@@ -1,4 +1,4 @@
-import type { PortfolioContent } from './types';
+import type { PortfolioContent } from '../types';
 
 export const en: PortfolioContent = {
   nav: {

@@ -1,7 +1,7 @@
 import type { Locale } from '@/i18n/locales';
 import type { PortfolioContent } from './types';
-import { es } from './es';
-import { en } from './en';
+import { es } from './seed/es';
+import { en } from './seed/en';
 
 const dictionary: Record<Locale, PortfolioContent> = { es, en };
 
