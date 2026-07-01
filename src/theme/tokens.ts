@@ -11,6 +11,7 @@ export const colors = {
   background: '#0a0b0e',
   surface: 'rgba(255,255,255,0.024)',
   surfaceStrong: 'rgba(255,255,255,0.05)',
+  surfaceCell: '#0d0f13',
   border: 'rgba(255,255,255,0.08)',
   borderStrong: 'rgba(255,255,255,0.12)',
   onAccent: '#07120e',
