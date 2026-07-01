@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SiteHeader } from './components/site-header';
 import { HeroSection } from './sections/hero/hero-section';
@@ -8,21 +9,27 @@ import { ExperienceSection } from './sections/experience/experience-section';
 import { ProjectsSection } from './sections/projects/projects-section';
 import { CertificationsSection } from './sections/certifications/certifications-section';
 import { ContactSection } from './sections/contact/contact-section';
+import { TrackedSection } from '@/analytics/tracked-section';
+import { armVisit } from '@/analytics/tracker';
 import { colors } from '@/theme/tokens';
 
 export function PortfolioScreen() {
+  useEffect(() => {
+    armVisit();
+  }, []);
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <SiteHeader />
       <ScrollView contentContainerStyle={{ alignItems: 'center', paddingBottom: 88 }}>
-        <HeroSection />
-        <ServicesSection />
-        <ImpactSection />
-        <StackSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <CertificationsSection />
-        <ContactSection />
+        <TrackedSection id="hero"><HeroSection /></TrackedSection>
+        <TrackedSection id="services"><ServicesSection /></TrackedSection>
+        <TrackedSection id="impact"><ImpactSection /></TrackedSection>
+        <TrackedSection id="stack"><StackSection /></TrackedSection>
+        <TrackedSection id="experience"><ExperienceSection /></TrackedSection>
+        <TrackedSection id="projects"><ProjectsSection /></TrackedSection>
+        <TrackedSection id="certifications"><CertificationsSection /></TrackedSection>
+        <TrackedSection id="contact"><ContactSection /></TrackedSection>
       </ScrollView>
     </View>
   );
