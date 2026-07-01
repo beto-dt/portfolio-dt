@@ -1,9 +1,16 @@
 import type { Locale } from '@/i18n/locales';
 import type { PortfolioContent } from './types';
-import { es } from './seed/es';
-import { en } from './seed/en';
+import { assertPortfolioContent } from './validate';
+import esJson from './published/es.json';
+import enJson from './published/en.json';
 
-const dictionary: Record<Locale, PortfolioContent> = { es, en };
+assertPortfolioContent(esJson, 'published/es');
+assertPortfolioContent(enJson, 'published/en');
+
+const dictionary: Record<Locale, PortfolioContent> = {
+  es: esJson as unknown as PortfolioContent,
+  en: enJson as unknown as PortfolioContent,
+};
 
 export function getContent(locale: Locale): PortfolioContent {
   return dictionary[locale];
