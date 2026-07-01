@@ -61,6 +61,9 @@ export const es: PortfolioContent = {
       { category: 'Mobile', items: ['Swift', 'Kotlin', 'Flutter', 'KMP', 'React Native'] },
       { category: 'AR / 3D', items: ['Unity', 'ARKit', 'ARCore', 'VR'] },
       { category: 'Backend', items: ['NestJS', 'FastAPI', 'Django', 'Spring Boot', 'Go', 'Node.js'] },
+      { category: 'Cloud & DevOps', items: ['AWS', 'Azure', 'Terraform', 'Docker', 'Kubernetes', 'CI/CD'] },
+      { category: 'Data & IA', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Python', 'ML'] },
+      { category: 'Arquitectura', items: ['Microservicios', 'DDD', 'Event Sourcing', 'API Gateway'] },
     ],
   },
   experience: {
