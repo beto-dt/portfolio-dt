@@ -13,7 +13,9 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm ci
+      # Retry on transient install flakes (e.g. esbuild ETXTBSY race in npm ci).
+      - name: Install dependencies
+        run: npm ci || (sleep 5 && npm ci) || (sleep 20 && npm ci)
 
       - name: Write service account credentials
         run: printf '%s' "$GCP_SA_KEY" > "$RUNNER_TEMP/sa.json"
