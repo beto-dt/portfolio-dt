@@ -107,8 +107,8 @@ export const es: PortfolioContent = {
     email: 'luis.atorred24@gmail.com',
     cta: 'Enviar un correo',
     socials: [
-      { label: 'GitHub', url: 'https://github.com/' },
-      { label: 'LinkedIn', url: 'https://www.linkedin.com/' },
+      { label: 'GitHub', url: 'https://github.com/beto-dt' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/' },
     ],
   },
 };
