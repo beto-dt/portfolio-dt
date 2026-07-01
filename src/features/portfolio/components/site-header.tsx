@@ -12,7 +12,11 @@ export function SiteHeader() {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: 20,
+        // Wrap the nav below the name on narrow (mobile) widths instead of
+        // forcing horizontal overflow.
+        flexWrap: 'wrap',
+        columnGap: 20,
+        rowGap: 12,
         paddingHorizontal: 40,
         paddingVertical: 16,
         borderBottomWidth: 1,
@@ -20,7 +24,7 @@ export function SiteHeader() {
         backgroundColor: 'rgba(10,11,14,0.72)',
       }}
     >
-      <View style={{ flexDirection: 'column', gap: 2, minWidth: 0 }}>
+      <View style={{ flexDirection: 'column', gap: 2, minWidth: 0, flexShrink: 1 }}>
         <Text style={{ fontFamily: fonts.display, fontSize: 16, letterSpacing: -0.16, color: colors.text }}>
           {nav.name}
         </Text>
@@ -29,7 +33,7 @@ export function SiteHeader() {
         </Text>
       </View>
 
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 24, flexWrap: 'wrap', flexShrink: 1 }}>
         {nav.links.map((link) => (
           <Text key={link.anchor} style={{ fontSize: 13.5, color: colors.textMuted }}>
             {link.label}

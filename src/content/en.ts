@@ -61,6 +61,9 @@ export const en: PortfolioContent = {
       { category: 'Mobile', items: ['Swift', 'Kotlin', 'Flutter', 'KMP', 'React Native'] },
       { category: 'AR / 3D', items: ['Unity', 'ARKit', 'ARCore', 'VR'] },
       { category: 'Backend', items: ['NestJS', 'FastAPI', 'Django', 'Spring Boot', 'Go', 'Node.js'] },
+      { category: 'Cloud & DevOps', items: ['AWS', 'Azure', 'Terraform', 'Docker', 'Kubernetes', 'CI/CD'] },
+      { category: 'Data & AI', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Python', 'ML'] },
+      { category: 'Architecture', items: ['Microservices', 'DDD', 'Event Sourcing', 'API Gateway'] },
     ],
   },
   experience: {
@@ -104,8 +107,8 @@ export const en: PortfolioContent = {
     email: 'luis.atorred24@gmail.com',
     cta: 'Send an email',
     socials: [
-      { label: 'GitHub', url: 'https://github.com/' },
-      { label: 'LinkedIn', url: 'https://www.linkedin.com/' },
+      { label: 'GitHub', url: 'https://github.com/beto-dt' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/' },
     ],
   },
 };
