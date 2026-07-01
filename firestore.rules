@@ -9,6 +9,12 @@ service cloud.firestore {
         && request.auth.token.email_verified == true
         && request.auth.token.email == 'luis.atorred24@gmail.com';
     }
+    match /analytics/{doc} {
+      allow read: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'luis.atorred24@gmail.com';
+      allow write: if false;
+    }
     match /{document=**} {
       allow read, write: if false;
     }
