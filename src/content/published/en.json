@@ -22,34 +22,6 @@
       "anchor": "contact"
     }
   },
-  "hero": {
-    "availability": "Available for freelance projects",
-    "titleLead": "I build digital products that drive",
-    "titleAccent": "real impact.",
-    "subtitle": "Senior Full-Stack & Mobile Developer with 7+ years building mobile apps, scalable web platforms, Augmented Reality experiences and distributed systems. From architecture to App Store and Google Play release.",
-    "primaryCta": {
-      "label": "Let's talk about your project",
-      "anchor": "contact"
-    },
-    "secondaryCta": {
-      "label": "View projects",
-      "anchor": "projects"
-    },
-    "stats": [
-      {
-        "value": "7+",
-        "label": "years of experience"
-      },
-      {
-        "value": "15+",
-        "label": "microservices in production"
-      },
-      {
-        "value": "99.9%",
-        "label": "sustained uptime"
-      }
-    ]
-  },
   "services": {
     "kicker": "services",
     "heading": "How I can help you",
@@ -354,21 +326,92 @@
       }
     ]
   },
-  "contact": {
-    "kicker": "contact",
-    "heading": "Let's work together",
-    "blurb": "Tell me about your project and let's build something with real impact.",
-    "email": "luis.atorred24@gmail.com",
-    "cta": "Send an email",
-    "socials": [
+  "education": {
+    "kicker": "academics",
+    "heading": "Education",
+    "items": [
       {
-        "label": "GitHub",
-        "url": "https://github.com/beto-dt"
+        "title": "Master's in Big Data with a focus on Artificial Intelligence",
+        "institution": "Universidad Regional Autónoma de los Andes",
+        "period": "06/2026 — Present"
       },
       {
-        "label": "LinkedIn",
-        "url": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/"
+        "title": "Systems Engineering",
+        "institution": "Universidad Regional Autónoma de los Andes",
+        "period": "01/2014 — 01/2019"
+      },
+      {
+        "title": "Master's in Microservices Architecture with Docker Containers",
+        "institution": "Lite Thinking",
+        "period": "07/2024"
+      },
+      {
+        "title": "Diploma in Modern Enterprise Architecture",
+        "institution": "Lite Thinking",
+        "period": "08/2025 — Present"
+      },
+      {
+        "title": "AI Assisted Programming Bootcamp",
+        "institution": "Dojo Coding",
+        "period": "08/2025 — Present"
+      }
+    ],
+    "languagesHeading": "Languages",
+    "languages": [
+      {
+        "language": "Spanish",
+        "level": "Native"
+      },
+      {
+        "language": "English",
+        "level": "Advanced"
       }
     ]
+  },
+  "footer": {
+    "copyright": "© 2026 Luis De La Torre Duran",
+    "tagline": "Designed and developed with precision."
+  },
+  "contact": {
+    "kicker": "contact",
+    "heading": "Got a project in mind? Let's talk.",
+    "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
+    "emailCta": "Send me an email",
+    "whatsappCta": "WhatsApp",
+    "email": "luis.atorred24@gmail.com",
+    "phone": "+593 97 990 6532",
+    "whatsapp": "593979906532",
+    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "location": "Quito, Ecuador"
+  },
+  "hero": {
+    "availability": "Available for freelance projects",
+    "titleLead": "I build digital products that drive",
+    "titleAccent": "real impact.",
+    "subtitle": "Senior Full-Stack & Mobile Developer with 7+ years building mobile apps, scalable web platforms, Augmented Reality experiences and distributed systems. From architecture to App Store and Google Play release.",
+    "primaryCta": {
+      "label": "Let's talk about your project",
+      "anchor": "contact"
+    },
+    "secondaryCta": {
+      "label": "View projects",
+      "anchor": "projects"
+    },
+    "stats": [
+      {
+        "value": "7+",
+        "label": "years of experience"
+      },
+      {
+        "value": "15+",
+        "label": "microservices in production"
+      },
+      {
+        "value": "99.9%",
+        "label": "sustained uptime"
+      }
+    ],
+    "cvLabel": "Download CV",
+    "cvUrl": "/cv.pdf"
   }
 }
