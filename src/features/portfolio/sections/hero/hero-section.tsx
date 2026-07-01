@@ -2,10 +2,12 @@ import { Text, View } from 'react-native';
 import { Container } from '../../components/container';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
+import { useFluidType } from '@/theme/use-fluid-type';
 
 export function HeroSection() {
   const { content } = useI18n();
   const { hero } = content;
+  const fluid = useFluidType();
 
   return (
     <Container style={{ paddingVertical: 88 }}>
@@ -30,11 +32,11 @@ export function HeroSection() {
           </Text>
         </View>
 
-        <Text style={{ fontFamily: fonts.display, fontSize: 64, lineHeight: 66, letterSpacing: -1.9, color: colors.text }}>
+        <Text style={{ fontFamily: fonts.display, fontSize: fluid.heroTitle, lineHeight: fluid.heroTitleLineHeight, letterSpacing: fluid.heroTitleSpacing, color: colors.text }}>
           {hero.titleLead} <Text style={{ color: colors.accent }}>{hero.titleAccent}</Text>
         </Text>
 
-        <Text style={{ fontSize: 18, lineHeight: 29, color: colors.textMuted, maxWidth: 640, fontFamily: fonts.body }}>
+        <Text style={{ fontSize: fluid.heroSubtitle, lineHeight: fluid.heroSubtitleLineHeight, color: colors.textMuted, maxWidth: 640, fontFamily: fonts.body }}>
           {hero.subtitle}
         </Text>
 
