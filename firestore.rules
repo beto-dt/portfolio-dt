@@ -1,8 +1,14 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Public site never reads Firestore at runtime; scripts use the Admin SDK
-    // which bypasses these rules. Phase 2 will open writes to the admin.
+    // Only the owner (verified email) can read/write content. The public site
+    // does not read Firestore at runtime; the build-time pull uses the Admin SDK
+    // which bypasses these rules.
+    match /content/{doc} {
+      allow read, write: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'luis.atorred24@gmail.com';
+    }
     match /{document=**} {
       allow read, write: if false;
     }
