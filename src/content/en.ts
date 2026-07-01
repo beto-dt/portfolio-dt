@@ -2,6 +2,7 @@ import type { PortfolioContent } from './types';
 
 export const en: PortfolioContent = {
   nav: {
+    name: 'Luis De La Torre',
     role: 'Senior Full-Stack & Mobile',
     links: [
       { label: 'Services', anchor: 'services' },

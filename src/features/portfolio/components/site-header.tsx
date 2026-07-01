@@ -22,7 +22,7 @@ export function SiteHeader() {
     >
       <View style={{ flexDirection: 'column', gap: 2, minWidth: 0 }}>
         <Text style={{ fontFamily: fonts.display, fontSize: 16, letterSpacing: -0.16, color: colors.text }}>
-          Luis De La Torre
+          {nav.name}
         </Text>
         <Text style={{ fontFamily: fonts.mono, fontSize: 10, letterSpacing: 0.6, color: colors.accent }}>
           {nav.role}

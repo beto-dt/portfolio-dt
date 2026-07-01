@@ -2,6 +2,7 @@ export type Stat = { value: string; label: string };
 export type CtaLink = { label: string; anchor: string };
 
 export type NavContent = {
+  name: string;
   role: string;
   links: { label: string; anchor: string }[];
   languageToggleLabel: string;
