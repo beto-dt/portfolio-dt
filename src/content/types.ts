@@ -17,6 +17,8 @@ export type HeroContent = {
   primaryCta: CtaLink;
   secondaryCta: CtaLink;
   stats: Stat[];
+  cvLabel: string;
+  cvUrl: string;
 };
 
 export type ServiceItem = {
@@ -55,13 +57,28 @@ export type ProjectsContent = { kicker: string; heading: string; items: ProjectI
 export type Certification = { name: string; issuer: string };
 export type CertificationsContent = { kicker: string; heading: string; items: Certification[] };
 
+export type EducationItem = { title: string; institution: string; period: string };
+export type LanguageItem = { language: string; level: string };
+export type EducationContent = {
+  kicker: string;
+  heading: string;
+  items: EducationItem[];
+  languagesHeading: string;
+  languages: LanguageItem[];
+};
+export type FooterContent = { copyright: string; tagline: string };
+
 export type ContactContent = {
   kicker: string;
   heading: string;
   blurb: string;
+  emailCta: string;
+  whatsappCta: string;
   email: string;
-  cta: string;
-  socials: { label: string; url: string }[];
+  phone: string;
+  whatsapp: string;
+  linkedin: string;
+  location: string;
 };
 
 export type PortfolioContent = {
@@ -73,5 +90,7 @@ export type PortfolioContent = {
   experience: ExperienceContent;
   projects: ProjectsContent;
   certifications: CertificationsContent;
+  education: EducationContent;
   contact: ContactContent;
+  footer: FooterContent;
 };

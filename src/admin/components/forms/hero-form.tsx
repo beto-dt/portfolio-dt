@@ -15,6 +15,8 @@ export function HeroForm({ value, onChange }: { value: HeroContent; onChange: (h
       <Field label="primaryCta.anchor" value={value.primaryCta.anchor} onChangeText={(t) => set('primaryCta', { ...value.primaryCta, anchor: t })} />
       <Field label="secondaryCta.label" value={value.secondaryCta.label} onChangeText={(t) => set('secondaryCta', { ...value.secondaryCta, label: t })} />
       <Field label="secondaryCta.anchor" value={value.secondaryCta.anchor} onChangeText={(t) => set('secondaryCta', { ...value.secondaryCta, anchor: t })} />
+      <Field label="cvLabel" value={value.cvLabel} onChangeText={(t) => set('cvLabel', t)} />
+      <Field label="cvUrl" value={value.cvUrl} onChangeText={(t) => set('cvUrl', t)} />
       <Label>stats</Label>
       <ListEditor
         items={value.stats}

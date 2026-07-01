@@ -9,7 +9,9 @@ const REQUIRED_KEYS: (keyof PortfolioContent)[] = [
   'experience',
   'projects',
   'certifications',
+  'education',
   'contact',
+  'footer',
 ];
 
 export function assertPortfolioContent(

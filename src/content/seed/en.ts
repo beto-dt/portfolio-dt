@@ -25,6 +25,8 @@ export const en: PortfolioContent = {
       { value: '15+', label: 'microservices in production' },
       { value: '99.9%', label: 'sustained uptime' },
     ],
+    cvLabel: 'Download CV',
+    cvUrl: '/cv.pdf',
   },
   services: {
     kicker: 'services',
@@ -100,15 +102,37 @@ export const en: PortfolioContent = {
       { name: 'NestJS: Persistence with MongoDB and TypeORM', issuer: 'Udemy' },
     ],
   },
+  education: {
+    kicker: 'academics',
+    heading: 'Education',
+    items: [
+      { title: "Master's in Big Data with a focus on Artificial Intelligence", institution: 'Universidad Regional Autónoma de los Andes', period: '06/2026 — Present' },
+      { title: 'Systems Engineering', institution: 'Universidad Regional Autónoma de los Andes', period: '01/2014 — 01/2019' },
+      { title: "Master's in Microservices Architecture with Docker Containers", institution: 'Lite Thinking', period: '07/2024' },
+      { title: 'Diploma in Modern Enterprise Architecture', institution: 'Lite Thinking', period: '08/2025 — Present' },
+      { title: 'AI Assisted Programming Bootcamp', institution: 'Dojo Coding', period: '08/2025 — Present' },
+    ],
+    languagesHeading: 'Languages',
+    languages: [
+      { language: 'Spanish', level: 'Native' },
+      { language: 'English', level: 'Advanced' },
+    ],
+  },
   contact: {
     kicker: 'contact',
-    heading: "Let's work together",
-    blurb: "Tell me about your project and let's build something with real impact.",
+    heading: "Got a project in mind? Let's talk.",
+    blurb:
+      "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
+    emailCta: 'Send me an email',
+    whatsappCta: 'WhatsApp',
     email: 'luis.atorred24@gmail.com',
-    cta: 'Send an email',
-    socials: [
-      { label: 'GitHub', url: 'https://github.com/beto-dt' },
-      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/' },
-    ],
+    phone: '+593 97 990 6532',
+    whatsapp: '593979906532',
+    linkedin: 'https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/',
+    location: 'Quito, Ecuador',
+  },
+  footer: {
+    copyright: '© 2026 Luis De La Torre Duran',
+    tagline: 'Designed and developed with precision.',
   },
 };

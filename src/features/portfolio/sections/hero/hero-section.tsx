@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Linking, Pressable, Text, View } from 'react-native';
 import { Container } from '../../components/container';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
@@ -47,6 +47,9 @@ export function HeroSection() {
           <View style={{ borderWidth: 1, borderColor: 'rgba(255,255,255,0.18)', borderRadius: radii.md, paddingHorizontal: 24, paddingVertical: 13 }}>
             <Text style={{ fontSize: 15, fontFamily: fonts.bodyMedium, color: 'rgb(231,233,236)' }}>{hero.secondaryCta.label}</Text>
           </View>
+          <Pressable onPress={() => Linking.openURL(hero.cvUrl)} style={{ borderWidth: 1, borderColor: 'rgba(255,255,255,0.18)', borderRadius: radii.md, paddingHorizontal: 24, paddingVertical: 13 }}>
+            <Text style={{ fontSize: 15, fontFamily: fonts.bodyMedium, color: 'rgb(231,233,236)' }}>↓ {hero.cvLabel}</Text>
+          </Pressable>
         </View>
 
         <View
