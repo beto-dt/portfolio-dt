@@ -1,13 +1,18 @@
 import type { ReactNode } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Platform, Pressable, Text, View } from 'react-native';
 import { colors, radii } from '@/theme/tokens';
+
+const webCursor = Platform.OS === 'web' ? ({ cursor: 'pointer', transitionDuration: '120ms', transitionProperty: 'background-color, border-color, opacity' } as object) : null;
 
 function Ctrl({ label, onPress, disabled }: { label: string; onPress: () => void; disabled?: boolean }) {
   return (
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={{ borderWidth: 1, borderColor: colors.border, borderRadius: radii.sm, paddingHorizontal: 10, paddingVertical: 5, opacity: disabled ? 0.35 : 1 }}
+      style={({ hovered, pressed }: { hovered?: boolean; pressed: boolean }) => [
+        { borderWidth: 1, borderColor: colors.border, borderRadius: radii.sm, paddingHorizontal: 10, paddingVertical: 5, opacity: disabled ? 0.35 : pressed ? 0.7 : 1, backgroundColor: hovered && !disabled ? colors.surfaceStrong : 'transparent' },
+        disabled ? null : (webCursor as object),
+      ]}
     >
       <Text style={{ color: colors.textMuted, fontSize: 13 }}>{label}</Text>
     </Pressable>
@@ -51,7 +56,10 @@ export function ListEditor<T>({
       ))}
       <Pressable
         onPress={() => onChange([...items, makeEmpty()])}
-        style={{ alignSelf: 'flex-start', borderWidth: 1, borderColor: colors.borderStrong, borderRadius: radii.sm, paddingHorizontal: 12, paddingVertical: 8 }}
+        style={({ hovered, pressed }: { hovered?: boolean; pressed: boolean }) => [
+          { alignSelf: 'flex-start', borderWidth: 1, borderColor: hovered ? colors.borderStrong : colors.border, borderRadius: radii.sm, paddingHorizontal: 12, paddingVertical: 8, opacity: pressed ? 0.7 : 1, backgroundColor: hovered ? colors.surfaceStrong : 'transparent' },
+          webCursor as object,
+        ]}
       >
         <Text style={{ color: colors.text, fontSize: 13 }}>{addLabel}</Text>
       </Pressable>
