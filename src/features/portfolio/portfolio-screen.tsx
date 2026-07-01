@@ -6,6 +6,8 @@ import { ImpactSection } from './sections/impact/impact-section';
 import { StackSection } from './sections/stack/stack-section';
 import { ExperienceSection } from './sections/experience/experience-section';
 import { ProjectsSection } from './sections/projects/projects-section';
+import { CertificationsSection } from './sections/certifications/certifications-section';
+import { ContactSection } from './sections/contact/contact-section';
 import { colors } from '@/theme/tokens';
 
 export function PortfolioScreen() {
@@ -19,9 +21,8 @@ export function PortfolioScreen() {
         <StackSection />
         <ExperienceSection />
         <ProjectsSection />
-        {/* TODO: CertificationsSection, ContactSection — data ready in
-            content/{es,en}.ts, replicate the Container + SectionHeading
-            pattern above. */}
+        <CertificationsSection />
+        <ContactSection />
       </ScrollView>
     </View>
   );
