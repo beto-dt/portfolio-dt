@@ -16,6 +16,7 @@ import { ExperienceForm } from '../components/forms/experience-form';
 import { ProjectsForm } from '../components/forms/projects-form';
 import { CertificationsForm } from '../components/forms/certifications-form';
 import { ContactForm } from '../components/forms/contact-form';
+import { MetricsView } from '../components/metrics-view';
 
 type SectionKey = keyof PortfolioContent;
 
@@ -59,6 +60,7 @@ export function AdminScreen() {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const [view, setView] = useState<'content' | 'metrics'>('content');
   const [locale, setLocale] = useState<Locale>('es');
   const [content, setContent] = useState<PortfolioContent | null>(null);
   const [section, setSection] = useState<SectionKey>('hero');
@@ -160,6 +162,9 @@ export function AdminScreen() {
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
         <Text style={{ fontFamily: fonts.display, fontSize: 22, color: colors.text }}>Panel · {SECTIONS.find((s) => s.key === section)?.label}</Text>
         <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+          <Pressable onPress={() => setView(view === 'content' ? 'metrics' : 'content')} style={{ borderWidth: 1, borderColor: colors.borderStrong, borderRadius: radii.pill, paddingHorizontal: 14, paddingVertical: 7 }}>
+            <Text style={{ color: colors.textMuted, fontSize: 13 }}>{view === 'content' ? 'Métricas' : 'Editar'}</Text>
+          </Pressable>
           <Pressable onPress={onPublish} disabled={publishing} style={{ backgroundColor: colors.accent, borderRadius: radii.pill, paddingHorizontal: 16, paddingVertical: 7, opacity: publishing ? 0.6 : 1 }}>
             <Text style={{ color: colors.onAccent, fontFamily: fonts.bodyMedium, fontSize: 13 }}>{publishing ? 'Publicando…' : 'Publicar'}</Text>
           </Pressable>
@@ -188,23 +193,28 @@ export function AdminScreen() {
         ))}
       </View>
 
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
-        {SECTIONS.map((s) => (
-          <Pressable key={s.key} onPress={() => setSection(s.key)} style={{ borderRadius: radii.sm, paddingHorizontal: 12, paddingVertical: 7, borderWidth: 1, borderColor: s.key === section ? colors.accent : colors.border, backgroundColor: s.key === section ? 'rgba(228,227,87,0.12)' : 'transparent' }}>
-            <Text style={{ color: s.key === section ? colors.accent : colors.textMuted, fontSize: 12.5 }}>{s.label}</Text>
-          </Pressable>
-        ))}
-      </View>
-
-      {loading || !content ? (
-        <ActivityIndicator color={colors.accent} />
+      {view === 'metrics' ? (
+        <MetricsView />
       ) : (
         <>
-          <SectionForm section={section} content={content} onChange={setContent} />
-          <Pressable onPress={onSave} style={{ alignSelf: 'flex-start', backgroundColor: colors.accent, borderRadius: radii.md, paddingHorizontal: 24, paddingVertical: 13 }}>
-            <Text style={{ color: colors.onAccent, fontFamily: fonts.bodyMedium, fontSize: 15 }}>Guardar</Text>
-          </Pressable>
-          {status ? <Text style={{ color: colors.textMuted, fontSize: 13 }}>{status}</Text> : null}
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+            {SECTIONS.map((s) => (
+              <Pressable key={s.key} onPress={() => setSection(s.key)} style={{ borderRadius: radii.sm, paddingHorizontal: 12, paddingVertical: 7, borderWidth: 1, borderColor: s.key === section ? colors.accent : colors.border, backgroundColor: s.key === section ? 'rgba(228,227,87,0.12)' : 'transparent' }}>
+                <Text style={{ color: s.key === section ? colors.accent : colors.textMuted, fontSize: 12.5 }}>{s.label}</Text>
+              </Pressable>
+            ))}
+          </View>
+          {loading || !content ? (
+            <ActivityIndicator color={colors.accent} />
+          ) : (
+            <>
+              <SectionForm section={section} content={content} onChange={setContent} />
+              <Pressable onPress={onSave} style={{ alignSelf: 'flex-start', backgroundColor: colors.accent, borderRadius: radii.md, paddingHorizontal: 24, paddingVertical: 13 }}>
+                <Text style={{ color: colors.onAccent, fontFamily: fonts.bodyMedium, fontSize: 15 }}>Guardar</Text>
+              </Pressable>
+              {status ? <Text style={{ color: colors.textMuted, fontSize: 13 }}>{status}</Text> : null}
+            </>
+          )}
         </>
       )}
       {error ? <Text style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</Text> : null}

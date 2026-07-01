@@ -55,3 +55,9 @@ export async function callPublish(): Promise<{ ok: boolean; actionsUrl: string }
   const result = await httpsCallable(functions, 'publish')();
   return result.data as { ok: boolean; actionsUrl: string };
 }
+
+export async function readAnalyticsDoc(): Promise<DocumentData | undefined> {
+  const { db } = services();
+  const snap = await getDoc(doc(db, 'analytics', 'summary'));
+  return snap.exists() ? snap.data() : undefined;
+}
