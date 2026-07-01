@@ -15,7 +15,9 @@ import { StackForm } from '../components/forms/stack-form';
 import { ExperienceForm } from '../components/forms/experience-form';
 import { ProjectsForm } from '../components/forms/projects-form';
 import { CertificationsForm } from '../components/forms/certifications-form';
+import { EducationForm } from '../components/forms/education-form';
 import { ContactForm } from '../components/forms/contact-form';
+import { FooterForm } from '../components/forms/footer-form';
 import { MetricsView } from '../components/metrics-view';
 
 type SectionKey = keyof PortfolioContent;
@@ -29,7 +31,9 @@ const SECTIONS: { key: SectionKey; label: string }[] = [
   { key: 'experience', label: 'Experiencia' },
   { key: 'projects', label: 'Proyectos' },
   { key: 'certifications', label: 'Certificaciones' },
+  { key: 'education', label: 'Educación' },
   { key: 'contact', label: 'Contacto' },
+  { key: 'footer', label: 'Footer' },
 ];
 
 function SectionForm({ section, content, onChange }: { section: SectionKey; content: PortfolioContent; onChange: (c: PortfolioContent) => void }) {
@@ -50,8 +54,12 @@ function SectionForm({ section, content, onChange }: { section: SectionKey; cont
       return <ProjectsForm value={content.projects} onChange={(v) => onChange({ ...content, projects: v })} />;
     case 'certifications':
       return <CertificationsForm value={content.certifications} onChange={(v) => onChange({ ...content, certifications: v })} />;
+    case 'education':
+      return <EducationForm value={content.education} onChange={(v) => onChange({ ...content, education: v })} />;
     case 'contact':
       return <ContactForm value={content.contact} onChange={(v) => onChange({ ...content, contact: v })} />;
+    case 'footer':
+      return <FooterForm value={content.footer} onChange={(v) => onChange({ ...content, footer: v })} />;
   }
 }
 
