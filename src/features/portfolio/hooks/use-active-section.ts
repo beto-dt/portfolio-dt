@@ -12,25 +12,20 @@ export function useActiveSection(anchors: string[]): string | null {
     const elements = list.map((a) => document.getElementById(a)).filter((el): el is HTMLElement => el !== null);
     if (elements.length === 0) return;
 
-    const ratios = new Map<string, number>();
+    // A thin detector band near the top (below the header). A section counts as
+    // "current" while it crosses that band — robust for tall sections where an
+    // intersectionRatio approach would stay near zero.
+    const intersecting = new Map<string, boolean>();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          const id = (entry.target as HTMLElement).id;
-          ratios.set(id, entry.isIntersecting ? entry.intersectionRatio : 0);
+          intersecting.set((entry.target as HTMLElement).id, entry.isIntersecting);
         }
-        let best: string | null = null;
-        let bestRatio = 0;
-        for (const a of list) {
-          const r = ratios.get(a) ?? 0;
-          if (r > bestRatio) {
-            bestRatio = r;
-            best = a;
-          }
-        }
-        setActive(best);
+        // First section (in document order) currently crossing the band.
+        const current = list.find((a) => intersecting.get(a) === true) ?? null;
+        setActive(current);
       },
-      { threshold: [0.15, 0.5, 0.85], rootMargin: '-64px 0px -55% 0px' },
+      { threshold: 0, rootMargin: '-72px 0px -70% 0px' },
     );
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
