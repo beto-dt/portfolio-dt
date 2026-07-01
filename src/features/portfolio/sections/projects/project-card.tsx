@@ -1,10 +1,11 @@
 import { Text, View } from 'react-native';
 import type { ProjectItem } from '@/content/types';
 import { colors, fonts, radii } from '@/theme/tokens';
+import { HoverCard } from '@/ui/hover-card';
 
 export function ProjectCard({ item }: { item: ProjectItem }) {
   return (
-    <View
+    <HoverCard
       style={{
         flexGrow: 1,
         flexBasis: 340,
@@ -54,6 +55,6 @@ export function ProjectCard({ item }: { item: ProjectItem }) {
           </View>
         ))}
       </View>
-    </View>
+    </HoverCard>
   );
 }

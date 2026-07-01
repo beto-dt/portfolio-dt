@@ -1,10 +1,11 @@
 import { Text, View } from 'react-native';
 import type { ServiceItem } from '@/content/types';
 import { colors, fonts, radii } from '@/theme/tokens';
+import { HoverCard } from '@/ui/hover-card';
 
 export function ServiceCard({ item }: { item: ServiceItem }) {
   return (
-    <View
+    <HoverCard
       style={{
         flexGrow: 1,
         flexBasis: 320,
@@ -28,6 +29,6 @@ export function ServiceCard({ item }: { item: ServiceItem }) {
       <Text style={{ fontSize: 13.5, lineHeight: 22, color: colors.textDim, fontFamily: fonts.body }}>
         {item.description}
       </Text>
-    </View>
+    </HoverCard>
   );
 }

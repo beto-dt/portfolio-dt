@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Linking, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Linking, ScrollView, Text, View } from 'react-native';
 import type { User } from 'firebase/auth';
 import type { PortfolioContent } from '@/content/types';
 import type { Locale } from '@/i18n/locales';
-import { colors, fonts, radii } from '@/theme/tokens';
+import { colors, fonts } from '@/theme/tokens';
+import { AppButton } from '@/ui/app-button';
+import { Chip } from '@/ui/chip';
+import { HoverLink } from '@/ui/hover-link';
 import { onAdminAuthChanged, signInWithGoogle, signOutAdmin } from '../auth';
 import { loadContent, saveSection } from '../content-repo';
 import { publishSite } from '../publish';
@@ -157,9 +160,7 @@ export function AdminScreen() {
     return (
       <View style={{ flex: 1, backgroundColor: colors.background, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 }}>
         <Text style={{ fontFamily: fonts.display, fontSize: 24, color: colors.text }}>Panel de administración</Text>
-        <Pressable onPress={onSignIn} style={{ backgroundColor: colors.accent, borderRadius: radii.md, paddingHorizontal: 22, paddingVertical: 13 }}>
-          <Text style={{ color: colors.onAccent, fontFamily: fonts.bodyMedium, fontSize: 15 }}>Iniciar sesión con Google</Text>
-        </Pressable>
+        <AppButton label="Iniciar sesión con Google" onPress={onSignIn} variant="primary" />
         {error ? <Text style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</Text> : null}
       </View>
     );
@@ -170,15 +171,9 @@ export function AdminScreen() {
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
         <Text style={{ fontFamily: fonts.display, fontSize: 22, color: colors.text }}>Panel · {SECTIONS.find((s) => s.key === section)?.label}</Text>
         <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
-          <Pressable onPress={() => setView(view === 'content' ? 'metrics' : 'content')} style={{ borderWidth: 1, borderColor: colors.borderStrong, borderRadius: radii.pill, paddingHorizontal: 14, paddingVertical: 7 }}>
-            <Text style={{ color: colors.textMuted, fontSize: 13 }}>{view === 'content' ? 'Métricas' : 'Editar'}</Text>
-          </Pressable>
-          <Pressable onPress={onPublish} disabled={publishing} style={{ backgroundColor: colors.accent, borderRadius: radii.pill, paddingHorizontal: 16, paddingVertical: 7, opacity: publishing ? 0.6 : 1 }}>
-            <Text style={{ color: colors.onAccent, fontFamily: fonts.bodyMedium, fontSize: 13 }}>{publishing ? 'Publicando…' : 'Publicar'}</Text>
-          </Pressable>
-          <Pressable onPress={signOutAdmin} style={{ borderWidth: 1, borderColor: colors.borderStrong, borderRadius: radii.pill, paddingHorizontal: 14, paddingVertical: 7 }}>
-            <Text style={{ color: colors.textMuted, fontSize: 13 }}>Cerrar sesión</Text>
-          </Pressable>
+          <AppButton label={view === 'content' ? 'Métricas' : 'Editar'} onPress={() => setView(view === 'content' ? 'metrics' : 'content')} variant="pill" size="sm" />
+          <AppButton label={publishing ? 'Publicando…' : 'Publicar'} onPress={onPublish} variant="pillPrimary" size="sm" />
+          <AppButton label="Cerrar sesión" onPress={signOutAdmin} variant="pill" size="sm" />
         </View>
       </View>
 
@@ -186,18 +181,14 @@ export function AdminScreen() {
         <View style={{ gap: 4 }}>
           <Text style={{ color: colors.textMuted, fontSize: 13 }}>{publishMsg}</Text>
           {publishUrl ? (
-            <Text onPress={() => Linking.openURL(publishUrl)} style={{ color: colors.accent, fontSize: 13, textDecorationLine: 'underline' }}>
-              Ver progreso en GitHub Actions
-            </Text>
+            <HoverLink label="Ver progreso en GitHub Actions" onPress={() => Linking.openURL(publishUrl)} color={colors.accent} hoverColor={colors.text} />
           ) : null}
         </View>
       ) : null}
 
       <View style={{ flexDirection: 'row', gap: 8 }}>
         {(['es', 'en'] as Locale[]).map((l) => (
-          <Pressable key={l} onPress={() => setLocale(l)} style={{ borderRadius: radii.sm, paddingHorizontal: 14, paddingVertical: 8, backgroundColor: l === locale ? colors.accent : colors.surfaceStrong }}>
-            <Text style={{ color: l === locale ? colors.onAccent : colors.text, fontFamily: fonts.mono, fontSize: 12 }}>{l.toUpperCase()}</Text>
-          </Pressable>
+          <Chip key={l} label={l.toUpperCase()} active={l === locale} onPress={() => setLocale(l)} />
         ))}
       </View>
 
@@ -207,9 +198,7 @@ export function AdminScreen() {
         <>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
             {SECTIONS.map((s) => (
-              <Pressable key={s.key} onPress={() => setSection(s.key)} style={{ borderRadius: radii.sm, paddingHorizontal: 12, paddingVertical: 7, borderWidth: 1, borderColor: s.key === section ? colors.accent : colors.border, backgroundColor: s.key === section ? 'rgba(228,227,87,0.12)' : 'transparent' }}>
-                <Text style={{ color: s.key === section ? colors.accent : colors.textMuted, fontSize: 12.5 }}>{s.label}</Text>
-              </Pressable>
+              <Chip key={s.key} label={s.label} active={s.key === section} onPress={() => setSection(s.key)} mono={false} />
             ))}
           </View>
           {loading || !content ? (
@@ -217,9 +206,9 @@ export function AdminScreen() {
           ) : (
             <>
               <SectionForm section={section} content={content} onChange={setContent} />
-              <Pressable onPress={onSave} style={{ alignSelf: 'flex-start', backgroundColor: colors.accent, borderRadius: radii.md, paddingHorizontal: 24, paddingVertical: 13 }}>
-                <Text style={{ color: colors.onAccent, fontFamily: fonts.bodyMedium, fontSize: 15 }}>Guardar</Text>
-              </Pressable>
+              <View style={{ alignSelf: 'flex-start' }}>
+                <AppButton label="Guardar" onPress={onSave} variant="primary" />
+              </View>
               {status ? <Text style={{ color: colors.textMuted, fontSize: 13 }}>{status}</Text> : null}
             </>
           )}

@@ -1,6 +1,9 @@
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useI18n } from '@/i18n/i18n-provider';
-import { colors, fonts, radii } from '@/theme/tokens';
+import { colors, fonts } from '@/theme/tokens';
+import { HoverLink } from '@/ui/hover-link';
+import { AppButton } from '@/ui/app-button';
+import { scrollToAnchor } from '@/ui/scroll-to-anchor';
 
 export function SiteHeader() {
   const { content, toggleLocale } = useI18n();
@@ -35,28 +38,10 @@ export function SiteHeader() {
 
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 24, flexWrap: 'wrap', flexShrink: 1 }}>
         {nav.links.map((link) => (
-          <Text key={link.anchor} style={{ fontSize: 13.5, color: colors.textMuted }}>
-            {link.label}
-          </Text>
+          <HoverLink key={link.anchor} label={link.label} onPress={() => scrollToAnchor(link.anchor)} />
         ))}
-        <Pressable
-          onPress={toggleLocale}
-          style={{
-            backgroundColor: colors.surfaceStrong,
-            borderWidth: 1,
-            borderColor: colors.borderStrong,
-            borderRadius: radii.pill,
-            paddingHorizontal: 11,
-            paddingVertical: 6,
-          }}
-        >
-          <Text style={{ fontFamily: fonts.mono, fontSize: 11, letterSpacing: 0.55, color: 'rgb(231,233,236)' }}>
-            {nav.languageToggleLabel}
-          </Text>
-        </Pressable>
-        <View style={{ backgroundColor: colors.accent, borderRadius: radii.pill, paddingHorizontal: 16, paddingVertical: 9 }}>
-          <Text style={{ fontSize: 13, fontFamily: fonts.bodyMedium, color: colors.onAccent }}>{nav.cta.label}</Text>
-        </View>
+        <AppButton label={nav.languageToggleLabel} onPress={toggleLocale} variant="pill" size="sm" />
+        <AppButton label={nav.cta.label} onPress={() => scrollToAnchor(nav.cta.anchor)} variant="pillPrimary" size="sm" />
       </View>
     </View>
   );
