@@ -44,7 +44,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "content:seed": "tsx scripts/seed-content.ts",
+    "content:pull": "tsx scripts/pull-content.ts",
+    "deploy": "npm run content:pull && expo export -p web && firebase deploy --only hosting"
   },
   "private": true
 }
