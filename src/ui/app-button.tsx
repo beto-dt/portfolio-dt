@@ -6,8 +6,9 @@ type HoverState = PressableStateCallbackType & { hovered?: boolean };
 
 // react-native-web accepts these web-only style props; cast at the boundary.
 const webInteractive = Platform.OS === 'web'
-  ? ({ cursor: 'pointer', transitionProperty: 'opacity, transform, background-color, border-color', transitionDuration: '150ms' } as object)
+  ? ({ cursor: 'pointer', transitionProperty: 'opacity, transform, background-color, border-color, box-shadow', transitionDuration: '150ms' } as object)
   : null;
+const primaryHoverGlow = Platform.OS === 'web' ? ({ boxShadow: '0 8px 30px rgba(228,227,87,0.35)' } as object) : null;
 
 export function AppButton({
   label,
@@ -38,6 +39,7 @@ export function AppButton({
           ...pad,
         },
         webInteractive as object,
+        isPrimary && hovered ? (primaryHoverGlow as object) : null,
       ]}
     >
       <Text style={{ fontSize: size === 'sm' ? 13 : 15, fontFamily: fonts.bodyMedium, color: isPrimary ? colors.onAccent : 'rgb(231,233,236)' }}>

@@ -1,9 +1,17 @@
+import { Platform } from 'react-native';
+
+// On web, react-native-web passes fontFamily straight to CSS `font-family`, so a
+// comma-separated stack works and guarantees a sans fallback (never the browser
+// serif). Native requires an exact font name, so it keeps the bare family.
+const sans = Platform.OS === 'web' ? ", system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" : '';
+const mono = Platform.OS === 'web' ? ", 'SFMono-Regular', Menlo, Consolas, monospace" : '';
+
 export const fonts = {
-  display: 'SpaceGrotesk_600SemiBold',
-  displayBold: 'SpaceGrotesk_700Bold',
-  body: 'IBMPlexSans_400Regular',
-  bodyMedium: 'IBMPlexSans_500Medium',
-  mono: 'JetBrainsMono_400Regular',
+  display: 'SpaceGrotesk_600SemiBold' + sans,
+  displayBold: 'SpaceGrotesk_700Bold' + sans,
+  body: 'IBMPlexSans_400Regular' + sans,
+  bodyMedium: 'IBMPlexSans_500Medium' + sans,
+  mono: 'JetBrainsMono_400Regular' + mono,
 } as const;
 
 export const colors = {
