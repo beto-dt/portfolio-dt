@@ -12,8 +12,10 @@ const ACTIONS_URL =
 export const publish = onCall(
   { secrets: [GITHUB_TOKEN], region: 'us-central1' },
   async (request) => {
-    const token = request.auth?.token;
-    if (!token || token.email !== ADMIN_EMAIL || token.email_verified !== true) {
+    if (
+      request.auth?.token?.email !== ADMIN_EMAIL ||
+      request.auth?.token?.email_verified !== true
+    ) {
       throw new HttpsError('permission-denied', 'No autorizado');
     }
 
