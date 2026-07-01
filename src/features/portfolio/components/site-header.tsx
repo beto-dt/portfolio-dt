@@ -1,22 +1,35 @@
-import { Text, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Image, Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
-import { HoverLink } from '@/ui/hover-link';
 import { AppButton } from '@/ui/app-button';
 import { scrollToAnchor } from '@/ui/scroll-to-anchor';
+import { NavLink } from './nav-link';
+import { useActiveSection } from '../hooks/use-active-section';
+
+type HoverState = PressableStateCallbackType & { hovered?: boolean };
+const webCursor = Platform.OS === 'web' ? ({ cursor: 'pointer' } as object) : null;
+const logoTransition = Platform.OS === 'web' ? ({ transitionProperty: 'transform', transitionDuration: '200ms' } as object) : null;
 
 export function SiteHeader() {
   const { content, toggleLocale } = useI18n();
   const { nav } = content;
+  const [anchors] = useState(() => nav.links.map((l) => l.anchor));
+  const active = useActiveSection(anchors);
+
+  const enter = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(enter, { toValue: 1, duration: 500, useNativeDriver: true }).start();
+  }, [enter]);
 
   return (
-    <View
+    <Animated.View
       style={{
+        opacity: enter,
+        transform: [{ translateY: enter.interpolate({ inputRange: [0, 1], outputRange: [-8, 0] }) }],
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        // Wrap the nav below the name on narrow (mobile) widths instead of
-        // forcing horizontal overflow.
         flexWrap: 'wrap',
         columnGap: 20,
         rowGap: 12,
@@ -27,22 +40,28 @@ export function SiteHeader() {
         backgroundColor: 'rgba(10,11,14,0.72)',
       }}
     >
-      <View style={{ flexDirection: 'column', gap: 2, minWidth: 0, flexShrink: 1 }}>
-        <Text style={{ fontFamily: fonts.display, fontSize: 16, letterSpacing: -0.16, color: colors.text }}>
-          {nav.name}
-        </Text>
-        <Text style={{ fontFamily: fonts.mono, fontSize: 10, letterSpacing: 0.6, color: colors.accent }}>
-          {nav.role}
-        </Text>
-      </View>
+      <Pressable onPress={() => scrollToAnchor('top')} style={webCursor as object}>
+        {({ hovered }: HoverState) => (
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, minWidth: 0, flexShrink: 1 }}>
+            <Image
+              source={require('@/assets/images/logo.png')}
+              style={[{ width: 36, height: 36, borderRadius: 9, transform: [{ scale: hovered ? 1.08 : 1 }] }, logoTransition as object]}
+            />
+            <View style={{ flexDirection: 'column', gap: 2, minWidth: 0 }}>
+              <Text style={{ fontFamily: fonts.display, fontSize: 16, letterSpacing: -0.16, color: colors.text }}>{nav.name}</Text>
+              <Text style={{ fontFamily: fonts.mono, fontSize: 10, letterSpacing: 0.6, color: colors.accent }}>{nav.role}</Text>
+            </View>
+          </View>
+        )}
+      </Pressable>
 
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 24, flexWrap: 'wrap', flexShrink: 1 }}>
         {nav.links.map((link) => (
-          <HoverLink key={link.anchor} label={link.label} onPress={() => scrollToAnchor(link.anchor)} />
+          <NavLink key={link.anchor} label={link.label} active={active === link.anchor} onPress={() => scrollToAnchor(link.anchor)} />
         ))}
         <AppButton label={nav.languageToggleLabel} onPress={toggleLocale} variant="pill" size="sm" />
         <AppButton label={nav.cta.label} onPress={() => scrollToAnchor(nav.cta.anchor)} variant="pillPrimary" size="sm" />
       </View>
-    </View>
+    </Animated.View>
   );
 }
