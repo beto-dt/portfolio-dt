@@ -4,6 +4,7 @@ import { HeroSection } from './sections/hero/hero-section';
 import { ServicesSection } from './sections/services/services-section';
 import { ImpactSection } from './sections/impact/impact-section';
 import { StackSection } from './sections/stack/stack-section';
+import { ExperienceSection } from './sections/experience/experience-section';
 import { colors } from '@/theme/tokens';
 
 export function PortfolioScreen() {
@@ -15,9 +16,10 @@ export function PortfolioScreen() {
         <ServicesSection />
         <ImpactSection />
         <StackSection />
-        {/* TODO: ExperienceSection, ProjectsSection, CertificationsSection,
-            ContactSection — data ready in content/{es,en}.ts, replicate the
-            Container + SectionHeading pattern above. */}
+        <ExperienceSection />
+        {/* TODO: ProjectsSection, CertificationsSection, ContactSection —
+            data ready in content/{es,en}.ts, replicate the Container +
+            SectionHeading pattern above. */}
       </ScrollView>
     </View>
   );
