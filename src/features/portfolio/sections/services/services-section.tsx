@@ -9,7 +9,7 @@ export function ServicesSection() {
   const { services } = content;
 
   return (
-    <Container style={{ paddingVertical: 56 }}>
+    <Container style={{ paddingVertical: 56 }} nativeID="services">
       <SectionHeading kicker={services.kicker} heading={services.heading} />
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16 }}>
         {services.items.map((item) => (

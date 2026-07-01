@@ -1,8 +1,10 @@
-import { Linking, Pressable, Text, View } from 'react-native';
+import { Linking, Text, View } from 'react-native';
 import { Container } from '../../components/container';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
 import { useFluidType } from '@/theme/use-fluid-type';
+import { AppButton } from '@/ui/app-button';
+import { scrollToAnchor } from '@/ui/scroll-to-anchor';
 
 export function HeroSection() {
   const { content } = useI18n();
@@ -10,7 +12,7 @@ export function HeroSection() {
   const fluid = useFluidType();
 
   return (
-    <Container style={{ paddingVertical: 88 }}>
+    <Container style={{ paddingVertical: 88 }} nativeID="top">
       <View style={{ gap: 34 }}>
         <View
           style={{
@@ -41,15 +43,9 @@ export function HeroSection() {
         </Text>
 
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16 }}>
-          <View style={{ backgroundColor: colors.accent, borderRadius: radii.md, paddingHorizontal: 26, paddingVertical: 14 }}>
-            <Text style={{ fontSize: 15, fontFamily: fonts.bodyMedium, color: colors.onAccent }}>{hero.primaryCta.label}</Text>
-          </View>
-          <View style={{ borderWidth: 1, borderColor: 'rgba(255,255,255,0.18)', borderRadius: radii.md, paddingHorizontal: 24, paddingVertical: 13 }}>
-            <Text style={{ fontSize: 15, fontFamily: fonts.bodyMedium, color: 'rgb(231,233,236)' }}>{hero.secondaryCta.label}</Text>
-          </View>
-          <Pressable onPress={() => Linking.openURL(hero.cvUrl)} style={{ borderWidth: 1, borderColor: 'rgba(255,255,255,0.18)', borderRadius: radii.md, paddingHorizontal: 24, paddingVertical: 13 }}>
-            <Text style={{ fontSize: 15, fontFamily: fonts.bodyMedium, color: 'rgb(231,233,236)' }}>↓ {hero.cvLabel}</Text>
-          </Pressable>
+          <AppButton label={hero.primaryCta.label} onPress={() => scrollToAnchor(hero.primaryCta.anchor)} variant="primary" />
+          <AppButton label={hero.secondaryCta.label} onPress={() => scrollToAnchor(hero.secondaryCta.anchor)} variant="outline" />
+          <AppButton label={`↓ ${hero.cvLabel}`} onPress={() => Linking.openURL(hero.cvUrl)} variant="outline" />
         </View>
 
         <View

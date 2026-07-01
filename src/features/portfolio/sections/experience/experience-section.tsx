@@ -9,7 +9,7 @@ export function ExperienceSection() {
   const { experience } = content;
 
   return (
-    <Container style={{ paddingVertical: 56 }}>
+    <Container style={{ paddingVertical: 56 }} nativeID="experience">
       <SectionHeading kicker={experience.kicker} heading={experience.heading} />
       <View>
         {experience.items.map((item) => (
