@@ -1,56 +1,114 @@
-# Welcome to your Expo app 👋
+# Portfolio — Luis De La Torre
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Portfolio personal bilingüe (ES/EN) con **CMS propio**: edita el contenido desde
+un panel `/admin`, pulsa **Publicar** y sale en vivo. Sin escribir código.
 
-## Get started
+- **Sitio:** https://luisdelatorre.dev
+- **Panel:** https://luisdelatorre.dev/admin (login con Google)
+- **Stack:** Expo Router + React Native Web · Firebase (Firestore, Functions,
+  Hosting, Auth) · TypeScript
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✍️ Editar el contenido (uso diario)
 
-2. Start the app
+1. Abre **https://luisdelatorre.dev/admin** e **inicia sesión con Google**
+   (solo `luis.atorred24@gmail.com` está autorizado).
+2. Elige el **idioma** (`ES` / `EN`) — cada idioma se edita por separado.
+3. Elige la **sección** (Nav, Hero, Servicios, Impacto, Stack, Experiencia,
+   Proyectos, Certificaciones, Contacto).
+4. Edita los campos. En las listas: **↑ / ↓** reordenar · **✕** borrar ·
+   **+ Añadir**.
+5. Pulsa **Guardar** — el cambio queda en la base de datos (todavía no en vivo).
+6. Pulsa **Publicar** — *"Publicación iniciada (~2-3 min)"*. Espera y recarga
+   el sitio → cambios en vivo. 🚀
 
-   ```bash
-   npx expo start
-   ```
+> **Guardar ≠ Publicar.** Guardar persiste en Firestore; Publicar despliega el
+> sitio real. Puedes guardar varias secciones/idiomas y publicar una sola vez.
 
-In the output, you'll find options to open the app in a
+## 📊 Métricas
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+En `/admin` → botón **"Métricas"**: total de visitas, últimos ~30 días y ranking
+de secciones más vistas. Cada visitante cuenta una vez por sesión. Sin cookies
+ni datos personales.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🛟 Si algo falla
 
-## Get a fresh project
+- **"Publicar" falla:** suele ser un flake transitorio de CI → vuelve a pulsar
+  Publicar, o re-lanza el workflow en GitHub → **Actions → Deploy → Run**.
+- **No entras a `/admin`:** usa la cuenta Google autorizada.
+- **No ves los cambios:** ¿pulsaste **Publicar** tras Guardar? Tarda 2-3 min.
 
-When you're ready, run:
+---
+
+## 🧑‍💻 Desarrollo (cambios de código/diseño)
 
 ```bash
-npm run reset-project
+npm install
+npm run web      # abre en http://localhost:8081
+npx tsc --noEmit # type-check
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+**Publicar desde la máquina** (equivale al botón Publicar):
 
-### Other setup steps
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="$PWD/service-account.json"
+npm run deploy   # pull de Firestore → build web → firebase deploy (hosting)
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Requiere `service-account.json` en la raíz (no se commitea; está en `.gitignore`).
 
-## Learn more
+### Scripts útiles
 
-To learn more about developing your project with Expo, look at the following resources:
+| Comando | Qué hace |
+|---|---|
+| `npm run web` | Sitio en local (Expo web) |
+| `npm run content:seed` | Sube el contenido semilla (`src/content/seed`) a Firestore |
+| `npm run content:pull` | Baja Firestore → `src/content/published/*.json` |
+| `npm run deploy` | Pull + build + deploy de hosting |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🏗️ Arquitectura
 
-## Join the community
+El sitio público es **estático y sin Firebase en el bundle**: el contenido de
+Firestore se **hornea en el build** (no hay lecturas en runtime → rápido + SEO).
+El panel `/admin` carga Firebase de forma perezosa (chunk aparte).
 
-Join our community of developers creating universal apps.
+```
+Firestore (content/es, content/en)         ← fuente de verdad, editable en /admin
+   │  npm run content:pull (build-time)
+   ▼
+src/content/published/{es,en}.json  →  el sitio estático los importa
+   │  Publicar (/admin) → Cloud Function → GitHub Actions → deploy
+   ▼
+Firebase Hosting  (luisdelatorre.dev)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Analítica:  sitio → POST /api/visit → Cloud Function recordVisit → Firestore analytics/summary → /admin
+```
+
+- **Contenido:** Firestore `content/{es,en}` (editable); `src/content/published/`
+  es lo publicado (commiteado).
+- **Publicar:** Cloud Function `publish` dispara el workflow `deploy.yml`.
+- **Analítica:** Cloud Function `recordVisit` cuenta visitas/secciones.
+- **Auth/seguridad:** solo el owner puede leer/escribir `content/*` y
+  `analytics/*` (reglas de Firestore). El sitio público no lee Firestore.
+
+## 📁 Estructura
+
+```
+src/
+  app/                  Rutas (Expo Router): index (portfolio) · admin
+  content/              Tipos + seed + JSON publicado + i18n dictionary
+  i18n/                 Proveedor de idioma ES/EN
+  theme/                Tokens de diseño + tipografía fluida
+  features/portfolio/   Secciones del sitio público
+  analytics/            Tracker de visitas (sin Firebase)
+  admin/                Panel: auth, formularios, publicar, métricas
+functions/              Cloud Functions (publish, recordVisit)
+docs/superpowers/       Specs y planes de cada fase
+```
+
+## 🧭 Documentación de diseño
+
+Cada fase tiene su spec y plan en `docs/superpowers/`:
+portfolio · CMS Firestore (Fase 1) · panel admin (2A login, 2B formularios,
+2C publicar) · analítica (Fase 3).
