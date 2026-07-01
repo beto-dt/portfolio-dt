@@ -1,22 +1,19 @@
-import type { User } from 'firebase/auth';
+import type { User } from 'firebase/auth'; // type-only: erased at build, no SDK in bundle
 import { ADMIN_EMAIL } from './admin-email';
 
 export async function signInWithGoogle(): Promise<User> {
-  const { getFirebase } = await import('./firebase-client');
-  const { GoogleAuthProvider, signInWithPopup, signOut } = await import('firebase/auth');
-  const { auth } = getFirebase();
-  const cred = await signInWithPopup(auth, new GoogleAuthProvider());
-  if (cred.user.email !== ADMIN_EMAIL) {
-    await signOut(auth);
+  const fb = await import('./firebase-client');
+  const user = await fb.popupGoogleSignIn();
+  if (user.email !== ADMIN_EMAIL) {
+    await fb.firebaseSignOut();
     throw new Error('No autorizado');
   }
-  return cred.user;
+  return user;
 }
 
 export async function signOutAdmin(): Promise<void> {
-  const { getFirebase } = await import('./firebase-client');
-  const { signOut } = await import('firebase/auth');
-  await signOut(getFirebase().auth);
+  const fb = await import('./firebase-client');
+  await fb.firebaseSignOut();
 }
 
 /** Subscribes to auth changes; only surfaces the user when it is the owner.
@@ -24,9 +21,8 @@ export async function signOutAdmin(): Promise<void> {
 export async function onAdminAuthChanged(
   callback: (user: User | null) => void,
 ): Promise<() => void> {
-  const { getFirebase } = await import('./firebase-client');
-  const { onAuthStateChanged } = await import('firebase/auth');
-  return onAuthStateChanged(getFirebase().auth, (user) => {
+  const fb = await import('./firebase-client');
+  return fb.watchAuth((user) => {
     callback(user && user.email === ADMIN_EMAIL ? user : null);
   });
 }
