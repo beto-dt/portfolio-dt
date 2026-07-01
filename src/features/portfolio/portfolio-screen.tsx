@@ -8,7 +8,9 @@ import { StackSection } from './sections/stack/stack-section';
 import { ExperienceSection } from './sections/experience/experience-section';
 import { ProjectsSection } from './sections/projects/projects-section';
 import { CertificationsSection } from './sections/certifications/certifications-section';
+import { EducationSection } from './sections/education/education-section';
 import { ContactSection } from './sections/contact/contact-section';
+import { SiteFooter } from './components/site-footer';
 import { TrackedSection } from '@/analytics/tracked-section';
 import { armVisit } from '@/analytics/tracker';
 import { colors } from '@/theme/tokens';
@@ -29,7 +31,9 @@ export function PortfolioScreen() {
         <TrackedSection id="experience"><ExperienceSection /></TrackedSection>
         <TrackedSection id="projects"><ProjectsSection /></TrackedSection>
         <TrackedSection id="certifications"><CertificationsSection /></TrackedSection>
+        <TrackedSection id="education"><EducationSection /></TrackedSection>
         <TrackedSection id="contact"><ContactSection /></TrackedSection>
+        <SiteFooter />
       </ScrollView>
     </View>
   );
