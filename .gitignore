@@ -49,3 +49,6 @@ dist/
 
 # Firebase
 .firebase/
+
+# Firebase service account (never commit)
+service-account.json

@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public site never reads Firestore at runtime; scripts use the Admin SDK
+    // which bypasses these rules. Phase 2 will open writes to the admin.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

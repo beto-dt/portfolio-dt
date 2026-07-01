@@ -32,7 +32,10 @@
     "react-native-worklets": "0.10.0"
   },
   "devDependencies": {
+    "@types/node": "^26.1.0",
     "@types/react": "~19.2.2",
+    "firebase-admin": "^13.10.0",
+    "tsx": "^4.22.4",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -41,7 +44,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "content:seed": "tsx scripts/seed-content.ts",
+    "content:pull": "tsx scripts/pull-content.ts",
+    "deploy": "npm run content:pull && expo export -p web && firebase deploy --only hosting"
   },
   "private": true
 }
