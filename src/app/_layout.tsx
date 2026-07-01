@@ -7,15 +7,17 @@ import { ThemeProvider } from '@/theme/theme-provider';
 import { I18nProvider } from '@/i18n/i18n-provider';
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({
+  // Load custom fonts. We intentionally do NOT block rendering on this: on web,
+  // gating on fonts leaves the static prerender and first paint blank until JS
+  // resolves the fonts. Rendering immediately shows content right away and lets
+  // the custom fonts swap in when ready (a standard, acceptable FOUT).
+  useFonts({
     SpaceGrotesk_600SemiBold,
     SpaceGrotesk_700Bold,
     IBMPlexSans_400Regular,
     IBMPlexSans_500Medium,
     JetBrainsMono_400Regular,
   });
-
-  if (!fontsLoaded) return null;
 
   return (
     <ThemeProvider>
