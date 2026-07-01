@@ -9,6 +9,7 @@ import {
   type Unsubscribe,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, updateDoc, type DocumentData } from 'firebase/firestore';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { firebaseConfig } from './firebase-config';
 
 // This is the ONLY module that imports the Firebase SDK at runtime. Everything
@@ -46,4 +47,11 @@ export async function readContentDoc(locale: string): Promise<DocumentData | und
 export async function writeContentSection(locale: string, key: string, value: unknown): Promise<void> {
   const { db } = services();
   await updateDoc(doc(db, 'content', locale), { [key]: value });
+}
+
+export async function callPublish(): Promise<{ ok: boolean; actionsUrl: string }> {
+  const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  const functions = getFunctions(app, 'us-central1');
+  const result = await httpsCallable(functions, 'publish')();
+  return result.data as { ok: boolean; actionsUrl: string };
 }

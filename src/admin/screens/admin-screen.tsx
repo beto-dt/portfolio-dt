@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Linking, Pressable, ScrollView, Text, View } from 'react-native';
 import type { User } from 'firebase/auth';
 import type { HeroContent, PortfolioContent } from '@/content/types';
 import type { Locale } from '@/i18n/locales';
 import { colors, fonts, radii } from '@/theme/tokens';
 import { onAdminAuthChanged, signInWithGoogle, signOutAdmin } from '../auth';
 import { loadContent, saveSection } from '../content-repo';
+import { publishSite } from '../publish';
 import { HeroForm } from '../components/hero-form';
 
 export function AdminScreen() {
@@ -17,6 +18,10 @@ export function AdminScreen() {
   const [hero, setHero] = useState<HeroContent | null>(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
+
+  const [publishing, setPublishing] = useState(false);
+  const [publishMsg, setPublishMsg] = useState<string | null>(null);
+  const [publishUrl, setPublishUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -71,6 +76,21 @@ export function AdminScreen() {
     }
   };
 
+  const onPublish = async () => {
+    setPublishing(true);
+    setPublishMsg(null);
+    setPublishUrl(null);
+    try {
+      const { actionsUrl } = await publishSite();
+      setPublishMsg('Publicación iniciada (~2-3 min).');
+      setPublishUrl(actionsUrl);
+    } catch (e) {
+      setPublishMsg(e instanceof Error ? `Error: ${e.message}` : 'Error al publicar');
+    } finally {
+      setPublishing(false);
+    }
+  };
+
   if (!authReady) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.background, alignItems: 'center', justifyContent: 'center' }}>
@@ -95,10 +115,26 @@ export function AdminScreen() {
     <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: 24, gap: 20, maxWidth: 720, width: '100%', marginHorizontal: 'auto' }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
         <Text style={{ fontFamily: fonts.display, fontSize: 22, color: colors.text }}>Editar · Hero</Text>
-        <Pressable onPress={signOutAdmin} style={{ borderWidth: 1, borderColor: colors.borderStrong, borderRadius: radii.pill, paddingHorizontal: 14, paddingVertical: 7 }}>
-          <Text style={{ color: colors.textMuted, fontSize: 13 }}>Cerrar sesión</Text>
-        </Pressable>
+        <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+          <Pressable onPress={onPublish} disabled={publishing} style={{ backgroundColor: colors.accent, borderRadius: radii.pill, paddingHorizontal: 16, paddingVertical: 7, opacity: publishing ? 0.6 : 1 }}>
+            <Text style={{ color: colors.onAccent, fontFamily: fonts.bodyMedium, fontSize: 13 }}>{publishing ? 'Publicando…' : 'Publicar'}</Text>
+          </Pressable>
+          <Pressable onPress={signOutAdmin} style={{ borderWidth: 1, borderColor: colors.borderStrong, borderRadius: radii.pill, paddingHorizontal: 14, paddingVertical: 7 }}>
+            <Text style={{ color: colors.textMuted, fontSize: 13 }}>Cerrar sesión</Text>
+          </Pressable>
+        </View>
       </View>
+
+      {publishMsg ? (
+        <View style={{ gap: 4 }}>
+          <Text style={{ color: colors.textMuted, fontSize: 13 }}>{publishMsg}</Text>
+          {publishUrl ? (
+            <Text onPress={() => Linking.openURL(publishUrl)} style={{ color: colors.accent, fontSize: 13, textDecorationLine: 'underline' }}>
+              Ver progreso en GitHub Actions
+            </Text>
+          ) : null}
+        </View>
+      ) : null}
 
       <View style={{ flexDirection: 'row', gap: 8 }}>
         {(['es', 'en'] as Locale[]).map((l) => (
