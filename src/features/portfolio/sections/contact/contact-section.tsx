@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Linking, Platform, Pressable, Text, TextInput, View, useWindowDimensions, type PressableStateCallbackType } from 'react-native';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
 import { BookingCalendar } from './booking-calendar';
+import { onBookingIntent } from './booking-intent';
 import { SLOT_TIMES, formatSlot } from './booking-config';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
@@ -128,6 +129,9 @@ export function ContactSection() {
   const [taken, setTaken] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<WizardError>(null);
+  const [model, setModel] = useState<string | null>(null);
+
+  useEffect(() => onBookingIntent((m) => { setModel(m); setStep('form'); }), []);
 
   const slot = date && time ? formatSlot(date, time, locale) : null;
 
@@ -163,9 +167,10 @@ export function ContactSection() {
     const t = type || '—';
     const b = budget || '—';
     const slotLine = slot ? (locale === 'es' ? `\nLlamada: ${slot}.` : `\nCall: ${slot}.`) : '';
+    const modelLine = model ? (locale === 'es' ? `\nModelo: ${model}.` : `\nModel: ${model}.`) : '';
     return locale === 'es'
-      ? `Hola Luis, soy ${n}.\nTipo de proyecto: ${t}.\nPresupuesto estimado: ${b}.${slotLine}\n\n${message}`
-      : `Hi Luis, I'm ${n}.\nProject type: ${t}.\nEstimated budget: ${b}.${slotLine}\n\n${message}`;
+      ? `Hola Luis, soy ${n}.\nTipo de proyecto: ${t}.\nPresupuesto estimado: ${b}.${modelLine}${slotLine}\n\n${message}`
+      : `Hi Luis, I'm ${n}.\nProject type: ${t}.\nEstimated budget: ${b}.${modelLine}${slotLine}\n\n${message}`;
   };
 
   const confirm = async () => {
@@ -176,7 +181,7 @@ export function ContactSection() {
       const res = await fetch('/api/booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), email: email.trim(), projectType: type ?? '', budget: budget ?? '', message, date, time, locale }),
+        body: JSON.stringify({ name: name.trim(), email: email.trim(), projectType: type ?? '', budget: budget ?? '', model: model ?? '', message, date, time, locale }),
       });
       if (res.status === 409) {
         setError('slot_taken');
@@ -204,6 +209,7 @@ export function ContactSection() {
     setTime(null);
     setTaken([]);
     setError(null);
+    setModel(null);
   };
 
   const errorText =
@@ -243,6 +249,14 @@ export function ContactSection() {
             <Stepper step={step} projectLabel={contact.stepProjectLabel} scheduleLabel={contact.stepScheduleLabel} />
             {step === 'form' ? (
               <View style={{ gap: 18 }}>
+                {model ? (
+                  <View style={{ gap: 8 }}>
+                    <Text style={FIELD_LABEL}>{contact.interestLabel}</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Chip label={model} mono={false} active onPress={() => setModel(null)} />
+                    </View>
+                  </View>
+                ) : null}
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 14 }}>
                   <View style={{ gap: 8, flexGrow: 1, flexBasis: 180 }}>
                     <Text style={FIELD_LABEL}>{contact.formNameLabel}</Text>
