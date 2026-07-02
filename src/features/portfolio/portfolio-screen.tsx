@@ -11,6 +11,7 @@ import { ProjectsSection } from './sections/projects/projects-section';
 import { CertificationsSection } from './sections/certifications/certifications-section';
 import { EducationSection } from './sections/education/education-section';
 import { ContactSection } from './sections/contact/contact-section';
+import { CollaborationSection } from './sections/collaboration/collaboration-section';
 import { SiteFooter } from './components/site-footer';
 import { TrackedSection } from '@/analytics/tracked-section';
 import { armVisit } from '@/analytics/tracker';
@@ -34,6 +35,7 @@ export function PortfolioScreen() {
         <TrackedSection id="projects"><ProjectsSection /></TrackedSection>
         <TrackedSection id="certifications"><CertificationsSection /></TrackedSection>
         <TrackedSection id="education"><EducationSection /></TrackedSection>
+        <TrackedSection id="collaboration"><CollaborationSection /></TrackedSection>
         <TrackedSection id="contact"><ContactSection /></TrackedSection>
         <SiteFooter />
       </ScrollView>

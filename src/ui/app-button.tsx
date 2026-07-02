@@ -42,7 +42,7 @@ export function AppButton({
         isPrimary && hovered ? (primaryHoverGlow as object) : null,
       ]}
     >
-      <Text style={{ fontSize: size === 'sm' ? 13 : 15, fontFamily: fonts.bodyMedium, color: isPrimary ? colors.onAccent : 'rgb(231,233,236)' }}>
+      <Text style={{ fontSize: size === 'sm' ? 13 : 15, fontFamily: fonts.bodyMedium, color: isPrimary ? colors.onAccent : 'rgb(231,233,236)', textAlign: 'center' }}>
         {label}
       </Text>
     </Pressable>
