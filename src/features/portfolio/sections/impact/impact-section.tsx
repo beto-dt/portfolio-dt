@@ -13,7 +13,7 @@ const cellTransition = Platform.OS === 'web' ? ({ transitionProperty: 'backgroun
 // fallback. The leftover area of the last row shows the container background
 // (the hairline color) — the mock's lighter filler panel, with no extra markup.
 const gridWeb = Platform.OS === 'web'
-  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))' } as object)
+  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 160px), 1fr))' } as object)
   : null;
 
 /** One stat number; owns a useCountUp call (hooks need a component boundary). */

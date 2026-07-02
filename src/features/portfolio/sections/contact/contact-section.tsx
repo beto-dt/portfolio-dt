@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Linking, Platform, Pressable, Text, TextInput, View, type PressableStateCallbackType } from 'react-native';
+import { Linking, Platform, Pressable, Text, TextInput, View, useWindowDimensions, type PressableStateCallbackType } from 'react-native';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
 import { BookingCalendar } from './booking-calendar';
@@ -20,7 +20,7 @@ const cardGlowWeb = Platform.OS === 'web'
   ? ({ backgroundImage: 'radial-gradient(700px 420px at 85% 0%, rgba(228,227,87,0.07), rgba(228,227,87,0) 70%)' } as object)
   : null;
 const cardGridWeb = Platform.OS === 'web'
-  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', columnGap: 56, rowGap: 40 } as object)
+  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', columnGap: 56, rowGap: 40 } as object)
   : null;
 
 const FIELD_LABEL = { fontFamily: fonts.mono, fontSize: 10.5, letterSpacing: 0.6, textTransform: 'uppercase' as const, color: colors.textFaint };
@@ -115,6 +115,8 @@ function Stepper({ step, projectLabel, scheduleLabel }: { step: Step; projectLab
 export function ContactSection() {
   const { content, locale } = useI18n();
   const { contact } = content;
+  const { width } = useWindowDimensions();
+  const compact = width < 640;
   const [step, setStep] = useState<Step>('form');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -215,7 +217,7 @@ export function ContactSection() {
     <Container style={{ paddingVertical: 72 }} nativeID="contact">
       <View
         style={[
-          { borderRadius: 24, borderWidth: 1, borderColor: 'rgba(228,227,87,0.25)', backgroundColor: 'rgba(255,255,255,0.02)', padding: 44 },
+          { borderRadius: compact ? 18 : 24, borderWidth: 1, borderColor: 'rgba(228,227,87,0.25)', backgroundColor: 'rgba(255,255,255,0.02)', padding: compact ? 22 : 44 },
           cardGlowWeb as object,
         ]}
       >

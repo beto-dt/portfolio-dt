@@ -12,7 +12,7 @@ const textTransition = Platform.OS === 'web' ? ({ transitionProperty: 'color', t
 const markerTransition = Platform.OS === 'web' ? ({ transitionProperty: 'opacity', transitionDuration: '160ms' } as object) : null;
 // Two side-by-side columns on web (stacks under ~1000px); flexWrap fallback.
 const gridWeb = Platform.OS === 'web'
-  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(460px, 1fr))', columnGap: 64, rowGap: 48 } as object)
+  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', columnGap: 64, rowGap: 48 } as object)
   : null;
 
 /** A certification row that highlights on hover (decorative — not a link). */
