@@ -19,6 +19,8 @@ export type HeroContent = {
   stats: Stat[];
   cvLabel: string;
   cvUrl: string;
+  clientsHeading: string;
+  clients: string[];
 };
 
 export type ServiceItem = {
@@ -66,6 +68,19 @@ export type EducationContent = {
   languagesHeading: string;
   languages: LanguageItem[];
 };
+export type ProcessStep = { number: string; title: string; description: string };
+export type ProcessContent = { kicker: string; heading: string; steps: ProcessStep[] };
+
+export type CollaborationModel = {
+  tag: string;
+  title: string;
+  description: string;
+  features: string[];
+  cta: string;
+  popular?: boolean;
+};
+export type CollaborationContent = { kicker: string; heading: string; blurb: string; models: CollaborationModel[] };
+
 export type FooterContent = { copyright: string; tagline: string };
 
 export type ContactContent = {
@@ -85,12 +100,14 @@ export type PortfolioContent = {
   nav: NavContent;
   hero: HeroContent;
   services: ServicesContent;
+  process: ProcessContent;
   impact: ImpactContent;
   stack: StackContent;
   experience: ExperienceContent;
   projects: ProjectsContent;
   certifications: CertificationsContent;
   education: EducationContent;
+  collaboration: CollaborationContent;
   contact: ContactContent;
   footer: FooterContent;
 };

@@ -27,6 +27,8 @@ export const en: PortfolioContent = {
     ],
     cvLabel: 'Download CV',
     cvUrl: '/cv.pdf',
+    clientsHeading: "Companies and sectors I've delivered for",
+    clients: ['Banking · Produbanco', 'E-commerce · Acid Labs', 'IoT · Audax', 'Telecom · Smartisp', 'Health · HL7/FHIR', 'AR/VR · Unity'],
   },
   services: {
     kicker: 'services',
@@ -39,6 +41,16 @@ export const en: PortfolioContent = {
       { index: '05', tag: 'CLOUD', title: 'Cloud & DevOps', description: 'AWS and Azure infrastructure with Terraform (IaC), CI/CD, Docker and Kubernetes for reliable deployments.' },
       { index: '06', tag: 'AI/ML', title: 'AI/ML Integration', description: 'Data pipelines, predictive analytics and machine learning models integrated directly into your product.' },
       { index: '07', tag: 'LEAD', title: 'Consulting & Tech Lead', description: 'Architecture definition, engineering standards and technical leadership to take your product to production.' },
+    ],
+  },
+  process: {
+    kicker: 'how I work',
+    heading: 'A clear process, no surprises',
+    steps: [
+      { number: '01', title: 'Discovery', description: 'I understand your business goal, users and constraints. We define scope, deliverables and success metrics.' },
+      { number: '02', title: 'Architecture', description: 'I design the technical solution: stack, infrastructure and a phased delivery plan with realistic estimates.' },
+      { number: '03', title: 'Development', description: 'I build in iterations with frequent demos. Clean, tested code with CI/CD from day one.' },
+      { number: '04', title: 'Delivery & support', description: 'Production deployment (stores/cloud), documentation and post-launch support.' },
     ],
   },
   impact: {
@@ -116,6 +128,16 @@ export const en: PortfolioContent = {
     languages: [
       { language: 'Spanish', level: 'Native' },
       { language: 'English', level: 'Advanced' },
+    ],
+  },
+  collaboration: {
+    kicker: 'collaboration',
+    heading: 'Ways to work together',
+    blurb: 'Pick the format that best fits your project. Everything starts with a free 30-min call.',
+    models: [
+      { tag: 'FIXED SCOPE', title: 'Turnkey project', description: 'Ideal for MVPs and products with a defined scope. Fixed price per deliverable.', features: ['Fixed quote per phase', 'Design → development → deployment', 'Post-delivery warranty'], cta: 'Get a quote' },
+      { tag: 'MONTHLY', title: 'Retainer / hourly', description: 'Ongoing dedicated capacity to evolve your product month by month.', features: ['Flexible block of hours', 'Priority and availability', 'Weekly reports and demos'], cta: 'Book a slot', popular: true },
+      { tag: 'STRATEGIC', title: 'Fractional Tech Lead', description: 'I lead your team and architecture without the cost of a full-time senior.', features: ['Architecture and standards', 'Code reviews and mentoring', 'Technical roadmap'], cta: 'Schedule a call' },
     ],
   },
   contact: {

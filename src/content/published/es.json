@@ -70,6 +70,32 @@
       }
     ]
   },
+  "process": {
+    "kicker": "cómo trabajo",
+    "heading": "Un proceso claro, sin sorpresas",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Descubrimiento",
+        "description": "Entiendo tu objetivo de negocio, usuarios y restricciones. Definimos alcance, entregables y métricas de éxito."
+      },
+      {
+        "number": "02",
+        "title": "Arquitectura",
+        "description": "Diseño la solución técnica: stack, infraestructura y plan de entrega por fases, con estimaciones realistas."
+      },
+      {
+        "number": "03",
+        "title": "Desarrollo",
+        "description": "Construyo en iteraciones con demos frecuentes. Código limpio, testeado y con CI/CD desde el día uno."
+      },
+      {
+        "number": "04",
+        "title": "Entrega & soporte",
+        "description": "Despliegue a producción (stores/cloud), documentación y acompañamiento post-lanzamiento."
+      }
+    ]
+  },
   "impact": {
     "kicker": "impacto",
     "heading": "Resultados medibles",
@@ -368,6 +394,47 @@
       }
     ]
   },
+  "collaboration": {
+    "kicker": "colaboración",
+    "heading": "Modelos para trabajar juntos",
+    "blurb": "Elige el formato que mejor encaje con tu proyecto. Todo empieza con una llamada gratuita de 30 min.",
+    "models": [
+      {
+        "tag": "ALCANCE CERRADO",
+        "title": "Proyecto llave en mano",
+        "description": "Ideal para MVPs y productos con alcance definido. Precio fijo por entregable.",
+        "features": [
+          "Cotización fija por fases",
+          "Diseño → desarrollo → despliegue",
+          "Garantía post-entrega"
+        ],
+        "cta": "Cotizar proyecto"
+      },
+      {
+        "tag": "MENSUAL",
+        "title": "Retainer / por horas",
+        "description": "Capacidad dedicada continua para evolucionar tu producto mes a mes.",
+        "features": [
+          "Bloque de horas flexible",
+          "Prioridad y disponibilidad",
+          "Reportes y demos semanales"
+        ],
+        "cta": "Reservar cupo",
+        "popular": true
+      },
+      {
+        "tag": "ESTRATÉGICO",
+        "title": "Tech Lead fraccional",
+        "description": "Lidero tu equipo y arquitectura sin el costo de un full-time senior.",
+        "features": [
+          "Arquitectura y estándares",
+          "Code reviews y mentoría",
+          "Roadmap técnico"
+        ],
+        "cta": "Agendar llamada"
+      }
+    ]
+  },
   "footer": {
     "copyright": "© 2026 Luis De La Torre Duran",
     "tagline": "Diseñado y desarrollado con precisión."
@@ -412,6 +479,15 @@
       }
     ],
     "cvLabel": "Descargar CV",
-    "cvUrl": "/cv.pdf"
+    "cvUrl": "/cv.pdf",
+    "clientsHeading": "Empresas y sectores donde he entregado",
+    "clients": [
+      "Banca · Produbanco",
+      "E-commerce · Acid Labs",
+      "IoT · Audax",
+      "Telecom · Smartisp",
+      "Salud · HL7/FHIR",
+      "AR/VR · Unity"
+    ]
   }
 }
