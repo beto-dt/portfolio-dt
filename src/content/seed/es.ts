@@ -27,6 +27,8 @@ export const es: PortfolioContent = {
     ],
     cvLabel: 'Descargar CV',
     cvUrl: '/cv.pdf',
+    clientsHeading: 'Empresas y sectores donde he entregado',
+    clients: ['Banca · Produbanco', 'E-commerce · Acid Labs', 'IoT · Audax', 'Telecom · Smartisp', 'Salud · HL7/FHIR', 'AR/VR · Unity'],
   },
   services: {
     kicker: 'servicios',
@@ -39,6 +41,16 @@ export const es: PortfolioContent = {
       { index: '05', tag: 'CLOUD', title: 'Cloud & DevOps', description: 'Infraestructura en AWS y Azure con Terraform (IaC), CI/CD, Docker y Kubernetes para despliegues confiables.' },
       { index: '06', tag: 'AI/ML', title: 'Integración de IA/ML', description: 'Pipelines de datos, análisis predictivo y modelos de machine learning integrados directamente en tu producto.' },
       { index: '07', tag: 'LEAD', title: 'Consultoría & Tech Lead', description: 'Definición de arquitectura, estándares de ingeniería y liderazgo técnico para llevar tu producto a producción.' },
+    ],
+  },
+  process: {
+    kicker: 'cómo trabajo',
+    heading: 'Un proceso claro, sin sorpresas',
+    steps: [
+      { number: '01', title: 'Descubrimiento', description: 'Entiendo tu objetivo de negocio, usuarios y restricciones. Definimos alcance, entregables y métricas de éxito.' },
+      { number: '02', title: 'Arquitectura', description: 'Diseño la solución técnica: stack, infraestructura y plan de entrega por fases, con estimaciones realistas.' },
+      { number: '03', title: 'Desarrollo', description: 'Construyo en iteraciones con demos frecuentes. Código limpio, testeado y con CI/CD desde el día uno.' },
+      { number: '04', title: 'Entrega & soporte', description: 'Despliegue a producción (stores/cloud), documentación y acompañamiento post-lanzamiento.' },
     ],
   },
   impact: {
@@ -116,6 +128,16 @@ export const es: PortfolioContent = {
     languages: [
       { language: 'Español', level: 'Nativo' },
       { language: 'Inglés', level: 'Avanzado' },
+    ],
+  },
+  collaboration: {
+    kicker: 'colaboración',
+    heading: 'Modelos para trabajar juntos',
+    blurb: 'Elige el formato que mejor encaje con tu proyecto. Todo empieza con una llamada gratuita de 30 min.',
+    models: [
+      { tag: 'ALCANCE CERRADO', title: 'Proyecto llave en mano', description: 'Ideal para MVPs y productos con alcance definido. Precio fijo por entregable.', features: ['Cotización fija por fases', 'Diseño → desarrollo → despliegue', 'Garantía post-entrega'], cta: 'Cotizar proyecto' },
+      { tag: 'MENSUAL', title: 'Retainer / por horas', description: 'Capacidad dedicada continua para evolucionar tu producto mes a mes.', features: ['Bloque de horas flexible', 'Prioridad y disponibilidad', 'Reportes y demos semanales'], cta: 'Reservar cupo', popular: true },
+      { tag: 'ESTRATÉGICO', title: 'Tech Lead fraccional', description: 'Lidero tu equipo y arquitectura sin el costo de un full-time senior.', features: ['Arquitectura y estándares', 'Code reviews y mentoría', 'Roadmap técnico'], cta: 'Agendar llamada' },
     ],
   },
   contact: {

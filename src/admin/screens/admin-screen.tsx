@@ -19,6 +19,8 @@ import { ExperienceForm } from '../components/forms/experience-form';
 import { ProjectsForm } from '../components/forms/projects-form';
 import { CertificationsForm } from '../components/forms/certifications-form';
 import { EducationForm } from '../components/forms/education-form';
+import { ProcessForm } from '../components/forms/process-form';
+import { CollaborationForm } from '../components/forms/collaboration-form';
 import { ContactForm } from '../components/forms/contact-form';
 import { FooterForm } from '../components/forms/footer-form';
 import { MetricsView } from '../components/metrics-view';
@@ -29,12 +31,14 @@ const SECTIONS: { key: SectionKey; label: string }[] = [
   { key: 'nav', label: 'Nav' },
   { key: 'hero', label: 'Hero' },
   { key: 'services', label: 'Servicios' },
+  { key: 'process', label: 'Proceso' },
   { key: 'impact', label: 'Impacto' },
   { key: 'stack', label: 'Stack' },
   { key: 'experience', label: 'Experiencia' },
   { key: 'projects', label: 'Proyectos' },
   { key: 'certifications', label: 'Certificaciones' },
   { key: 'education', label: 'Educación' },
+  { key: 'collaboration', label: 'Colaboración' },
   { key: 'contact', label: 'Contacto' },
   { key: 'footer', label: 'Footer' },
 ];
@@ -47,6 +51,8 @@ function SectionForm({ section, content, onChange }: { section: SectionKey; cont
       return <HeroForm value={content.hero} onChange={(v) => onChange({ ...content, hero: v })} />;
     case 'services':
       return <ServicesForm value={content.services} onChange={(v) => onChange({ ...content, services: v })} />;
+    case 'process':
+      return <ProcessForm value={content.process} onChange={(v) => onChange({ ...content, process: v })} />;
     case 'impact':
       return <ImpactForm value={content.impact} onChange={(v) => onChange({ ...content, impact: v })} />;
     case 'stack':
@@ -59,6 +65,8 @@ function SectionForm({ section, content, onChange }: { section: SectionKey; cont
       return <CertificationsForm value={content.certifications} onChange={(v) => onChange({ ...content, certifications: v })} />;
     case 'education':
       return <EducationForm value={content.education} onChange={(v) => onChange({ ...content, education: v })} />;
+    case 'collaboration':
+      return <CollaborationForm value={content.collaboration} onChange={(v) => onChange({ ...content, collaboration: v })} />;
     case 'contact':
       return <ContactForm value={content.contact} onChange={(v) => onChange({ ...content, contact: v })} />;
     case 'footer':
