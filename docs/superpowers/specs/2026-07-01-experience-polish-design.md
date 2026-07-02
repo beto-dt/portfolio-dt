@@ -1,3 +1,57 @@
+# Experience Timeline UI/UX Polish + Animations — Design
+
+**Date:** 2026-07-01
+**Status:** Approved (design)
+
+## Goal
+
+Elevate the "Experiencia" timeline without changing its layout: stagger entries in
+on entrance (fade only, to keep the vertical line intact), pulse the current
+entry's node, and add a per-entry hover (node fills, line segment + description
+brighten). Public site only.
+
+## Context
+
+- `experience-section.tsx` renders `SectionHeading` + a `<View>` of
+  `ExperienceItem`s.
+- `ExperienceItem` is a row `View` with `borderLeftWidth: 1` (the timeline line),
+  an absolutely-positioned hollow node (bg = background, 2px accent border), a left
+  column (period, location, optional `current`/`currentLabel` badge), and a right
+  column (role in `fonts.display`, company in accent, description in `textDim`).
+- `Reveal` (`src/ui/reveal.tsx`) exists with a `slide?: boolean` prop (default
+  true); `slide={false}` = opacity-only, needed here so the stacked `border-left`
+  segments never shift and leave gaps mid-animation.
+- `ExperienceItem` type: `{ period, location, current?, currentLabel?, role,
+  company, description }`.
+
+## Decisions (agreed with user)
+
+- **Hover:** node fills accent (soft glow) + that entry's `border-left` segment
+  brightens to an accent tint + description brightens (`textDim → textMuted`).
+- **Current node:** a subtle pulsing ring behind the node.
+- **Entrance:** staggered per-entry, fade only (`slide={false}`); heading normal.
+
+## Non-goals
+
+- No layout/content changes; no typography size changes (role already SpaceGrotesk).
+- No `onPress` (entries are not links — default cursor).
+- `SectionHeading` unmodified (wrapped in `Reveal`). No other sections touched.
+
+## Architecture
+
+Two concerns:
+
+1. **`ExperienceItem` becomes hover-reactive with a smart node** — a `Pressable`
+   (no `onPress`) whose row exposes `hovered` to a new `TimelineNode`
+   sub-component and to the description; a web transition eases the border/color
+   changes. `TimelineNode` fills on hover and, when `current`, renders a pulsing
+   ring (reduced-motion aware).
+2. **Entrance wiring** — `experience-section.tsx` wraps the heading in `Reveal` and
+   each entry in `<Reveal slide={false} delay={i*70}>`.
+
+### `experience-item.tsx` (full rewrite)
+
+```tsx
 import { useEffect, useRef } from 'react';
 import { Animated, Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
 import type { ExperienceItem as ExperienceItemContent } from '@/content/types';
@@ -126,3 +180,53 @@ export function ExperienceItem({ item }: { item: ExperienceItemContent }) {
     </Pressable>
   );
 }
+```
+
+Notes:
+- Same rest appearance (hollow node, faint line, `textDim` description).
+- Web-only style props guarded by `Platform.OS === 'web'` and cast at the boundary.
+- `Pressable` has no `onPress` (not a link); no `cursor: pointer`.
+
+### `experience-section.tsx` (rewrite)
+
+Wrap the heading in `<Reveal delay={0}>` and each entry in
+`<Reveal key={…} slide={false} delay={i * 70}>` (fade-only). Keep the existing key
+scheme `${item.company}-${item.period}`.
+
+## Data flow
+
+No new data. All effects derive from `item` + hover/reduced-motion state. i18n
+unaffected (locale switch re-mounts → re-reveal, consistent with prior sections).
+
+## Files
+
+- **Modify:** `src/features/portfolio/sections/experience/experience-item.tsx` —
+  `TimelineNode` + hover-reactive entry.
+- **Modify:** `src/features/portfolio/sections/experience/experience-section.tsx` —
+  `Reveal` (heading + staggered fade entries).
+
+## Error handling
+
+- Components never throw; web-only props guarded. Pulse cleans up its loop on
+  unmount.
+- Timeline line preserved: entries fade (no slide) so the stacked `border-left`
+  segments never shift; hover only changes the segment color.
+
+## Testing / verification
+
+- `npx tsc --noEmit` passes; `npx expo export -p web` builds.
+- Bundle hygiene unchanged (no Firebase in experience).
+- Browser (preview): at rest the timeline looks identical (continuous line, hollow
+  nodes); the current entry's node pulses a ring; hovering an entry fills its node
+  (glow), brightens its line segment + description; on load heading + entries fade
+  in staggered. Verify at mobile (375) + desktop.
+- Reduced motion: with `prefers-reduced-motion: reduce`, no pulse and no entrance
+  motion (final state); hover still works.
+- No regression to other sections.
+
+## Implementation order
+
+1. `experience-item.tsx` — `TimelineNode` (pulse + hover fill) + hover-reactive
+   entry (line + description).
+2. `experience-section.tsx` — `Reveal` heading + staggered fade entries.
+3. Verify (tsc, export, bundle hygiene) + browser check + deploy.
