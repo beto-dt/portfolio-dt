@@ -308,81 +308,9 @@
       }
     ]
   },
-  "certifications": {
-    "kicker": "formación continua",
-    "heading": "Certificaciones",
-    "items": [
-      {
-        "name": "Máster en Arquitectura de Microservicios con Docker",
-        "issuer": "Lite Thinking"
-      },
-      {
-        "name": "DevOps con AWS",
-        "issuer": "Smart Data"
-      },
-      {
-        "name": "NestJS: Persistencia con MongoDB y TypeORM",
-        "issuer": "Udemy"
-      }
-    ]
-  },
-  "education": {
-    "kicker": "academia",
-    "heading": "Educación",
-    "items": [
-      {
-        "title": "Maestría en Big Data con mención en Inteligencia Artificial",
-        "institution": "Universidad Regional Autónoma de los Andes",
-        "period": "06/2026 — Presente"
-      },
-      {
-        "title": "Ingeniería en Sistemas",
-        "institution": "Universidad Regional Autónoma de los Andes",
-        "period": "01/2014 — 01/2019"
-      },
-      {
-        "title": "Máster en Arquitectura de Microservicios con Contenedores Docker",
-        "institution": "Lite Thinking",
-        "period": "07/2024"
-      },
-      {
-        "title": "Diplomado en Arquitectura Empresarial Moderna",
-        "institution": "Lite Thinking",
-        "period": "08/2025 — Presente"
-      },
-      {
-        "title": "AI Assisted Programming Bootcamp",
-        "institution": "Dojo Coding",
-        "period": "08/2025 — Presente"
-      }
-    ],
-    "languagesHeading": "Idiomas",
-    "languages": [
-      {
-        "language": "Español",
-        "level": "Nativo"
-      },
-      {
-        "language": "Inglés",
-        "level": "Avanzado"
-      }
-    ]
-  },
   "footer": {
     "copyright": "© 2026 Luis De La Torre Duran",
     "tagline": "Diseñado y desarrollado con precisión."
-  },
-  "contact": {
-    "kicker": "contacto",
-    "heading": "¿Tienes un proyecto en mente? Hablemos.",
-    "blurb": "Estoy disponible para proyectos freelance y colaboraciones. Cuéntame qué quieres construir y te respondo en menos de 24 horas.",
-    "emailCta": "Escríbeme un email",
-    "whatsappCta": "WhatsApp",
-    "email": "luis.atorred24@gmail.com",
-    "phone": "+593 97 990 6532",
-    "whatsapp": "593979906532",
-    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
-    "location": "Quito, Ecuador"
   },
   "process": {
     "heading": "Un proceso claro, sin sorpresas",
@@ -488,6 +416,125 @@
       "Telecom · Smartisp",
       "Salud · HL7/FHIR",
       "AR/VR · Unity"
+    ]
+  },
+  "education": {
+    "kicker": "academia",
+    "heading": "Educación",
+    "languagesHeading": "Idiomas",
+    "languages": [
+      {
+        "language": "Español",
+        "level": "Nativo"
+      },
+      {
+        "language": "Inglés",
+        "level": "Avanzado"
+      }
+    ],
+    "items": [
+      {
+        "title": "Maestría en Big Data con mención en IA",
+        "institution": "UNIANDES",
+        "period": "2026 — Presente"
+      },
+      {
+        "title": "Diplomado en Arquitectura Empresarial Moderna",
+        "institution": "Lite Thinking",
+        "period": "2025 — Presente"
+      },
+      {
+        "title": "AI Assisted Programming Bootcamp",
+        "institution": "Dojo Coding",
+        "period": "2025 — Presente"
+      },
+      {
+        "title": "Ingeniería en Sistemas",
+        "institution": "UNIANDES",
+        "period": "2014 — 2019"
+      }
+    ]
+  },
+  "contact": {
+    "kicker": "contacto",
+    "heading": "¿Tienes un proyecto en mente? Hablemos.",
+    "blurb": "Estoy disponible para proyectos freelance y colaboraciones. Cuéntame qué quieres construir y te respondo en menos de 24 horas.",
+    "email": "luis.atorred24@gmail.com",
+    "phone": "+593 97 990 6532",
+    "whatsapp": "593979906532",
+    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "formNameLabel": "Tu nombre",
+    "projectTypes": [
+      "Web",
+      "App móvil",
+      "AR / Unity",
+      "Backend",
+      "Cloud / DevOps",
+      "IA / ML",
+      "Consultoría"
+    ],
+    "emailCta": "Enviar por email",
+    "formMessageLabel": "Cuéntame tu proyecto",
+    "formMessagePlaceholder": "¿Qué quieres construir? Objetivo, plazos, contexto...",
+    "whatsappCta": "Enviar por WhatsApp",
+    "budgets": [
+      "< $2k",
+      "$2k–5k",
+      "$5k–15k",
+      "$15k+",
+      "A definir"
+    ],
+    "formBudgetLabel": "Presupuesto estimado",
+    "linkedinLabel": "/luis-alberto-de-la-torre",
+    "location": "Quito, Ecuador · GMT-5",
+    "formTypeLabel": "Tipo de proyecto",
+    "formHint": "Al enviar se abre WhatsApp o tu email con el mensaje ya redactado. Respondo en menos de 24 h.",
+    "formNamePlaceholder": "Ej: María Torres"
+  },
+  "certifications": {
+    "kicker": "formación continua",
+    "heading": "Certificaciones",
+    "items": [
+      {
+        "name": "Máster en Arquitectura de Microservicios con Docker",
+        "issuer": "Lite Thinking"
+      },
+      {
+        "name": "DevOps con AWS",
+        "issuer": "Smart Data"
+      },
+      {
+        "name": "NestJS: Persistencia con MongoDB y TypeORM",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Infraestructura como código en Terraform",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Fundamentos de TypeScript",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Testing con JavaScript",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Angular: Componentes y Servicios",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Material UI con React",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Desarrollo Front-End & JavaScript",
+        "issuer": "Coursera"
+      },
+      {
+        "name": "Diplomado en Habilidades Directivas",
+        "issuer": "Newman"
+      }
     ]
   }
 }

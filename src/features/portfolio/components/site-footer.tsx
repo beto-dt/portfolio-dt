@@ -1,4 +1,4 @@
-import { Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
+import { Image, Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
 import { Container } from './container';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
@@ -28,7 +28,10 @@ export function SiteFooter() {
     <View style={{ width: '100%', borderTopWidth: 1, borderTopColor: colors.border }}>
       <Reveal slide={false}>
         <Container style={{ paddingVertical: 28, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <Text style={{ fontFamily: fonts.mono, fontSize: 11.5, color: colors.textFaint }}>{footer.copyright}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+            <Image source={require('@/assets/images/logo.png')} style={{ width: 24, height: 24, borderRadius: 6 }} />
+            <Text style={{ fontFamily: fonts.mono, fontSize: 11.5, color: colors.textFaint }}>{footer.copyright}</Text>
+          </View>
           <BackToTop label={topLabel} />
           <Text style={{ fontFamily: fonts.mono, fontSize: 11.5, color: colors.textFaint }}>{footer.tagline}</Text>
         </Container>
