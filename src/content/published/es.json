@@ -555,6 +555,7 @@
     "whatsappAlt": "o coordinar por WhatsApp",
     "formEmailLabel": "Tu email",
     "formHint": "Recibirás una confirmación y el detalle llegará directo a mi correo. Respondo en menos de 24 h.",
-    "stepScheduleLabel": "Agenda"
+    "stepScheduleLabel": "Agenda",
+    "interestLabel": "Interesado en"
   }
 }

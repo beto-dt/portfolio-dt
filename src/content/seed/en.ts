@@ -188,6 +188,7 @@ export const en: PortfolioContent = {
     errorRequired: 'Fill in your name and email to continue.',
     errorSlotTaken: 'That time was just taken. Pick another.',
     errorNetwork: "Couldn't send. Try again or message me on WhatsApp.",
+    interestLabel: 'Interested in',
   },
   footer: {
     copyright: '© 2026 Luis De La Torre Duran',
