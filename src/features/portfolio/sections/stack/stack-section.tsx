@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
 import { Pill } from '../../components/pill';
@@ -6,6 +6,11 @@ import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
 import { GlowCard } from '@/ui/glow-card';
 import { Reveal } from '@/ui/reveal';
+
+// Uniform columns on web (last row never stretches); flexWrap is the native fallback.
+const gridWeb = Platform.OS === 'web'
+  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' } as object)
+  : null;
 
 export function StackSection() {
   const { content } = useI18n();
@@ -16,7 +21,7 @@ export function StackSection() {
       <Reveal delay={0}>
         <SectionHeading kicker={stack.kicker} heading={stack.heading} />
       </Reveal>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 14 }}>
+      <View style={[{ flexDirection: 'row', flexWrap: 'wrap', gap: 14 }, gridWeb as object]}>
         {stack.groups.map((group, i) => (
           <Reveal key={group.category} delay={i * 70} style={{ flexGrow: 1, flexBasis: 240, minWidth: 220 }}>
             <GlowCard
