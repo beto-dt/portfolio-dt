@@ -70,32 +70,6 @@
       }
     ]
   },
-  "process": {
-    "kicker": "cómo trabajo",
-    "heading": "Un proceso claro, sin sorpresas",
-    "steps": [
-      {
-        "number": "01",
-        "title": "Descubrimiento",
-        "description": "Entiendo tu objetivo de negocio, usuarios y restricciones. Definimos alcance, entregables y métricas de éxito."
-      },
-      {
-        "number": "02",
-        "title": "Arquitectura",
-        "description": "Diseño la solución técnica: stack, infraestructura y plan de entrega por fases, con estimaciones realistas."
-      },
-      {
-        "number": "03",
-        "title": "Desarrollo",
-        "description": "Construyo en iteraciones con demos frecuentes. Código limpio, testeado y con CI/CD desde el día uno."
-      },
-      {
-        "number": "04",
-        "title": "Entrega & soporte",
-        "description": "Despliegue a producción (stores/cloud), documentación y acompañamiento post-lanzamiento."
-      }
-    ]
-  },
   "impact": {
     "kicker": "impacto",
     "heading": "Resultados medibles",
@@ -394,10 +368,49 @@
       }
     ]
   },
+  "footer": {
+    "copyright": "© 2026 Luis De La Torre Duran",
+    "tagline": "Diseñado y desarrollado con precisión."
+  },
+  "contact": {
+    "kicker": "contacto",
+    "heading": "¿Tienes un proyecto en mente? Hablemos.",
+    "blurb": "Estoy disponible para proyectos freelance y colaboraciones. Cuéntame qué quieres construir y te respondo en menos de 24 horas.",
+    "emailCta": "Escríbeme un email",
+    "whatsappCta": "WhatsApp",
+    "email": "luis.atorred24@gmail.com",
+    "phone": "+593 97 990 6532",
+    "whatsapp": "593979906532",
+    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "location": "Quito, Ecuador"
+  },
+  "process": {
+    "heading": "Un proceso claro, sin sorpresas",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Descubrimiento",
+        "description": "Entiendo tu objetivo de negocio, usuarios y restricciones. Definimos alcance, entregables y métricas de éxito."
+      },
+      {
+        "number": "02",
+        "title": "Arquitectura",
+        "description": "Diseño la solución técnica: stack, infraestructura y plan de entrega por fases, con estimaciones realistas."
+      },
+      {
+        "number": "03",
+        "title": "Desarrollo",
+        "description": "Construyo en iteraciones con demos frecuentes. Código limpio, testeado y con CI/CD desde el día uno."
+      },
+      {
+        "number": "04",
+        "title": "Entrega & soporte",
+        "description": "Despliegue a producción (stores/cloud), documentación y acompañamiento post-lanzamiento."
+      }
+    ],
+    "kicker": "cómo trabajo"
+  },
   "collaboration": {
-    "kicker": "colaboración",
-    "heading": "Modelos para trabajar juntos",
-    "blurb": "Elige el formato que mejor encaje con tu proyecto. Todo empieza con una llamada gratuita de 30 min.",
     "models": [
       {
         "tag": "ALCANCE CERRADO",
@@ -433,23 +446,10 @@
         ],
         "cta": "Agendar llamada"
       }
-    ]
-  },
-  "footer": {
-    "copyright": "© 2026 Luis De La Torre Duran",
-    "tagline": "Diseñado y desarrollado con precisión."
-  },
-  "contact": {
-    "kicker": "contacto",
-    "heading": "¿Tienes un proyecto en mente? Hablemos.",
-    "blurb": "Estoy disponible para proyectos freelance y colaboraciones. Cuéntame qué quieres construir y te respondo en menos de 24 horas.",
-    "emailCta": "Escríbeme un email",
-    "whatsappCta": "WhatsApp",
-    "email": "luis.atorred24@gmail.com",
-    "phone": "+593 97 990 6532",
-    "whatsapp": "593979906532",
-    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
-    "location": "Quito, Ecuador"
+    ],
+    "heading": "Modelos para trabajar juntos",
+    "blurb": "Elige el formato que mejor encaje con tu proyecto. Todo empieza con una llamada gratuita de 30 min.",
+    "kicker": "colaboración"
   },
   "hero": {
     "availability": "Disponible para proyectos freelance",

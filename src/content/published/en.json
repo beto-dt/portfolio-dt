@@ -70,32 +70,6 @@
       }
     ]
   },
-  "process": {
-    "kicker": "how I work",
-    "heading": "A clear process, no surprises",
-    "steps": [
-      {
-        "number": "01",
-        "title": "Discovery",
-        "description": "I understand your business goal, users and constraints. We define scope, deliverables and success metrics."
-      },
-      {
-        "number": "02",
-        "title": "Architecture",
-        "description": "I design the technical solution: stack, infrastructure and a phased delivery plan with realistic estimates."
-      },
-      {
-        "number": "03",
-        "title": "Development",
-        "description": "I build in iterations with frequent demos. Clean, tested code with CI/CD from day one."
-      },
-      {
-        "number": "04",
-        "title": "Delivery & support",
-        "description": "Production deployment (stores/cloud), documentation and post-launch support."
-      }
-    ]
-  },
   "impact": {
     "kicker": "impact",
     "heading": "Measurable results",
@@ -394,10 +368,49 @@
       }
     ]
   },
+  "footer": {
+    "copyright": "© 2026 Luis De La Torre Duran",
+    "tagline": "Designed and developed with precision."
+  },
+  "contact": {
+    "kicker": "contact",
+    "heading": "Got a project in mind? Let's talk.",
+    "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
+    "emailCta": "Send me an email",
+    "whatsappCta": "WhatsApp",
+    "email": "luis.atorred24@gmail.com",
+    "phone": "+593 97 990 6532",
+    "whatsapp": "593979906532",
+    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "location": "Quito, Ecuador"
+  },
+  "process": {
+    "heading": "A clear process, no surprises",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Discovery",
+        "description": "I understand your business goal, users and constraints. We define scope, deliverables and success metrics."
+      },
+      {
+        "number": "02",
+        "title": "Architecture",
+        "description": "I design the technical solution: stack, infrastructure and a phased delivery plan with realistic estimates."
+      },
+      {
+        "number": "03",
+        "title": "Development",
+        "description": "I build in iterations with frequent demos. Clean, tested code with CI/CD from day one."
+      },
+      {
+        "number": "04",
+        "title": "Delivery & support",
+        "description": "Production deployment (stores/cloud), documentation and post-launch support."
+      }
+    ],
+    "kicker": "how I work"
+  },
   "collaboration": {
-    "kicker": "collaboration",
-    "heading": "Ways to work together",
-    "blurb": "Pick the format that best fits your project. Everything starts with a free 30-min call.",
     "models": [
       {
         "tag": "FIXED SCOPE",
@@ -433,23 +446,10 @@
         ],
         "cta": "Schedule a call"
       }
-    ]
-  },
-  "footer": {
-    "copyright": "© 2026 Luis De La Torre Duran",
-    "tagline": "Designed and developed with precision."
-  },
-  "contact": {
-    "kicker": "contact",
-    "heading": "Got a project in mind? Let's talk.",
-    "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
-    "emailCta": "Send me an email",
-    "whatsappCta": "WhatsApp",
-    "email": "luis.atorred24@gmail.com",
-    "phone": "+593 97 990 6532",
-    "whatsapp": "593979906532",
-    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
-    "location": "Quito, Ecuador"
+    ],
+    "heading": "Ways to work together",
+    "blurb": "Pick the format that best fits your project. Everything starts with a free 30-min call.",
+    "kicker": "collaboration"
   },
   "hero": {
     "availability": "Available for freelance projects",
