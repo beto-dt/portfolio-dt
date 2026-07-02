@@ -96,10 +96,19 @@ export const recordVisit = onRequest({ region: 'us-central1', cors: true }, asyn
 
 const GMAIL_APP_PASSWORD = defineSecret('GMAIL_APP_PASSWORD');
 
-const SLOT_TIMES = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'];
+const SLOT_TIMES = new Set(['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00']);
 const MAX_DAYS_AHEAD = 60;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
-const BOOKING_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Linear-time email sanity check (no regex backtracking). */
+function isEmailish(v: string): boolean {
+  if (!v || v.length > 200 || /\s/.test(v)) return false;
+  const at = v.indexOf('@');
+  if (at <= 0 || at !== v.lastIndexOf('@') || at === v.length - 1) return false;
+  const domain = v.slice(at + 1);
+  const dot = domain.indexOf('.');
+  return dot > 0 && dot < domain.length - 1;
+}
 
 /** Valid booking day: real date, Mon–Fri, today..+60d in the site's GMT-5. */
 function isValidBookingDate(iso: string): boolean {
@@ -113,6 +122,48 @@ function isValidBookingDate(iso: string): boolean {
   const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
   const target = Date.UTC(y, m - 1, d);
   return target >= today && target <= today + MAX_DAYS_AHEAD * 86400 * 1000;
+}
+
+type BookingPayload = {
+  name: string;
+  email: string;
+  projectType: string;
+  budget: string;
+  message: string;
+  date: string;
+  time: string;
+  locale: string;
+};
+
+/** Parse + validate the booking POST body; null when anything is off. */
+function parseBookingPayload(raw: unknown): BookingPayload | null {
+  let body: unknown = raw;
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      body = {};
+    }
+  }
+  const b = (body && typeof body === 'object' ? body : {}) as Record<string, unknown>;
+  const payload: BookingPayload = {
+    name: typeof b.name === 'string' ? b.name.trim() : '',
+    email: typeof b.email === 'string' ? b.email.trim() : '',
+    projectType: typeof b.projectType === 'string' ? b.projectType.slice(0, 60) : '',
+    budget: typeof b.budget === 'string' ? b.budget.slice(0, 60) : '',
+    message: typeof b.message === 'string' ? b.message.slice(0, 2000) : '',
+    date: typeof b.date === 'string' ? b.date : '',
+    time: typeof b.time === 'string' ? b.time : '',
+    locale: b.locale === 'en' ? 'en' : 'es',
+  };
+  if (
+    !payload.name || payload.name.length > 120 ||
+    !isEmailish(payload.email) ||
+    !isValidBookingDate(payload.date) || !SLOT_TIMES.has(payload.time)
+  ) {
+    return null;
+  }
+  return payload;
 }
 
 export const submitBooking = onRequest(
@@ -135,31 +186,12 @@ export const submitBooking = onRequest(
       res.status(405).json({ error: 'method' });
       return;
     }
-    let raw: unknown = req.body;
-    if (typeof raw === 'string') {
-      try {
-        raw = JSON.parse(raw);
-      } catch {
-        raw = {};
-      }
-    }
-    const b = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
-    const name = typeof b.name === 'string' ? b.name.trim() : '';
-    const email = typeof b.email === 'string' ? b.email.trim() : '';
-    const projectType = typeof b.projectType === 'string' ? b.projectType.slice(0, 60) : '';
-    const budget = typeof b.budget === 'string' ? b.budget.slice(0, 60) : '';
-    const message = typeof b.message === 'string' ? b.message.slice(0, 2000) : '';
-    const date = typeof b.date === 'string' ? b.date : '';
-    const time = typeof b.time === 'string' ? b.time : '';
-    const locale = b.locale === 'en' ? 'en' : 'es';
-    if (
-      !name || name.length > 120 ||
-      !BOOKING_EMAIL_RE.test(email) || email.length > 200 ||
-      !isValidBookingDate(date) || !SLOT_TIMES.includes(time)
-    ) {
+    const payload = parseBookingPayload(req.body);
+    if (!payload) {
       res.status(400).json({ error: 'invalid' });
       return;
     }
+    const { name, email, projectType, budget, message, date, time, locale } = payload;
     const existing = await db.collection('bookings').where('date', '==', date).where('time', '==', time).get();
     if (existing.docs.some((docSnap) => docSnap.get('status') !== 'cancelled')) {
       res.status(409).json({ error: 'slot_taken' });
@@ -172,8 +204,12 @@ export const submitBooking = onRequest(
     });
     let emailed = true;
     try {
+      // Explicit SMTPS (TLS on 465) — same endpoint the 'gmail' shorthand uses,
+      // spelled out so the transport is verifiably encrypted (Sonar S5332).
       const transport = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: { user: ADMIN_EMAIL, pass: GMAIL_APP_PASSWORD.value() },
       });
       await transport.sendMail({

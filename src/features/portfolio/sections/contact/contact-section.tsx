@@ -25,7 +25,16 @@ const cardGridWeb = Platform.OS === 'web'
 
 const FIELD_LABEL = { fontFamily: fonts.mono, fontSize: 10.5, letterSpacing: 0.6, textTransform: 'uppercase' as const, color: colors.textFaint };
 const ERROR_COLOR = '#ff8a8a';
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Linear-time email sanity check (no regex backtracking). */
+function isEmailish(v: string): boolean {
+  if (!v || v.length > 200 || /\s/.test(v)) return false;
+  const at = v.indexOf('@');
+  if (at <= 0 || at !== v.lastIndexOf('@') || at === v.length - 1) return false;
+  const domain = v.slice(at + 1);
+  const dot = domain.indexOf('.');
+  return dot > 0 && dot < domain.length - 1;
+}
 
 type Step = 'form' | 'schedule' | 'done';
 type WizardError = 'required' | 'slot_taken' | 'network' | null;
@@ -139,7 +148,7 @@ export function ContactSection() {
   };
 
   const goSchedule = () => {
-    if (!name.trim() || !EMAIL_RE.test(email.trim())) {
+    if (!name.trim() || !isEmailish(email.trim())) {
       setError('required');
       return;
     }
