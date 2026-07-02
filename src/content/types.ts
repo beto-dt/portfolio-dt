@@ -56,6 +56,15 @@ export type ProjectItem = {
 };
 export type ProjectsContent = { kicker: string; heading: string; items: ProjectItem[] };
 
+export type TestimonialItem = { quote: string; name: string; role: string };
+export type TestimonialsContent = {
+  kicker: string;
+  heading: string;
+  blurb: string;
+  linkedinUrl: string;
+  items: TestimonialItem[];
+};
+
 export type Certification = { name: string; issuer: string };
 export type CertificationsContent = { kicker: string; heading: string; items: Certification[] };
 
@@ -136,6 +145,7 @@ export type PortfolioContent = {
   stack: StackContent;
   experience: ExperienceContent;
   projects: ProjectsContent;
+  testimonials: TestimonialsContent;
   certifications: CertificationsContent;
   education: EducationContent;
   collaboration: CollaborationContent;
