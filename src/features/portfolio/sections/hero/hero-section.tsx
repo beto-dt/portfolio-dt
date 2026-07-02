@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Animated, Linking, Platform, Text, View } from 'react-native';
 import { Container } from '../../components/container';
+import { Pill } from '../../components/pill';
 import { useCountUp } from '../../hooks/use-count-up';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
@@ -129,6 +130,19 @@ export function HeroSection() {
                 <Text style={{ fontSize: 12.5, color: colors.textFainter, maxWidth: 160 }}>{stat.label}</Text>
               </View>
             ))}
+          </View>
+        </Reveal>
+
+        <Reveal delay={400}>
+          <View style={{ gap: 12 }}>
+            <Text style={{ fontFamily: fonts.mono, fontSize: 11, letterSpacing: 0.6, textTransform: 'uppercase', color: colors.textFaint }}>
+              {hero.clientsHeading}
+            </Text>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
+              {hero.clients.map((client) => (
+                <Pill key={client} label={client} />
+              ))}
+            </View>
           </View>
         </Reveal>
       </View>
