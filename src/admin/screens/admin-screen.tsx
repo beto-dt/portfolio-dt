@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Linking, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Platform, Pressable, Text, useWindowDimensions, View, type PressableStateCallbackType } from 'react-native';
 import type { User } from 'firebase/auth';
 import type { PortfolioContent } from '@/content/types';
 import type { Locale } from '@/i18n/locales';
-import { colors, fonts } from '@/theme/tokens';
-import { AppButton } from '@/ui/app-button';
-import { Chip } from '@/ui/chip';
-import { HoverLink } from '@/ui/hover-link';
+import { colors, fonts, radii } from '@/theme/tokens';
 import { onAdminAuthChanged, signInWithGoogle, signOutAdmin } from '../auth';
 import { loadContent, saveSection } from '../content-repo';
+import { loadBookings, setBookingStatus, type BookingRecord } from '../bookings-repo';
 import { publishSite } from '../publish';
 import { HeroForm } from '../components/forms/hero-form';
 import { NavForm } from '../components/forms/nav-form';
@@ -26,6 +24,13 @@ import { FooterForm } from '../components/forms/footer-form';
 import { MetricsView } from '../components/metrics-view';
 import { BookingsView } from '../components/bookings-view';
 import { AdminBackdrop, LoginView } from '../components/login-view';
+import { AccentButton, AdminShell, ViewHeader, type AdminView } from '../components/admin-shell';
+
+type HoverState = PressableStateCallbackType & { hovered?: boolean };
+
+const webPress = Platform.OS === 'web'
+  ? ({ cursor: 'pointer', transitionProperty: 'background-color', transitionDuration: '150ms' } as object)
+  : null;
 
 type SectionKey = keyof PortfolioContent;
 
@@ -76,12 +81,84 @@ function SectionForm({ section, content, onChange }: { section: SectionKey; cont
   }
 }
 
+function SectionNavItem({ label, active, onPress }: { label: string; active: boolean; onPress: () => void }) {
+  return (
+    <Pressable
+      onPress={onPress}
+      style={({ hovered }: HoverState) => [
+        { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 14, paddingVertical: 10, borderRadius: radii.md, backgroundColor: active ? 'rgba(228,227,87,0.12)' : hovered ? colors.surfaceStrong : 'transparent' },
+        webPress as object,
+      ]}
+    >
+      <View style={{ width: 5, height: 5, borderRadius: 999, backgroundColor: active ? colors.accent : colors.border }} />
+      <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: active ? colors.text : colors.textMuted }}>{label}</Text>
+    </Pressable>
+  );
+}
+
+function SaveBar({ status, onSave }: { status: string | null; onSave: () => void }) {
+  const isSaving = status === 'Guardando…';
+  const isSaved = !!status && status.startsWith('Guardado');
+  const isError = !!status && !isSaving && !isSaved;
+  const color = isSaved ? '#4ade80' : isSaving ? colors.accent : isError ? '#ff6b6b' : colors.textFaint;
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 12, borderWidth: 1, borderColor: colors.border, borderRadius: radii.lg, backgroundColor: colors.surface, padding: 16 }}>
+      <View style={{ width: 8, height: 8, borderRadius: 999, backgroundColor: color }} />
+      <Text style={{ flex: 1, fontFamily: fonts.mono, fontSize: 12.5, color }}>{status ?? 'Sin cambios pendientes'}</Text>
+      <AccentButton label="💾 Guardar" onPress={onSave} />
+    </View>
+  );
+}
+
+function EditorView({
+  wide,
+  section,
+  onSection,
+  loading,
+  content,
+  onChange,
+  status,
+  onSave,
+}: {
+  wide: boolean;
+  section: SectionKey;
+  onSection: (s: SectionKey) => void;
+  loading: boolean;
+  content: PortfolioContent | null;
+  onChange: (c: PortfolioContent) => void;
+  status: string | null;
+  onSave: () => void;
+}) {
+  return (
+    <View style={{ gap: 24 }}>
+      <ViewHeader title="Editor de contenido" subtitle="Edita los textos de tu portfolio y publica los cambios." />
+      <View style={{ flexDirection: wide ? 'row' : 'column', gap: 24 }}>
+        <View style={{ width: wide ? 220 : '100%', gap: 4 }}>
+          {SECTIONS.map((s) => (
+            <SectionNavItem key={s.key} label={s.label} active={s.key === section} onPress={() => onSection(s.key)} />
+          ))}
+        </View>
+        <View style={[{ gap: 16 }, wide ? { flex: 1 } : null]}>
+          {loading || !content ? (
+            <ActivityIndicator color={colors.accent} />
+          ) : (
+            <>
+              <SectionForm section={section} content={content} onChange={onChange} />
+              <SaveBar status={status} onSave={onSave} />
+            </>
+          )}
+        </View>
+      </View>
+    </View>
+  );
+}
+
 export function AdminScreen() {
   const [authReady, setAuthReady] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const [view, setView] = useState<'content' | 'metrics' | 'bookings'>('content');
+  const [view, setView] = useState<AdminView>('metrics');
   const [locale, setLocale] = useState<Locale>('es');
   const [content, setContent] = useState<PortfolioContent | null>(null);
   const [section, setSection] = useState<SectionKey>('hero');
@@ -91,6 +168,8 @@ export function AdminScreen() {
   const [publishing, setPublishing] = useState(false);
   const [publishMsg, setPublishMsg] = useState<string | null>(null);
   const [publishUrl, setPublishUrl] = useState<string | null>(null);
+
+  const [bookings, setBookings] = useState<BookingRecord[] | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -122,6 +201,34 @@ export function AdminScreen() {
       active = false;
     };
   }, [user, locale]);
+
+  useEffect(() => {
+    if (!user) {
+      setBookings(null);
+      return;
+    }
+    let active = true;
+    loadBookings()
+      .then((b) => active && setBookings(b))
+      .catch((e) => {
+        if (active) {
+          setBookings([]);
+          setError(e instanceof Error ? e.message : String(e));
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [user]);
+
+  const onBookingStatus = async (id: string, next: string) => {
+    setBookings((prev) => prev?.map((b) => (b.id === id ? { ...b, status: next } : b)) ?? prev);
+    try {
+      await setBookingStatus(id, next);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    }
+  };
 
   const onSignIn = async () => {
     setError(null);
@@ -158,6 +265,9 @@ export function AdminScreen() {
     }
   };
 
+  const { width } = useWindowDimensions();
+  const wide = width >= 900;
+
   if (!authReady) {
     return (
       <AdminBackdrop>
@@ -171,58 +281,26 @@ export function AdminScreen() {
   }
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: 24, gap: 20, maxWidth: 760, width: '100%', marginHorizontal: 'auto' }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-        <Text style={{ fontFamily: fonts.display, fontSize: 22, color: colors.text }}>Panel · {SECTIONS.find((s) => s.key === section)?.label}</Text>
-        <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
-          {view !== 'content' ? <AppButton label="Editar" onPress={() => setView('content')} variant="pill" size="sm" /> : null}
-          {view !== 'metrics' ? <AppButton label="Métricas" onPress={() => setView('metrics')} variant="pill" size="sm" /> : null}
-          {view !== 'bookings' ? <AppButton label="Solicitudes" onPress={() => setView('bookings')} variant="pill" size="sm" /> : null}
-          <AppButton label={publishing ? 'Publicando…' : 'Publicar'} onPress={onPublish} variant="pillPrimary" size="sm" />
-          <AppButton label="Cerrar sesión" onPress={signOutAdmin} variant="pill" size="sm" />
-        </View>
-      </View>
-
-      {publishMsg ? (
-        <View style={{ gap: 4 }}>
-          <Text style={{ color: colors.textMuted, fontSize: 13 }}>{publishMsg}</Text>
-          {publishUrl ? (
-            <HoverLink label="Ver progreso en GitHub Actions" onPress={() => Linking.openURL(publishUrl)} color={colors.accent} hoverColor={colors.text} />
-          ) : null}
-        </View>
-      ) : null}
-
-      <View style={{ flexDirection: 'row', gap: 8 }}>
-        {(['es', 'en'] as Locale[]).map((l) => (
-          <Chip key={l} label={l.toUpperCase()} active={l === locale} onPress={() => setLocale(l)} />
-        ))}
-      </View>
-
+    <AdminShell
+      view={view}
+      onNavigate={setView}
+      bookingsCount={bookings ? bookings.length : null}
+      publishing={publishing}
+      onPublish={onPublish}
+      publishMsg={publishMsg}
+      publishUrl={publishUrl}
+      locale={locale}
+      onLocale={setLocale}
+      onSignOut={signOutAdmin}
+    >
       {view === 'metrics' ? (
-        <MetricsView />
+        <MetricsView bookings={bookings} />
       ) : view === 'bookings' ? (
-        <BookingsView />
+        <BookingsView bookings={bookings} onStatus={onBookingStatus} />
       ) : (
-        <>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
-            {SECTIONS.map((s) => (
-              <Chip key={s.key} label={s.label} active={s.key === section} onPress={() => setSection(s.key)} mono={false} />
-            ))}
-          </View>
-          {loading || !content ? (
-            <ActivityIndicator color={colors.accent} />
-          ) : (
-            <>
-              <SectionForm section={section} content={content} onChange={setContent} />
-              <View style={{ alignSelf: 'flex-start' }}>
-                <AppButton label="Guardar" onPress={onSave} variant="primary" />
-              </View>
-              {status ? <Text style={{ color: colors.textMuted, fontSize: 13 }}>{status}</Text> : null}
-            </>
-          )}
-        </>
+        <EditorView wide={wide} section={section} onSection={setSection} loading={loading} content={content} onChange={setContent} status={status} onSave={onSave} />
       )}
-      {error ? <Text style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</Text> : null}
-    </ScrollView>
+      {error ? <Text style={{ color: '#ff6b6b', fontSize: 13, marginTop: 16 }}>{error}</Text> : null}
+    </AdminShell>
   );
 }
