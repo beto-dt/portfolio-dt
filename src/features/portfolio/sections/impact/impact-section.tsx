@@ -9,6 +9,11 @@ import type { ImpactItem } from '@/content/types';
 
 type HoverState = PressableStateCallbackType & { hovered?: boolean };
 const cellTransition = Platform.OS === 'web' ? ({ transitionProperty: 'background-color', transitionDuration: '180ms' } as object) : null;
+const gridWeb = Platform.OS === 'web'
+  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))' } as object)
+  : null;
+// Spans the leftover columns of the grid's last row (mock's lighter filler panel).
+const fillerWeb = Platform.OS === 'web' ? ({ gridColumn: 'auto / -1' } as object) : null;
 
 /** One stat number; owns a useCountUp call (hooks need a component boundary). */
 function ImpactValue({ value }: { value: string }) {
@@ -54,22 +59,28 @@ export function ImpactSection() {
       {/* The container background shows through the 1px gap, drawing hairline
           dividers between cells (matches the mock's grid look). */}
       <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: 1,
-          backgroundColor: colors.border,
-          borderWidth: 1,
-          borderColor: colors.border,
-          borderRadius: 18,
-          overflow: 'hidden',
-        }}
+        style={[
+          {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: 1,
+            backgroundColor: colors.border,
+            borderWidth: 1,
+            borderColor: colors.border,
+            borderRadius: 18,
+            overflow: 'hidden',
+          },
+          gridWeb as object,
+        ]}
       >
         {impact.items.map((item, i) => (
           <Reveal key={item.label} slide={false} delay={i * 70} style={{ flexGrow: 1, flexBasis: 180, minWidth: 160 }}>
             <ImpactCell item={item} />
           </Reveal>
         ))}
+        {Platform.OS === 'web' ? (
+          <View pointerEvents="none" style={[{ backgroundColor: '#101218' }, fillerWeb as object]} />
+        ) : null}
       </View>
     </Container>
   );
