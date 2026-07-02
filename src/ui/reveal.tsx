@@ -10,10 +10,22 @@ function prefersReducedMotion(): boolean {
 }
 
 /**
- * Fades + slides children in on mount (opacity 0->1, translateY 8->0) after
- * `delay` ms. Under prefers-reduced-motion it renders at the final state.
+ * Fades children in on mount (opacity 0->1) after `delay` ms, and — unless
+ * `slide` is false — also slides them up (translateY 8->0). `slide={false}` is
+ * used where a transform would break a seamless layout (e.g. a hairline grid).
+ * Under prefers-reduced-motion it renders at the final state.
  */
-export function Reveal({ children, delay = 0, style }: { children: ReactNode; delay?: number; style?: ViewStyle }) {
+export function Reveal({
+  children,
+  delay = 0,
+  slide = true,
+  style,
+}: {
+  children: ReactNode;
+  delay?: number;
+  slide?: boolean;
+  style?: ViewStyle;
+}) {
   const reduce = prefersReducedMotion();
   const progress = useRef(new Animated.Value(reduce ? 1 : 0)).current;
 
@@ -35,7 +47,9 @@ export function Reveal({ children, delay = 0, style }: { children: ReactNode; de
         style,
         {
           opacity: progress,
-          transform: [{ translateY: progress.interpolate({ inputRange: [0, 1], outputRange: [8, 0] }) }],
+          transform: slide
+            ? [{ translateY: progress.interpolate({ inputRange: [0, 1], outputRange: [8, 0] }) }]
+            : undefined,
         },
       ]}
     >
