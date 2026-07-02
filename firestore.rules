@@ -15,6 +15,14 @@ service cloud.firestore {
         && request.auth.token.email == 'luis.atorred24@gmail.com';
       allow write: if false;
     }
+    // Bookings are written only by the submitBooking function (Admin SDK
+    // bypasses rules); the owner reads/updates them from /admin.
+    match /bookings/{doc} {
+      allow read, update, delete: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'luis.atorred24@gmail.com';
+      allow create: if false;
+    }
     match /{document=**} {
       allow read, write: if false;
     }
