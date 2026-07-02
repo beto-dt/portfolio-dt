@@ -29,12 +29,12 @@ export function PortfolioScreen() {
         <TrackedSection id="hero"><HeroSection /></TrackedSection>
         <TrackedSection id="services"><ServicesSection /></TrackedSection>
         <TrackedSection id="process"><ProcessSection /></TrackedSection>
+        <TrackedSection id="collaboration"><CollaborationSection /></TrackedSection>
         <TrackedSection id="impact"><ImpactSection /></TrackedSection>
         <TrackedSection id="stack"><StackSection /></TrackedSection>
         <TrackedSection id="experience"><ExperienceSection /></TrackedSection>
         <TrackedSection id="projects"><ProjectsSection /></TrackedSection>
         <TrackedSection id="formation"><FormationSection /></TrackedSection>
-        <TrackedSection id="collaboration"><CollaborationSection /></TrackedSection>
         <TrackedSection id="contact"><ContactSection /></TrackedSection>
         <SiteFooter />
       </ScrollView>
