@@ -8,7 +8,7 @@ import {
   type User,
   type Unsubscribe,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, updateDoc, type DocumentData } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, updateDoc, collection, getDocs, orderBy, query, type DocumentData } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { firebaseConfig } from './firebase-config';
 
@@ -60,4 +60,28 @@ export async function readAnalyticsDoc(): Promise<DocumentData | undefined> {
   const { db } = services();
   const snap = await getDoc(doc(db, 'analytics', 'summary'));
   return snap.exists() ? snap.data() : undefined;
+}
+
+export type BookingRecord = {
+  id: string;
+  name: string;
+  email: string;
+  projectType: string;
+  budget: string;
+  message: string;
+  date: string;
+  time: string;
+  locale: string;
+  status: string;
+};
+
+export async function readBookings(): Promise<BookingRecord[]> {
+  const { db } = services();
+  const snap = await getDocs(query(collection(db, 'bookings'), orderBy('createdAt', 'desc')));
+  return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<BookingRecord, 'id'>) }));
+}
+
+export async function updateBookingStatus(id: string, status: string): Promise<void> {
+  const { db } = services();
+  await updateDoc(doc(db, 'bookings', id), { status });
 }

@@ -104,6 +104,26 @@ export type ContactContent = {
   formMessageLabel: string;
   formMessagePlaceholder: string;
   formHint: string;
+  formEmailLabel: string;
+  formEmailPlaceholder: string;
+  stepProjectLabel: string;
+  stepScheduleLabel: string;
+  nextCta: string;
+  backCta: string;
+  confirmCta: string;
+  slotsHeading: string;
+  slotsFreeSuffix: string;
+  slotsPickDay: string;
+  bannerPickDay: string;
+  bannerPickTime: string;
+  bannerScheduled: string;
+  whatsappAlt: string;
+  successTitle: string;
+  successBody: string;
+  successAgain: string;
+  errorRequired: string;
+  errorSlotTaken: string;
+  errorNetwork: string;
 };
 
 export type PortfolioContent = {

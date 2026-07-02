@@ -7,6 +7,10 @@
       {
         "source": "/api/visit",
         "function": { "functionId": "recordVisit", "region": "us-central1" }
+      },
+      {
+        "source": "/api/booking",
+        "function": { "functionId": "submitBooking", "region": "us-central1" }
       }
     ]
   },

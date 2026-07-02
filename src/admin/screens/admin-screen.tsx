@@ -24,6 +24,7 @@ import { CollaborationForm } from '../components/forms/collaboration-form';
 import { ContactForm } from '../components/forms/contact-form';
 import { FooterForm } from '../components/forms/footer-form';
 import { MetricsView } from '../components/metrics-view';
+import { BookingsView } from '../components/bookings-view';
 
 type SectionKey = keyof PortfolioContent;
 
@@ -79,7 +80,7 @@ export function AdminScreen() {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const [view, setView] = useState<'content' | 'metrics'>('content');
+  const [view, setView] = useState<'content' | 'metrics' | 'bookings'>('content');
   const [locale, setLocale] = useState<Locale>('es');
   const [content, setContent] = useState<PortfolioContent | null>(null);
   const [section, setSection] = useState<SectionKey>('hero');
@@ -179,7 +180,9 @@ export function AdminScreen() {
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
         <Text style={{ fontFamily: fonts.display, fontSize: 22, color: colors.text }}>Panel · {SECTIONS.find((s) => s.key === section)?.label}</Text>
         <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
-          <AppButton label={view === 'content' ? 'Métricas' : 'Editar'} onPress={() => setView(view === 'content' ? 'metrics' : 'content')} variant="pill" size="sm" />
+          {view !== 'content' ? <AppButton label="Editar" onPress={() => setView('content')} variant="pill" size="sm" /> : null}
+          {view !== 'metrics' ? <AppButton label="Métricas" onPress={() => setView('metrics')} variant="pill" size="sm" /> : null}
+          {view !== 'bookings' ? <AppButton label="Solicitudes" onPress={() => setView('bookings')} variant="pill" size="sm" /> : null}
           <AppButton label={publishing ? 'Publicando…' : 'Publicar'} onPress={onPublish} variant="pillPrimary" size="sm" />
           <AppButton label="Cerrar sesión" onPress={signOutAdmin} variant="pill" size="sm" />
         </View>
@@ -202,6 +205,8 @@ export function AdminScreen() {
 
       {view === 'metrics' ? (
         <MetricsView />
+      ) : view === 'bookings' ? (
+        <BookingsView />
       ) : (
         <>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>

@@ -455,42 +455,6 @@
       }
     ]
   },
-  "contact": {
-    "kicker": "contact",
-    "heading": "Got a project in mind? Let's talk.",
-    "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
-    "email": "luis.atorred24@gmail.com",
-    "phone": "+593 97 990 6532",
-    "whatsapp": "593979906532",
-    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
-    "formNameLabel": "Your name",
-    "projectTypes": [
-      "Web",
-      "Mobile app",
-      "AR / Unity",
-      "Backend",
-      "Cloud / DevOps",
-      "AI / ML",
-      "Consulting"
-    ],
-    "emailCta": "Send via email",
-    "formMessageLabel": "Tell me about your project",
-    "formMessagePlaceholder": "What do you want to build? Goal, timeline, context...",
-    "whatsappCta": "Send via WhatsApp",
-    "budgets": [
-      "< $2k",
-      "$2k–5k",
-      "$5k–15k",
-      "$15k+",
-      "To be defined"
-    ],
-    "formBudgetLabel": "Estimated budget",
-    "linkedinLabel": "/luis-alberto-de-la-torre",
-    "location": "Quito, Ecuador · GMT-5",
-    "formTypeLabel": "Project type",
-    "formHint": "Sending opens WhatsApp or your email with the message pre-drafted. I reply within 24 h.",
-    "formNamePlaceholder": "E.g.: María Torres"
-  },
   "certifications": {
     "kicker": "continuous learning",
     "heading": "Certifications",
@@ -536,5 +500,61 @@
         "issuer": "Newman"
       }
     ]
+  },
+  "contact": {
+    "kicker": "contact",
+    "heading": "Got a project in mind? Let's talk.",
+    "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
+    "email": "luis.atorred24@gmail.com",
+    "phone": "+593 97 990 6532",
+    "whatsapp": "593979906532",
+    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "formNameLabel": "Your name",
+    "projectTypes": [
+      "Web",
+      "Mobile app",
+      "AR / Unity",
+      "Backend",
+      "Cloud / DevOps",
+      "AI / ML",
+      "Consulting"
+    ],
+    "emailCta": "Send via email",
+    "formMessageLabel": "Tell me about your project",
+    "formMessagePlaceholder": "What do you want to build? Goal, timeline, context...",
+    "whatsappCta": "Send via WhatsApp",
+    "budgets": [
+      "< $2k",
+      "$2k–5k",
+      "$5k–15k",
+      "$15k+",
+      "To be defined"
+    ],
+    "formBudgetLabel": "Estimated budget",
+    "linkedinLabel": "/luis-alberto-de-la-torre",
+    "location": "Quito, Ecuador · GMT-5",
+    "formTypeLabel": "Project type",
+    "formNamePlaceholder": "E.g.: María Torres",
+    "backCta": "← Back",
+    "confirmCta": "Confirm and send",
+    "errorRequired": "Fill in your name and email to continue.",
+    "slotsHeading": "Available times",
+    "errorNetwork": "Couldn't send. Try again or message me on WhatsApp.",
+    "slotsPickDay": "Pick a day on the calendar first.",
+    "successAgain": "Send another request",
+    "nextCta": "Pick a day and time →",
+    "errorSlotTaken": "That time was just taken. Pick another.",
+    "formEmailPlaceholder": "name@email.com",
+    "bannerScheduled": "30-min call scheduled for {slot}.",
+    "successTitle": "Request sent!",
+    "slotsFreeSuffix": "open slots",
+    "bannerPickDay": "Pick a day and time for your free 30-min call.",
+    "stepProjectLabel": "Project",
+    "successBody": "I got your request for {slot}. I'll confirm by email within 24 h.",
+    "bannerPickTime": "Day selected. Now pick a time.",
+    "whatsappAlt": "or coordinate via WhatsApp",
+    "formEmailLabel": "Your email",
+    "formHint": "You'll get a confirmation and the details go straight to my inbox. I reply within 24 h.",
+    "stepScheduleLabel": "Schedule"
   }
 }
