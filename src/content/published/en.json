@@ -308,128 +308,9 @@
       }
     ]
   },
-  "certifications": {
-    "kicker": "continuous learning",
-    "heading": "Certifications",
-    "items": [
-      {
-        "name": "Master's in Microservices Architecture with Docker",
-        "issuer": "Lite Thinking"
-      },
-      {
-        "name": "DevOps with AWS",
-        "issuer": "Smart Data"
-      },
-      {
-        "name": "NestJS: Persistence with MongoDB & TypeORM",
-        "issuer": "Platzi"
-      },
-      {
-        "name": "Infrastructure as Code with Terraform",
-        "issuer": "Platzi"
-      },
-      {
-        "name": "TypeScript Fundamentals",
-        "issuer": "Platzi"
-      },
-      {
-        "name": "Testing with JavaScript",
-        "issuer": "Platzi"
-      },
-      {
-        "name": "Angular: Components & Services",
-        "issuer": "Platzi"
-      },
-      {
-        "name": "Material UI with React",
-        "issuer": "Platzi"
-      },
-      {
-        "name": "Front-End Development & JavaScript",
-        "issuer": "Coursera"
-      },
-      {
-        "name": "Management Skills Diploma",
-        "issuer": "Newman"
-      }
-    ]
-  },
-  "education": {
-    "kicker": "academics",
-    "heading": "Education",
-    "items": [
-      {
-        "title": "Master's in Big Data with a focus on AI",
-        "institution": "UNIANDES",
-        "period": "2026 — Present"
-      },
-      {
-        "title": "Diploma in Modern Enterprise Architecture",
-        "institution": "Lite Thinking",
-        "period": "2025 — Present"
-      },
-      {
-        "title": "AI Assisted Programming Bootcamp",
-        "institution": "Dojo Coding",
-        "period": "2025 — Present"
-      },
-      {
-        "title": "Systems Engineering",
-        "institution": "UNIANDES",
-        "period": "2014 — 2019"
-      }
-    ],
-    "languagesHeading": "Languages",
-    "languages": [
-      {
-        "language": "Spanish",
-        "level": "Native"
-      },
-      {
-        "language": "English",
-        "level": "Advanced"
-      }
-    ]
-  },
   "footer": {
     "copyright": "© 2026 Luis De La Torre Duran",
     "tagline": "Designed and developed with precision."
-  },
-  "contact": {
-    "kicker": "contact",
-    "heading": "Got a project in mind? Let's talk.",
-    "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
-    "emailCta": "Send via email",
-    "whatsappCta": "Send via WhatsApp",
-    "email": "luis.atorred24@gmail.com",
-    "phone": "+593 97 990 6532",
-    "whatsapp": "593979906532",
-    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
-    "location": "Quito, Ecuador · GMT-5",
-    "linkedinLabel": "/luis-alberto-de-la-torre",
-    "formNameLabel": "Your name",
-    "formNamePlaceholder": "E.g.: María Torres",
-    "formTypeLabel": "Project type",
-    "projectTypes": [
-      "Web",
-      "Mobile app",
-      "AR / Unity",
-      "Backend",
-      "Cloud / DevOps",
-      "AI / ML",
-      "Consulting"
-    ],
-    "formBudgetLabel": "Estimated budget",
-    "budgets": [
-      "< $2k",
-      "$2k–5k",
-      "$5k–15k",
-      "$15k+",
-      "To be defined"
-    ],
-    "formMessageLabel": "Tell me about your project",
-    "formMessagePlaceholder": "What do you want to build? Goal, timeline, context...",
-    "formHint": "Sending opens WhatsApp or your email with the message pre-drafted. I reply within 24 h."
   },
   "process": {
     "heading": "A clear process, no surprises",
@@ -535,6 +416,125 @@
       "Telecom · Smartisp",
       "Health · HL7/FHIR",
       "AR/VR · Unity"
+    ]
+  },
+  "education": {
+    "kicker": "academics",
+    "heading": "Education",
+    "languagesHeading": "Languages",
+    "languages": [
+      {
+        "language": "Spanish",
+        "level": "Native"
+      },
+      {
+        "language": "English",
+        "level": "Advanced"
+      }
+    ],
+    "items": [
+      {
+        "title": "Master's in Big Data with a focus on AI",
+        "institution": "UNIANDES",
+        "period": "2026 — Present"
+      },
+      {
+        "title": "Diploma in Modern Enterprise Architecture",
+        "institution": "Lite Thinking",
+        "period": "2025 — Present"
+      },
+      {
+        "title": "AI Assisted Programming Bootcamp",
+        "institution": "Dojo Coding",
+        "period": "2025 — Present"
+      },
+      {
+        "title": "Systems Engineering",
+        "institution": "UNIANDES",
+        "period": "2014 — 2019"
+      }
+    ]
+  },
+  "contact": {
+    "kicker": "contact",
+    "heading": "Got a project in mind? Let's talk.",
+    "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
+    "email": "luis.atorred24@gmail.com",
+    "phone": "+593 97 990 6532",
+    "whatsapp": "593979906532",
+    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "formNameLabel": "Your name",
+    "projectTypes": [
+      "Web",
+      "Mobile app",
+      "AR / Unity",
+      "Backend",
+      "Cloud / DevOps",
+      "AI / ML",
+      "Consulting"
+    ],
+    "emailCta": "Send via email",
+    "formMessageLabel": "Tell me about your project",
+    "formMessagePlaceholder": "What do you want to build? Goal, timeline, context...",
+    "whatsappCta": "Send via WhatsApp",
+    "budgets": [
+      "< $2k",
+      "$2k–5k",
+      "$5k–15k",
+      "$15k+",
+      "To be defined"
+    ],
+    "formBudgetLabel": "Estimated budget",
+    "linkedinLabel": "/luis-alberto-de-la-torre",
+    "location": "Quito, Ecuador · GMT-5",
+    "formTypeLabel": "Project type",
+    "formHint": "Sending opens WhatsApp or your email with the message pre-drafted. I reply within 24 h.",
+    "formNamePlaceholder": "E.g.: María Torres"
+  },
+  "certifications": {
+    "kicker": "continuous learning",
+    "heading": "Certifications",
+    "items": [
+      {
+        "name": "Master's in Microservices Architecture with Docker",
+        "issuer": "Lite Thinking"
+      },
+      {
+        "name": "DevOps with AWS",
+        "issuer": "Smart Data"
+      },
+      {
+        "name": "NestJS: Persistence with MongoDB & TypeORM",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Infrastructure as Code with Terraform",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "TypeScript Fundamentals",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Testing with JavaScript",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Angular: Components & Services",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Material UI with React",
+        "issuer": "Platzi"
+      },
+      {
+        "name": "Front-End Development & JavaScript",
+        "issuer": "Coursera"
+      },
+      {
+        "name": "Management Skills Diploma",
+        "issuer": "Newman"
+      }
     ]
   }
 }
