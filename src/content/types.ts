@@ -94,6 +94,16 @@ export type ContactContent = {
   whatsapp: string;
   linkedin: string;
   location: string;
+  linkedinLabel: string;
+  formNameLabel: string;
+  formNamePlaceholder: string;
+  formTypeLabel: string;
+  projectTypes: string[];
+  formBudgetLabel: string;
+  budgets: string[];
+  formMessageLabel: string;
+  formMessagePlaceholder: string;
+  formHint: string;
 };
 
 export type PortfolioContent = {
