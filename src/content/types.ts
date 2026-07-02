@@ -124,6 +124,7 @@ export type ContactContent = {
   errorRequired: string;
   errorSlotTaken: string;
   errorNetwork: string;
+  interestLabel: string;
 };
 
 export type PortfolioContent = {

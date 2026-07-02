@@ -68,6 +68,7 @@ export type BookingRecord = {
   email: string;
   projectType: string;
   budget: string;
+  model: string;
   message: string;
   date: string;
   time: string;

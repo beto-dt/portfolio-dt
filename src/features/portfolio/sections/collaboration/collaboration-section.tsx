@@ -7,6 +7,7 @@ import { AppButton } from '@/ui/app-button';
 import { GlowCard } from '@/ui/glow-card';
 import { Reveal } from '@/ui/reveal';
 import { scrollToAnchor } from '@/ui/scroll-to-anchor';
+import { setBookingIntent } from '../contact/booking-intent';
 import type { CollaborationModel } from '@/content/types';
 
 /** One collaboration model card; the popular one is accent-bordered + badged. */
@@ -45,7 +46,14 @@ function ModelCard({ model }: { model: CollaborationModel }) {
           </View>
           {/* marginTop:'auto' pins the CTA to the bottom of the card */}
           <View style={{ marginTop: 'auto', paddingTop: 20 }}>
-            <AppButton label={model.cta} onPress={() => scrollToAnchor('contact')} variant={model.popular ? 'primary' : 'outline'} />
+            <AppButton
+              label={model.cta}
+              onPress={() => {
+                setBookingIntent(model.title);
+                scrollToAnchor('contact');
+              }}
+              variant={model.popular ? 'primary' : 'outline'}
+            />
           </View>
         </>
       )}

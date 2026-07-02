@@ -47,6 +47,7 @@ export function BookingsView() {
           </View>
           <Text style={{ fontFamily: fonts.display, fontSize: 16, color: colors.text }}>{b.name}</Text>
           <Text style={{ fontSize: 13, color: colors.textMuted }}>
+            {b.model ? `${b.model} · ` : ''}
             {b.email}
             {b.projectType ? ` · ${b.projectType}` : ''}
             {b.budget ? ` · ${b.budget}` : ''}

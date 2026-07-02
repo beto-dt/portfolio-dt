@@ -129,6 +129,7 @@ type BookingPayload = {
   email: string;
   projectType: string;
   budget: string;
+  model: string;
   message: string;
   date: string;
   time: string;
@@ -151,6 +152,7 @@ function parseBookingPayload(raw: unknown): BookingPayload | null {
     email: typeof b.email === 'string' ? b.email.trim() : '',
     projectType: typeof b.projectType === 'string' ? b.projectType.slice(0, 60) : '',
     budget: typeof b.budget === 'string' ? b.budget.slice(0, 60) : '',
+    model: typeof b.model === 'string' ? b.model.slice(0, 80) : '',
     message: typeof b.message === 'string' ? b.message.slice(0, 2000) : '',
     date: typeof b.date === 'string' ? b.date : '',
     time: typeof b.time === 'string' ? b.time : '',
@@ -191,14 +193,14 @@ export const submitBooking = onRequest(
       res.status(400).json({ error: 'invalid' });
       return;
     }
-    const { name, email, projectType, budget, message, date, time, locale } = payload;
+    const { name, email, projectType, budget, model, message, date, time, locale } = payload;
     const existing = await db.collection('bookings').where('date', '==', date).where('time', '==', time).get();
     if (existing.docs.some((docSnap) => docSnap.get('status') !== 'cancelled')) {
       res.status(409).json({ error: 'slot_taken' });
       return;
     }
     await db.collection('bookings').add({
-      name, email, projectType, budget, message, date, time, locale,
+      name, email, projectType, budget, model, message, date, time, locale,
       status: 'new',
       createdAt: FieldValue.serverTimestamp(),
     });
@@ -222,6 +224,7 @@ export const submitBooking = onRequest(
           `Email: ${email}`,
           `Tipo: ${projectType || '—'}`,
           `Presupuesto: ${budget || '—'}`,
+          `Modelo: ${model || '—'}`,
           `Fecha: ${date} ${time} (GMT-5)`,
           `Idioma: ${locale}`,
           '',

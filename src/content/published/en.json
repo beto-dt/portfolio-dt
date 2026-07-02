@@ -555,6 +555,7 @@
     "whatsappAlt": "or coordinate via WhatsApp",
     "formEmailLabel": "Your email",
     "formHint": "You'll get a confirmation and the details go straight to my inbox. I reply within 24 h.",
-    "stepScheduleLabel": "Schedule"
+    "stepScheduleLabel": "Schedule",
+    "interestLabel": "Interested in"
   }
 }
