@@ -1,9 +1,14 @@
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
 import { ProjectCard } from './project-card';
 import { useI18n } from '@/i18n/i18n-provider';
 import { Reveal } from '@/ui/reveal';
+
+// Uniform columns on web (last row never stretches); flexWrap is the native fallback.
+const gridWeb = Platform.OS === 'web'
+  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' } as object)
+  : null;
 
 export function ProjectsSection() {
   const { content } = useI18n();
@@ -14,7 +19,7 @@ export function ProjectsSection() {
       <Reveal delay={0}>
         <SectionHeading kicker={projects.kicker} heading={projects.heading} />
       </Reveal>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16 }}>
+      <View style={[{ flexDirection: 'row', flexWrap: 'wrap', gap: 16 }, gridWeb as object]}>
         {projects.items.map((item, i) => (
           <Reveal key={item.title} delay={i * 70} style={{ flexGrow: 1, flexBasis: 340, minWidth: 300 }}>
             <ProjectCard item={item} />

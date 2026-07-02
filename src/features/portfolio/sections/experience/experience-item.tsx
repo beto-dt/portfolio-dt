@@ -81,7 +81,7 @@ export function ExperienceItem({ item }: { item: ExperienceItemContent }) {
               flexDirection: 'row',
               gap: 28,
               paddingLeft: 28,
-              paddingBottom: 34,
+              paddingBottom: 48,
               marginLeft: 2,
               borderLeftWidth: 1,
               borderLeftColor: hovered ? 'rgba(228,227,87,0.35)' : 'rgba(255,255,255,0.1)',
@@ -117,7 +117,7 @@ export function ExperienceItem({ item }: { item: ExperienceItemContent }) {
               {item.role}
             </Text>
             <Text style={{ fontSize: 14, color: colors.accent }}>{item.company}</Text>
-            <Text style={[{ marginTop: 6, fontSize: 13.5, lineHeight: 22, color: hovered ? colors.textMuted : colors.textDim, maxWidth: 560 }, descTransition as object]}>
+            <Text style={[{ marginTop: 6, fontSize: 13.5, lineHeight: 22, color: hovered ? colors.textMuted : colors.textDim, maxWidth: 680 }, descTransition as object]}>
               {item.description}
             </Text>
           </View>
