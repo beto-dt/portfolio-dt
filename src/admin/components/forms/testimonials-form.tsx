@@ -15,12 +15,13 @@ export function TestimonialsForm({ value, onChange }: { value: TestimonialsConte
       <ListEditor
         items={value.items}
         onChange={(items) => set('items', items)}
-        makeEmpty={() => ({ quote: '', name: '', role: '' })}
+        makeEmpty={() => ({ quote: '', name: '', role: '', photoUrl: '' })}
         renderItem={(it, on) => (
           <>
             <Field label="quote" value={it.quote} onChangeText={(t) => on({ ...it, quote: t })} multiline />
             <Field label="name" value={it.name} onChangeText={(t) => on({ ...it, name: t })} />
             <Field label="role" value={it.role} onChangeText={(t) => on({ ...it, role: t })} />
+            <Field label="photoUrl" value={it.photoUrl ?? ''} onChangeText={(t) => on({ ...it, photoUrl: t })} />
           </>
         )}
       />

@@ -56,7 +56,7 @@ export type ProjectItem = {
 };
 export type ProjectsContent = { kicker: string; heading: string; items: ProjectItem[] };
 
-export type TestimonialItem = { quote: string; name: string; role: string };
+export type TestimonialItem = { quote: string; name: string; role: string; photoUrl?: string };
 export type TestimonialsContent = {
   kicker: string;
   heading: string;

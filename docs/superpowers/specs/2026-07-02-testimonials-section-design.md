@@ -227,6 +227,15 @@ where Spanish):
 - Patch `src/content/published/{es,en}.json` with the same object (scratchpad
   tsx script), verify value-identical vs seed.
 
+## Addendum: profile photos (approved 2026-07-02)
+
+LinkedIn photo URLs expire (~3 weeks token), so the 12 images are downloaded
+to `public/images/testimonials/<slug>.jpg` (served from our own domain; `public/`
+is copied into `dist` at export). `TestimonialItem` gains `photoUrl?: string`
+(seeded as `/images/testimonials/<slug>.jpg`, editable in the admin). The card
+avatar renders the photo inside the accent circle, falling back to the initials
+when `photoUrl` is missing or the image fails to load (`onError`).
+
 ## Error handling
 
 No new failure modes: static content; LinkedIn link is a plain `openURL`.

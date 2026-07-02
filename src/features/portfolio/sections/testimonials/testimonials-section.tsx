@@ -1,4 +1,5 @@
-import { Linking, Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
+import { useState } from 'react';
+import { Image, Linking, Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
 import { useI18n } from '@/i18n/i18n-provider';
@@ -25,6 +26,21 @@ function initialsOf(name: string) {
     .join('');
 }
 
+/** Photo avatar with initials fallback (missing photoUrl or failed load). */
+function Avatar({ item }: { item: TestimonialItem }) {
+  const [failed, setFailed] = useState(false);
+  const showPhoto = !!item.photoUrl && !failed;
+  return (
+    <View style={{ width: 44, height: 44, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(228,227,87,0.45)', backgroundColor: 'rgba(228,227,87,0.10)', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+      {showPhoto ? (
+        <Image source={{ uri: item.photoUrl }} style={{ width: 42, height: 42, borderRadius: 999 }} onError={() => setFailed(true)} />
+      ) : (
+        <Text style={{ fontFamily: fonts.mono, fontSize: 13, color: colors.accent }}>{initialsOf(item.name)}</Text>
+      )}
+    </View>
+  );
+}
+
 function TestimonialCard({ item, linkedinUrl }: { item: TestimonialItem; linkedinUrl: string }) {
   return (
     <GlowCard
@@ -44,9 +60,7 @@ function TestimonialCard({ item, linkedinUrl }: { item: TestimonialItem; linkedi
           <Text style={{ fontSize: 15, lineHeight: 24, color: colors.textMuted, marginTop: 6 }}>{item.quote}</Text>
           <View style={{ height: 1, backgroundColor: colors.border, marginVertical: 16 }} />
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-            <View style={{ width: 44, height: 44, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(228,227,87,0.45)', backgroundColor: 'rgba(228,227,87,0.10)', alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ fontFamily: fonts.mono, fontSize: 13, color: colors.accent }}>{initialsOf(item.name)}</Text>
-            </View>
+            <Avatar item={item} />
             <View style={{ flex: 1, gap: 2 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                 <Text style={{ fontFamily: fonts.display, fontSize: 15, color: colors.text }}>{item.name}</Text>
