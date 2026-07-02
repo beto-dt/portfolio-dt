@@ -15,6 +15,7 @@ import { ImpactForm } from '../components/forms/impact-form';
 import { StackForm } from '../components/forms/stack-form';
 import { ExperienceForm } from '../components/forms/experience-form';
 import { ProjectsForm } from '../components/forms/projects-form';
+import { TestimonialsForm } from '../components/forms/testimonials-form';
 import { CertificationsForm } from '../components/forms/certifications-form';
 import { EducationForm } from '../components/forms/education-form';
 import { ProcessForm } from '../components/forms/process-form';
@@ -43,6 +44,7 @@ const SECTIONS: { key: SectionKey; label: string }[] = [
   { key: 'stack', label: 'Stack' },
   { key: 'experience', label: 'Experiencia' },
   { key: 'projects', label: 'Proyectos' },
+  { key: 'testimonials', label: 'Recomendaciones' },
   { key: 'certifications', label: 'Certificaciones' },
   { key: 'education', label: 'Educación' },
   { key: 'collaboration', label: 'Colaboración' },
@@ -68,6 +70,8 @@ function SectionForm({ section, content, onChange }: { section: SectionKey; cont
       return <ExperienceForm value={content.experience} onChange={(v) => onChange({ ...content, experience: v })} />;
     case 'projects':
       return <ProjectsForm value={content.projects} onChange={(v) => onChange({ ...content, projects: v })} />;
+    case 'testimonials':
+      return <TestimonialsForm value={content.testimonials} onChange={(v) => onChange({ ...content, testimonials: v })} />;
     case 'certifications':
       return <CertificationsForm value={content.certifications} onChange={(v) => onChange({ ...content, certifications: v })} />;
     case 'education':

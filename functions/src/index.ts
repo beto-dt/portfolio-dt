@@ -53,6 +53,7 @@ const SECTION_KEYS = new Set([
   'stack',
   'experience',
   'projects',
+  'testimonials',
   'certifications',
   'formation',
   'collaboration',
