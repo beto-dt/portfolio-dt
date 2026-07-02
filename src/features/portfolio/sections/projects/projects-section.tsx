@@ -7,7 +7,7 @@ import { Reveal } from '@/ui/reveal';
 
 // Uniform columns on web (last row never stretches); flexWrap is the native fallback.
 const gridWeb = Platform.OS === 'web'
-  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' } as object)
+  ? ({ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' } as object)
   : null;
 
 export function ProjectsSection() {
