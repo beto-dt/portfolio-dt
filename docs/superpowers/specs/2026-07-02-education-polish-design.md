@@ -1,3 +1,53 @@
+# Education Section UI/UX Polish + Animations — Design
+
+**Date:** 2026-07-02
+**Status:** Approved (design)
+
+## Goal
+
+Elevate the "Educación" section without changing its layout: education rows
+highlight on hover (like Certifications) with a staggered entrance, and the
+Idiomas block becomes hover-reactive chips. Public site only.
+
+## Context
+
+- `education-section.tsx` renders `SectionHeading` + a list of education rows +
+  a languages block.
+- Each education row: title (`fonts.display`, 16) on top, then a
+  space-between row with institution (accent) + period (mono, `textFaint`);
+  1px bottom border (`rgba(255,255,255,0.07)`), `paddingVertical: 12`.
+- Languages block: a mono-uppercase heading (`languagesHeading`) + inline
+  `language` (text) / `level` (mono, `textFaint`) pairs.
+- `Reveal` (`src/ui/reveal.tsx`) exists (default fade+slide, reduced-motion aware),
+  reused here.
+- Types: `EducationItem = { title, institution, period }`,
+  `LanguageItem = { language, level }`.
+
+## Decisions (agreed with user)
+
+- **Education rows:** same hover as Certifications — subtle bg, brighter
+  title/institution/period, brighter divider, accent left marker (default cursor).
+- **Languages:** each pair becomes a hover-reactive chip (`LangChip`) — pill bg +
+  border that brighten on hover; language in text, level in mono (`textFaint →
+  textDim`).
+- **Entrance:** `Reveal` fade+slide, staggered — heading, each row, then the
+  languages block.
+
+## Non-goals
+
+- No content changes; no typography size changes; no hyperlinks.
+- No layout shift on hover (accent marker sits in the Container gutter).
+- `SectionHeading` unmodified (wrapped in `Reveal`). No other sections touched.
+
+## Architecture
+
+Single file. `EduRow` (hover-reactive `Pressable`) and `LangChip` (hover-reactive
+`Pressable`) sub-components; the section maps rows inside `Reveal` wrappers and puts
+the languages block in its own `Reveal`.
+
+### `education-section.tsx` (full rewrite)
+
+```tsx
 import { Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
@@ -107,3 +157,47 @@ export function EducationSection() {
     </Container>
   );
 }
+```
+
+Notes:
+- Education rows keep their rest appearance (title display 16, institution accent,
+  period `textFaint`, divider `0.07`); hover adds bg + marker + period brighten +
+  divider brighten. (Institution stays accent — already prominent.)
+- Languages change from inline text pairs to chips (surface-strong bg, faint
+  border), matching the Stack pill aesthetic. Row `gap` tightened 28 → 12 since
+  chips have their own padding.
+- Web-only props guarded by `Platform.OS === 'web'`; no `cursor: pointer` (not
+  links).
+- `langDelay` continues the stagger after the education rows (+1 accounts for the
+  heading at delay 0 / rows starting at 70).
+
+## Data flow
+
+No new data. Everything derives from `education` + hover state. i18n unaffected.
+
+## Files
+
+- **Modify:** `src/features/portfolio/sections/education/education-section.tsx`.
+
+## Error handling
+
+- Components never throw; web-only props guarded.
+- No layout regression for rows (rest styles match; marker absolute). Languages
+  visually change to chips by design (approved).
+
+## Testing / verification
+
+- `npx tsc --noEmit` passes; `npx expo export -p web` builds.
+- Bundle hygiene unchanged (no Firebase in education).
+- Browser (preview): education rows look the same at rest; hovering a row adds bg +
+  marker + brighter divider/period; language chips render (bg + border) and
+  brighten on hover; on load heading + rows + languages fade/slide in staggered.
+  Verify at mobile (375) + desktop.
+- Reduced motion: with `prefers-reduced-motion: reduce`, everything appears at
+  final state; hovers still work.
+- No regression to other sections.
+
+## Implementation order
+
+1. `education-section.tsx` — `EduRow` + `LangChip` hover + `Reveal` stagger.
+2. Verify (tsc, export, bundle hygiene) + browser check + deploy.

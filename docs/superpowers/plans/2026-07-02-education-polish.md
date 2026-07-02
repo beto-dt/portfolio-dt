@@ -1,3 +1,25 @@
+# Education Section Polish + Animations — Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Add hover-highlight education rows (like Certifications), hover-reactive language chips, and a staggered fade-in entrance to the Educación section — no layout/content changes to the rows.
+
+**Architecture:** `EduRow` (hover `Pressable`) and `LangChip` (hover `Pressable`) sub-components; the section maps rows inside `Reveal` wrappers and puts the languages block in its own `Reveal`. Single file.
+
+**Tech Stack:** Expo Router + react-native-web, existing `Reveal`, Pressable hover state. No test runner in this repo.
+
+**Verification note:** No jest/unit-test setup — do NOT add one. Verify with `npx tsc --noEmit` + `npx expo export -p web` + browser. Do NOT run `npx expo lint` (auto-scaffolds `eslint.config.js` + deps; discard if produced). If `dist/` appears it is gitignored — leave it.
+
+---
+
+### Task 1: `education-section.tsx` — hover rows + language chips + staggered entrance
+
+**Files:**
+- Modify: `src/features/portfolio/sections/education/education-section.tsx` (full rewrite)
+
+- [ ] **Step 1: Replace the entire contents of `src/features/portfolio/sections/education/education-section.tsx`**
+
+```tsx
 import { Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
@@ -107,3 +129,77 @@ export function EducationSection() {
     </Container>
   );
 }
+```
+
+- [ ] **Step 2: Type-check + build**
+
+Run: `npx tsc --noEmit && npx expo export -p web`
+Expected: PASS + successful `dist` export.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add src/features/portfolio/sections/education/education-section.tsx
+git commit -m "feat(portfolio): education rows hover + language chips + staggered reveal"
+```
+
+---
+
+### Task 2: Verify (build + bundle hygiene + browser) and deploy
+
+**Files:** none (verification + deploy).
+
+- [ ] **Step 1: Type-check + build**
+
+Run: `npx tsc --noEmit && npx expo export -p web`
+Expected: PASS + successful export.
+
+- [ ] **Step 2: Bundle hygiene**
+
+Run: `grep -rl "initializeApp\|firebase/auth" dist/_expo/static/js/web | grep -v firebase-client || echo "clean"`
+Expected: `clean`.
+
+- [ ] **Step 3: Browser verification (preview tools)**
+
+Start/reuse the `web` preview, scroll to the Educación section, and confirm:
+- **At rest:** education rows look identical (title, institution accent, period);
+  languages now render as chips (bg + border). `preview_screenshot`.
+- **Row hover:** hovering a row adds a subtle bg, brighter divider + period, and
+  the left accent marker (headless RNW hover may be unreliable — confirm by code /
+  live).
+- **Chip hover:** hovering a language chip brightens its bg/border.
+- **Entrance:** heading + rows + languages block fade/slide in staggered on reload.
+- **Layout:** no text shift in rows; verify at mobile (375) + desktop.
+
+Fix issues by editing source and re-running from Step 1.
+
+- [ ] **Step 4: Deploy**
+
+After merge (or on request): `gh workflow run deploy.yml --ref main`, then
+`gh run watch <run-id> --exit-status` → `completed / success`. Confirm live.
+
+---
+
+## Self-Review
+
+**1. Spec coverage:**
+- Education rows hover-highlight (bg, brighter period/divider, accent marker) →
+  Task 1 (`EduRow`) ✓
+- Languages → hover-reactive chips → Task 1 (`LangChip`) ✓
+- Staggered entrance (heading, rows, languages block) → Task 1 ✓
+- Verify + deploy → Task 2 ✓
+- Non-goals honored: no content/type-size change; no hyperlinks; `SectionHeading`
+  wrapped not edited; other sections untouched ✓
+No gaps.
+
+**2. Placeholder scan:** No TBD/TODO; complete code in the code step. ✓
+
+**3. Type consistency:**
+- `EducationItem = { title, institution, period }`, `LanguageItem = { language,
+  level }` from `@/content/types`; fields used match ✓.
+- `Reveal({ children, delay?, slide?, style? })` — used with `delay` + `style`
+  (`gap: 10` on the languages block), default slide ✓.
+- Stagger math: heading `delay 0`, rows `(i+1)*70`, languages `(items.length+1)*70`
+  (continues after the last row) ✓.
+- Rest-state row styles (title display 16, institution accent, period `textFaint`,
+  divider `0.07`) match the current file ✓.
