@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import type { HeroContent } from '@/content/types';
 import { Field, Label } from '../field';
 import { ListEditor } from '../list-editor';
+import { StringListEditor } from '../string-list-editor';
 
 export function HeroForm({ value, onChange }: { value: HeroContent; onChange: (h: HeroContent) => void }) {
   const set = <K extends keyof HeroContent>(key: K, v: HeroContent[K]) => onChange({ ...value, [key]: v });
@@ -17,6 +18,8 @@ export function HeroForm({ value, onChange }: { value: HeroContent; onChange: (h
       <Field label="secondaryCta.anchor" value={value.secondaryCta.anchor} onChangeText={(t) => set('secondaryCta', { ...value.secondaryCta, anchor: t })} />
       <Field label="cvLabel" value={value.cvLabel} onChangeText={(t) => set('cvLabel', t)} />
       <Field label="cvUrl" value={value.cvUrl} onChangeText={(t) => set('cvUrl', t)} />
+      <Field label="clientsHeading" value={value.clientsHeading} onChangeText={(t) => set('clientsHeading', t)} />
+      <StringListEditor label="clients" items={value.clients} onChange={(clients) => set('clients', clients)} />
       <Label>stats</Label>
       <ListEditor
         items={value.stats}
