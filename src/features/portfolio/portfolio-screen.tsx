@@ -3,6 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { SiteHeader } from './components/site-header';
 import { HeroSection } from './sections/hero/hero-section';
 import { ServicesSection } from './sections/services/services-section';
+import { ProcessSection } from './sections/process/process-section';
 import { ImpactSection } from './sections/impact/impact-section';
 import { StackSection } from './sections/stack/stack-section';
 import { ExperienceSection } from './sections/experience/experience-section';
@@ -26,6 +27,7 @@ export function PortfolioScreen() {
       <ScrollView contentContainerStyle={{ alignItems: 'center', paddingBottom: 88 }}>
         <TrackedSection id="hero"><HeroSection /></TrackedSection>
         <TrackedSection id="services"><ServicesSection /></TrackedSection>
+        <TrackedSection id="process"><ProcessSection /></TrackedSection>
         <TrackedSection id="impact"><ImpactSection /></TrackedSection>
         <TrackedSection id="stack"><StackSection /></TrackedSection>
         <TrackedSection id="experience"><ExperienceSection /></TrackedSection>
