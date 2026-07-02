@@ -25,6 +25,7 @@ import { ContactForm } from '../components/forms/contact-form';
 import { FooterForm } from '../components/forms/footer-form';
 import { MetricsView } from '../components/metrics-view';
 import { BookingsView } from '../components/bookings-view';
+import { AdminBackdrop, LoginView } from '../components/login-view';
 
 type SectionKey = keyof PortfolioContent;
 
@@ -159,20 +160,14 @@ export function AdminScreen() {
 
   if (!authReady) {
     return (
-      <View style={{ flex: 1, backgroundColor: colors.background, alignItems: 'center', justifyContent: 'center' }}>
+      <AdminBackdrop>
         <ActivityIndicator color={colors.accent} />
-      </View>
+      </AdminBackdrop>
     );
   }
 
   if (!user) {
-    return (
-      <View style={{ flex: 1, backgroundColor: colors.background, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 24 }}>
-        <Text style={{ fontFamily: fonts.display, fontSize: 24, color: colors.text }}>Panel de administración</Text>
-        <AppButton label="Iniciar sesión con Google" onPress={onSignIn} variant="primary" />
-        {error ? <Text style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</Text> : null}
-      </View>
-    );
+    return <LoginView onSignIn={onSignIn} error={error} />;
   }
 
   return (
