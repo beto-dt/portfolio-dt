@@ -12,6 +12,7 @@ import { FormationSection } from './sections/formation/formation-section';
 import { ContactSection } from './sections/contact/contact-section';
 import { CollaborationSection } from './sections/collaboration/collaboration-section';
 import { SiteFooter } from './components/site-footer';
+import { WhatsAppFab } from './components/whatsapp-fab';
 import { TrackedSection } from '@/analytics/tracked-section';
 import { armVisit } from '@/analytics/tracker';
 import { colors } from '@/theme/tokens';
@@ -37,6 +38,7 @@ export function PortfolioScreen() {
         <TrackedSection id="contact"><ContactSection /></TrackedSection>
         <SiteFooter />
       </ScrollView>
+      <WhatsAppFab />
     </View>
   );
 }
