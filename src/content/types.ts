@@ -28,8 +28,10 @@ export type ServiceItem = {
   tag: string;
   title: string;
   description: string;
+  projectType: string;
+  recommendedModel: string;
 };
-export type ServicesContent = { kicker: string; heading: string; items: ServiceItem[] };
+export type ServicesContent = { kicker: string; heading: string; requestCta: string; items: ServiceItem[] };
 
 export type ImpactItem = { value: string; label: string };
 export type ImpactContent = { kicker: string; heading: string; items: ImpactItem[] };
@@ -150,6 +152,7 @@ export type ContactContent = {
   errorSlotTaken: string;
   errorNetwork: string;
   interestLabel: string;
+  intentBanner: string;
 };
 
 export type PortfolioContent = {
