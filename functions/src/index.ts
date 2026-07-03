@@ -52,6 +52,7 @@ const SECTION_KEYS = new Set([
   'impact',
   'stack',
   'experience',
+  'reach',
   'projects',
   'testimonials',
   'certifications',
