@@ -41,6 +41,8 @@ export const en: PortfolioContent = {
       { index: '05', tag: 'CLOUD', title: 'Cloud & DevOps', description: 'AWS and Azure infrastructure with Terraform (IaC), CI/CD, Docker and Kubernetes for reliable deployments.' },
       { index: '06', tag: 'AI/ML', title: 'AI/ML Integration', description: 'Data pipelines, predictive analytics and machine learning models integrated directly into your product.' },
       { index: '07', tag: 'LEAD', title: 'Consulting & Tech Lead', description: 'Architecture definition, engineering standards and technical leadership to take your product to production.' },
+      { index: '08', tag: 'CHATBOT', title: 'AI Chatbots', description: 'Automated conversational assistants powered by natural language (LLMs) for support, sales and 24/7 service, integrated with WhatsApp, web and your systems.' },
+      { index: '09', tag: 'AGENTS', title: 'Intelligent agents', description: 'Autonomous AI agents that reason, use tools and APIs, and execute multi-step tasks to automate complete workflows.' },
     ],
   },
   process: {
