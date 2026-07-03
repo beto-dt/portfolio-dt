@@ -130,8 +130,16 @@ export function ContactSection() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<WizardError>(null);
   const [model, setModel] = useState<string | null>(null);
+  const [intentNotice, setIntentNotice] = useState<{ type: string; model: string } | null>(null);
 
-  useEffect(() => onBookingIntent((m) => { setModel(m); setStep('form'); }), []);
+  useEffect(() => onBookingIntent((i) => {
+    if (i.model) setModel(i.model);
+    if (i.projectType) {
+      setType(i.projectType);
+      setIntentNotice(i.model ? { type: i.projectType, model: i.model } : null);
+    }
+    setStep('form');
+  }), []);
 
   const slot = date && time ? formatSlot(date, time, locale) : null;
 
@@ -249,7 +257,16 @@ export function ContactSection() {
             <Stepper step={step} projectLabel={contact.stepProjectLabel} scheduleLabel={contact.stepScheduleLabel} />
             {step === 'form' ? (
               <View style={{ gap: 18 }}>
-                {model ? (
+                {intentNotice ? (
+                  <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 10, borderWidth: 1, borderColor: 'rgba(228,227,87,0.45)', backgroundColor: 'rgba(228,227,87,0.07)', borderRadius: radii.md, padding: 14 }}>
+                    <Text style={{ fontSize: 14 }}>💡</Text>
+                    <Text style={{ flex: 1, fontSize: 13.5, lineHeight: 20, color: colors.textMuted }}>
+                      {contact.intentBanner.replace('{type}', intentNotice.type).replace('{model}', intentNotice.model)}
+                    </Text>
+                    <HoverLink label="✕" onPress={() => setIntentNotice(null)} color={colors.textFaint} hoverColor={colors.text} />
+                  </View>
+                ) : null}
+                {model && !intentNotice ? (
                   <View style={{ gap: 8 }}>
                     <Text style={FIELD_LABEL}>{contact.interestLabel}</Text>
                     <View style={{ flexDirection: 'row' }}>
@@ -271,7 +288,7 @@ export function ContactSection() {
                   <Text style={FIELD_LABEL}>{contact.formTypeLabel}</Text>
                   <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
                     {contact.projectTypes.map((t) => (
-                      <Chip key={t} label={t} mono={false} active={type === t} onPress={() => setType(type === t ? null : t)} />
+                      <Chip key={t} label={t} mono={false} active={type === t} onPress={() => { setType(type === t ? null : t); if (intentNotice && t !== intentNotice.type) setIntentNotice(null); }} />
                     ))}
                   </View>
                 </View>

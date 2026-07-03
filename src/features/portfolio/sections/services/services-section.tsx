@@ -17,7 +17,7 @@ export function ServicesSection() {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16 }}>
         {services.items.map((item, i) => (
           <Reveal key={item.index} delay={i * 70} style={{ flexGrow: 1, flexBasis: 320, maxWidth: 560 }}>
-            <ServiceCard item={item} />
+            <ServiceCard item={item} requestCta={services.requestCta} />
           </Reveal>
         ))}
       </View>
