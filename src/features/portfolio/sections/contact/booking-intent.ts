@@ -1,9 +1,11 @@
-type Listener = (model: string) => void;
+export type BookingIntent = { model?: string; projectType?: string };
+
+type Listener = (intent: BookingIntent) => void;
 const listeners = new Set<Listener>();
 
-/** Broadcast the collaboration model the visitor tapped. */
-export function setBookingIntent(model: string): void {
-  listeners.forEach((l) => l(model));
+/** Broadcast what the visitor tapped (collaboration model and/or service project type). */
+export function setBookingIntent(intent: BookingIntent): void {
+  listeners.forEach((l) => l(intent));
 }
 
 /** Subscribe to intent broadcasts; returns an unsubscribe. */

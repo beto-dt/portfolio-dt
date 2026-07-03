@@ -48,6 +48,7 @@ export function ContactForm({ value, onChange }: { value: ContactContent; onChan
       <Field label="errorSlotTaken" value={value.errorSlotTaken} onChangeText={(t) => set('errorSlotTaken', t)} />
       <Field label="errorNetwork" value={value.errorNetwork} onChangeText={(t) => set('errorNetwork', t)} />
       <Field label="interestLabel" value={value.interestLabel} onChangeText={(t) => set('interestLabel', t)} />
+      <Field label="intentBanner" value={value.intentBanner} onChangeText={(t) => set('intentBanner', t)} multiline />
     </View>
   );
 }

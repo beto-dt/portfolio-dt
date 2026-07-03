@@ -25,60 +25,79 @@
   "services": {
     "kicker": "services",
     "heading": "How I can help you",
+    "requestCta": "Request this service",
     "items": [
       {
         "index": "01",
         "tag": "WEB",
         "title": "Web Development",
-        "description": "High-performance React and Next.js apps, real-time dashboards and scalable SPAs with polished UX."
+        "description": "High-performance React and Next.js apps, real-time dashboards and scalable SPAs with polished UX.",
+        "projectType": "Web",
+        "recommendedModel": "Turnkey project"
       },
       {
         "index": "02",
         "tag": "MOBILE",
         "title": "Mobile Apps",
-        "description": "Native iOS and Android (Swift/Kotlin) and cross-platform with Flutter, KMP and React Native, shipped to the stores."
+        "description": "Native iOS and Android (Swift/Kotlin) and cross-platform with Flutter, KMP and React Native, shipped to the stores.",
+        "projectType": "Mobile app",
+        "recommendedModel": "Turnkey project"
       },
       {
         "index": "03",
         "tag": "AR/3D",
         "title": "Augmented Reality & Unity",
-        "description": "Native AR experiences (ARKit/ARCore) and 3D/VR with Unity that digitize products and triple engagement."
+        "description": "Native AR experiences (ARKit/ARCore) and 3D/VR with Unity that digitize products and triple engagement.",
+        "projectType": "AR / Unity",
+        "recommendedModel": "Turnkey project"
       },
       {
         "index": "04",
         "tag": "BACKEND",
         "title": "Backend & Microservices",
-        "description": "Distributed architectures, DDD, event-driven systems and robust APIs with NestJS, FastAPI, Spring Boot and Go."
+        "description": "Distributed architectures, DDD, event-driven systems and robust APIs with NestJS, FastAPI, Spring Boot and Go.",
+        "projectType": "Backend",
+        "recommendedModel": "Turnkey project"
       },
       {
         "index": "05",
         "tag": "CLOUD",
         "title": "Cloud & DevOps",
-        "description": "AWS and Azure infrastructure with Terraform (IaC), CI/CD, Docker and Kubernetes for reliable deployments."
+        "description": "AWS and Azure infrastructure with Terraform (IaC), CI/CD, Docker and Kubernetes for reliable deployments.",
+        "projectType": "Cloud / DevOps",
+        "recommendedModel": "Retainer / hourly"
       },
       {
         "index": "06",
         "tag": "AI/ML",
         "title": "AI/ML Integration",
-        "description": "Data pipelines, predictive analytics and machine learning models integrated directly into your product."
+        "description": "Data pipelines, predictive analytics and machine learning models integrated directly into your product.",
+        "projectType": "AI / ML",
+        "recommendedModel": "Retainer / hourly"
       },
       {
         "index": "07",
         "tag": "LEAD",
         "title": "Consulting & Tech Lead",
-        "description": "Architecture definition, engineering standards and technical leadership to take your product to production."
+        "description": "Architecture definition, engineering standards and technical leadership to take your product to production.",
+        "projectType": "Consulting",
+        "recommendedModel": "Fractional Tech Lead"
       },
       {
         "index": "08",
         "tag": "CHATBOT",
         "title": "AI Chatbots",
-        "description": "Automated conversational assistants powered by natural language (LLMs) for support, sales and 24/7 service, integrated with WhatsApp, web and your systems."
+        "description": "Automated conversational assistants powered by natural language (LLMs) for support, sales and 24/7 service, integrated with WhatsApp, web and your systems.",
+        "projectType": "AI Chatbot",
+        "recommendedModel": "Turnkey project"
       },
       {
         "index": "09",
         "tag": "AGENTS",
         "title": "Intelligent agents",
-        "description": "Autonomous AI agents that reason, use tools and APIs, and execute multi-step tasks to automate complete workflows."
+        "description": "Autonomous AI agents that reason, use tools and APIs, and execute multi-step tasks to automate complete workflows.",
+        "projectType": "AI Agents",
+        "recommendedModel": "Turnkey project"
       }
     ]
   },
@@ -517,11 +536,17 @@
     "kicker": "contact",
     "heading": "Got a project in mind? Let's talk.",
     "blurb": "I'm available for freelance projects and collaborations. Tell me what you want to build and I'll reply within 24 hours.",
+    "emailCta": "Send via email",
+    "whatsappCta": "Send via WhatsApp",
     "email": "luis.atorred24@gmail.com",
     "phone": "+593 97 990 6532",
     "whatsapp": "593979906532",
     "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "location": "Quito, Ecuador · GMT-5",
+    "linkedinLabel": "/luis-alberto-de-la-torre",
     "formNameLabel": "Your name",
+    "formNamePlaceholder": "E.g.: María Torres",
+    "formTypeLabel": "Project type",
     "projectTypes": [
       "Web",
       "Mobile app",
@@ -529,12 +554,11 @@
       "Backend",
       "Cloud / DevOps",
       "AI / ML",
-      "Consulting"
+      "Consulting",
+      "AI Chatbot",
+      "AI Agents"
     ],
-    "emailCta": "Send via email",
-    "formMessageLabel": "Tell me about your project",
-    "formMessagePlaceholder": "What do you want to build? Goal, timeline, context...",
-    "whatsappCta": "Send via WhatsApp",
+    "formBudgetLabel": "Estimated budget",
     "budgets": [
       "< $2k",
       "$2k–5k",
@@ -542,33 +566,31 @@
       "$15k+",
       "To be defined"
     ],
-    "formBudgetLabel": "Estimated budget",
-    "linkedinLabel": "/luis-alberto-de-la-torre",
-    "location": "Quito, Ecuador · GMT-5",
-    "formTypeLabel": "Project type",
-    "formNamePlaceholder": "E.g.: María Torres",
+    "formMessageLabel": "Tell me about your project",
+    "formMessagePlaceholder": "What do you want to build? Goal, timeline, context...",
+    "formHint": "You'll get a confirmation and the details go straight to my inbox. I reply within 24 h.",
+    "formEmailLabel": "Your email",
+    "formEmailPlaceholder": "name@email.com",
+    "stepProjectLabel": "Project",
+    "stepScheduleLabel": "Schedule",
+    "nextCta": "Pick a day and time →",
     "backCta": "← Back",
     "confirmCta": "Confirm and send",
-    "errorRequired": "Fill in your name and email to continue.",
     "slotsHeading": "Available times",
-    "errorNetwork": "Couldn't send. Try again or message me on WhatsApp.",
-    "slotsPickDay": "Pick a day on the calendar first.",
-    "successAgain": "Send another request",
-    "nextCta": "Pick a day and time →",
-    "errorSlotTaken": "That time was just taken. Pick another.",
-    "formEmailPlaceholder": "name@email.com",
-    "bannerScheduled": "30-min call scheduled for {slot}.",
-    "successTitle": "Request sent!",
     "slotsFreeSuffix": "open slots",
+    "slotsPickDay": "Pick a day on the calendar first.",
     "bannerPickDay": "Pick a day and time for your free 30-min call.",
-    "stepProjectLabel": "Project",
-    "successBody": "I got your request for {slot}. I'll confirm by email within 24 h.",
     "bannerPickTime": "Day selected. Now pick a time.",
+    "bannerScheduled": "30-min call scheduled for {slot}.",
     "whatsappAlt": "or coordinate via WhatsApp",
-    "formEmailLabel": "Your email",
-    "formHint": "You'll get a confirmation and the details go straight to my inbox. I reply within 24 h.",
-    "stepScheduleLabel": "Schedule",
-    "interestLabel": "Interested in"
+    "successTitle": "Request sent!",
+    "successBody": "I got your request for {slot}. I'll confirm by email within 24 h.",
+    "successAgain": "Send another request",
+    "errorRequired": "Fill in your name and email to continue.",
+    "errorSlotTaken": "That time was just taken. Pick another.",
+    "errorNetwork": "Couldn't send. Try again or message me on WhatsApp.",
+    "interestLabel": "Interested in",
+    "intentBanner": "For {type} I'd recommend the {model} model. I've preselected it below — tell me the details."
   },
   "testimonials": {
     "kicker": "recommendations",

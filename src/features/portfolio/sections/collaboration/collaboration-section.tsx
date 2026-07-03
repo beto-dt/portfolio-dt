@@ -49,7 +49,7 @@ function ModelCard({ model }: { model: CollaborationModel }) {
             <AppButton
               label={model.cta}
               onPress={() => {
-                setBookingIntent(model.title);
+                setBookingIntent({ model: model.title });
                 scrollToAnchor('contact');
               }}
               variant={model.popular ? 'primary' : 'outline'}
