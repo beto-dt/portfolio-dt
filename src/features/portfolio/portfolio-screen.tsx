@@ -7,6 +7,7 @@ import { ProcessSection } from './sections/process/process-section';
 import { ImpactSection } from './sections/impact/impact-section';
 import { StackSection } from './sections/stack/stack-section';
 import { ExperienceSection } from './sections/experience/experience-section';
+import { GlobalReachSection } from './sections/global-reach/global-reach-section';
 import { ProjectsSection } from './sections/projects/projects-section';
 import { TestimonialsSection } from './sections/testimonials/testimonials-section';
 import { FormationSection } from './sections/formation/formation-section';
@@ -34,6 +35,7 @@ export function PortfolioScreen() {
         <TrackedSection id="impact"><ImpactSection /></TrackedSection>
         <TrackedSection id="stack"><StackSection /></TrackedSection>
         <TrackedSection id="experience"><ExperienceSection /></TrackedSection>
+        <TrackedSection id="reach"><GlobalReachSection /></TrackedSection>
         <TrackedSection id="projects"><ProjectsSection /></TrackedSection>
         <TrackedSection id="testimonials"><TestimonialsSection /></TrackedSection>
         <TrackedSection id="formation"><FormationSection /></TrackedSection>

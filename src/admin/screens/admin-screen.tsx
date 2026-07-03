@@ -14,6 +14,7 @@ import { ServicesForm } from '../components/forms/services-form';
 import { ImpactForm } from '../components/forms/impact-form';
 import { StackForm } from '../components/forms/stack-form';
 import { ExperienceForm } from '../components/forms/experience-form';
+import { GlobalReachForm } from '../components/forms/global-reach-form';
 import { ProjectsForm } from '../components/forms/projects-form';
 import { TestimonialsForm } from '../components/forms/testimonials-form';
 import { CertificationsForm } from '../components/forms/certifications-form';
@@ -43,6 +44,7 @@ const SECTIONS: { key: SectionKey; label: string }[] = [
   { key: 'impact', label: 'Impacto' },
   { key: 'stack', label: 'Stack' },
   { key: 'experience', label: 'Experiencia' },
+  { key: 'globalReach', label: 'Alcance global' },
   { key: 'projects', label: 'Proyectos' },
   { key: 'testimonials', label: 'Recomendaciones' },
   { key: 'certifications', label: 'Certificaciones' },
@@ -68,6 +70,8 @@ function SectionForm({ section, content, onChange }: { section: SectionKey; cont
       return <StackForm value={content.stack} onChange={(v) => onChange({ ...content, stack: v })} />;
     case 'experience':
       return <ExperienceForm value={content.experience} onChange={(v) => onChange({ ...content, experience: v })} />;
+    case 'globalReach':
+      return <GlobalReachForm value={content.globalReach} onChange={(v) => onChange({ ...content, globalReach: v })} />;
     case 'projects':
       return <ProjectsForm value={content.projects} onChange={(v) => onChange({ ...content, projects: v })} />;
     case 'testimonials':

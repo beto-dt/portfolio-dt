@@ -637,5 +637,63 @@
         "quote": "Muy buen elemento, apasionado por su carrera, propositivo y responsable; además es un buen compañero, sabe trabajar en equipo y es muy solidario."
       }
     ]
+  },
+  "globalReach": {
+    "kicker": "alcance global",
+    "heading": "Experiencia nacional e internacional",
+    "blurb": "He colaborado con equipos locales y distribuidos en distintos países, culturas y zonas horarias, comunicándome con fluidez en español e inglés. Del trabajo presencial en Ecuador a la colaboración remota con clientes de América y Europa.",
+    "stats": [
+      {
+        "value": "3",
+        "label": "continentes"
+      },
+      {
+        "value": "2",
+        "label": "idiomas de trabajo"
+      },
+      {
+        "value": "GMT-5",
+        "label": "base en Quito, Ecuador"
+      }
+    ],
+    "locationsHeading": "Dónde he colaborado",
+    "locations": [
+      {
+        "name": "Ecuador",
+        "tag": "local"
+      },
+      {
+        "name": "Latinoamérica",
+        "tag": "remoto"
+      },
+      {
+        "name": "Estados Unidos",
+        "tag": "remoto"
+      },
+      {
+        "name": "Europa",
+        "tag": "remoto"
+      }
+    ],
+    "languagesHeading": "Idiomas",
+    "languages": [
+      {
+        "language": "Español",
+        "level": "Nativo",
+        "percent": 100
+      },
+      {
+        "language": "Inglés",
+        "level": "Intermedio · B1",
+        "percent": 55
+      }
+    ],
+    "teamHeading": "En equipos globales",
+    "teamItems": [
+      "Solapamiento horario con América (EST/PST) y Europa (CET)",
+      "Flujo remoto y asíncrono, con dailies y demos en inglés",
+      "Documentación y code reviews bilingües (ES/EN)",
+      "Adaptación a equipos multiculturales y husos distintos"
+    ]
   }
 }

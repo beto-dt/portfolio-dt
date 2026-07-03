@@ -94,6 +94,35 @@ export const en: PortfolioContent = {
       { period: '04/2019 — 08/2019', location: 'Ecuador', role: 'Senior Full-Stack Developer', company: 'Vinary VR/AR', description: 'Native AR/VR experiences with Unity that replaced physical material, raised engagement 3× and generated +20% enterprise revenue.' },
     ],
   },
+  globalReach: {
+    kicker: 'global reach',
+    heading: 'National and international experience',
+    blurb: "I've collaborated with local and distributed teams across countries, cultures and time zones, communicating fluently in Spanish and English. From on-site work in Ecuador to remote collaboration with clients across America and Europe.",
+    stats: [
+      { value: '3', label: 'continents' },
+      { value: '2', label: 'working languages' },
+      { value: 'GMT-5', label: 'based in Quito, Ecuador' },
+    ],
+    locationsHeading: "Where I've collaborated",
+    locations: [
+      { name: 'Ecuador', tag: 'on-site' },
+      { name: 'Latin America', tag: 'remote' },
+      { name: 'United States', tag: 'remote' },
+      { name: 'Europe', tag: 'remote' },
+    ],
+    languagesHeading: 'Languages',
+    languages: [
+      { language: 'Spanish', level: 'Native', percent: 100 },
+      { language: 'English', level: 'Intermediate · B1', percent: 55 },
+    ],
+    teamHeading: 'On global teams',
+    teamItems: [
+      'Time-zone overlap with America (EST/PST) and Europe (CET)',
+      'Remote, async workflow with dailies and demos in English',
+      'Bilingual documentation and code reviews (ES/EN)',
+      'Adaptation to multicultural teams and different time zones',
+    ],
+  },
   projects: {
     kicker: 'featured',
     heading: 'Projects',

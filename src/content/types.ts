@@ -48,6 +48,22 @@ export type ExperienceItem = {
 };
 export type ExperienceContent = { kicker: string; heading: string; items: ExperienceItem[] };
 
+export type GlobalStat = { value: string; label: string };
+export type GlobalLocation = { name: string; tag: string };
+export type GlobalLanguage = { language: string; level: string; percent: number };
+export type GlobalReachContent = {
+  kicker: string;
+  heading: string;
+  blurb: string;
+  stats: GlobalStat[];
+  locationsHeading: string;
+  locations: GlobalLocation[];
+  languagesHeading: string;
+  languages: GlobalLanguage[];
+  teamHeading: string;
+  teamItems: string[];
+};
+
 export type ProjectItem = {
   category: string;
   title: string;
@@ -144,6 +160,7 @@ export type PortfolioContent = {
   impact: ImpactContent;
   stack: StackContent;
   experience: ExperienceContent;
+  globalReach: GlobalReachContent;
   projects: ProjectsContent;
   testimonials: TestimonialsContent;
   certifications: CertificationsContent;
