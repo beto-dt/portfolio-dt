@@ -67,6 +67,18 @@
         "tag": "LEAD",
         "title": "Consultoría & Tech Lead",
         "description": "Definición de arquitectura, estándares de ingeniería y liderazgo técnico para llevar tu producto a producción."
+      },
+      {
+        "index": "08",
+        "tag": "CHATBOT",
+        "title": "Chatbots con IA",
+        "description": "Asistentes conversacionales automatizados con lenguaje natural (LLMs) para soporte, ventas y atención 24/7, integrados a WhatsApp, web y tus sistemas."
+      },
+      {
+        "index": "09",
+        "tag": "AGENTES",
+        "title": "Agentes inteligentes",
+        "description": "Agentes de IA autónomos que razonan, usan herramientas y APIs, y ejecutan tareas de varios pasos para automatizar flujos de trabajo completos."
       }
     ]
   },
