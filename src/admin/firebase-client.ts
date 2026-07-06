@@ -8,9 +8,10 @@ import {
   type User,
   type Unsubscribe,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, updateDoc, collection, getDocs, orderBy, query, type DocumentData } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, getDocs, orderBy, query, serverTimestamp, type DocumentData } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { firebaseConfig } from './firebase-config';
+import type { BlogPost } from '@/content/posts-types';
 
 // This is the ONLY module that imports the Firebase SDK at runtime. Everything
 // else reaches it via a single dynamic import('./firebase-client'), so the
@@ -85,4 +86,33 @@ export async function readBookings(): Promise<BookingRecord[]> {
 export async function updateBookingStatus(id: string, status: string): Promise<void> {
   const { db } = services();
   await updateDoc(doc(db, 'bookings', id), { status });
+}
+
+export async function readPosts(): Promise<BlogPost[]> {
+  const { db } = services();
+  const snap = await getDocs(collection(db, 'posts'));
+  return snap.docs.map((d) => {
+    const { createdAt: _c, updatedAt: _u, ...rest } = d.data() as DocumentData;
+    return { ...rest, slug: d.id } as BlogPost;
+  });
+}
+
+export async function writePost(post: BlogPost): Promise<void> {
+  const { db } = services();
+  const ref = doc(db, 'posts', post.slug);
+  const existing = await getDoc(ref);
+  await setDoc(ref, {
+    status: post.status,
+    publishedAt: post.publishedAt,
+    tags: post.tags,
+    es: post.es,
+    en: post.en,
+    createdAt: existing.exists() ? (existing.data()?.createdAt ?? serverTimestamp()) : serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+}
+
+export async function deletePostDoc(slug: string): Promise<void> {
+  const { db } = services();
+  await deleteDoc(doc(db, 'posts', slug));
 }
