@@ -102,7 +102,7 @@ export function DockNav() {
       ]}
     >
       {tabs.map((t) => (
-        <DockTab key={t.route} icon={t.icon} label={t.label} active={pathname === t.route} narrow={narrow} onPress={() => { if (pathname !== t.route) router.push(t.route as never); }} />
+        <DockTab key={t.route} icon={t.icon} label={t.label} active={pathname === t.route} narrow={narrow} onPress={() => { if (pathname !== t.route) router.replace(t.route as never); }} />
       ))}
     </View>
   );

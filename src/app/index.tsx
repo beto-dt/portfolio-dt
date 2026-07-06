@@ -1,4 +1,5 @@
 import Head from 'expo-router/head';
+import { usePageTitle } from '@/ui/use-page-title';
 import { HomePage } from '@/features/portfolio/pages/home-page';
 
 const TITLE = 'Luis De La Torre — Senior Full-Stack & Mobile Developer';
@@ -8,6 +9,7 @@ const URL = 'https://luisdelatorre.dev/';
 const OG_IMAGE = 'https://luisdelatorre.dev/og.png';
 
 export default function Index() {
+  usePageTitle(TITLE);
   return (
     <>
       <Head>
