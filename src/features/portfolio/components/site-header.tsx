@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Animated, Image, Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
 import { AppButton } from '@/ui/app-button';
-import { scrollToAnchor } from '@/ui/scroll-to-anchor';
-import { NavLink } from './nav-link';
-import { useActiveSection } from '../hooks/use-active-section';
+import { goToSection } from '@/ui/go-to-section';
 
 type HoverState = PressableStateCallbackType & { hovered?: boolean };
 const webCursor = Platform.OS === 'web' ? ({ cursor: 'pointer' } as object) : null;
@@ -14,8 +12,6 @@ const logoTransition = Platform.OS === 'web' ? ({ transitionProperty: 'transform
 export function SiteHeader() {
   const { content, toggleLocale } = useI18n();
   const { nav } = content;
-  const [anchors] = useState(() => nav.links.map((l) => l.anchor));
-  const active = useActiveSection(anchors);
 
   const enter = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -40,7 +36,7 @@ export function SiteHeader() {
         backgroundColor: 'rgba(10,11,14,0.72)',
       }}
     >
-      <Pressable onPress={() => scrollToAnchor('top')} style={webCursor as object}>
+      <Pressable onPress={() => goToSection('hero')} style={webCursor as object}>
         {({ hovered }: HoverState) => (
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, minWidth: 0, flexShrink: 1 }}>
             <Image
@@ -56,11 +52,8 @@ export function SiteHeader() {
       </Pressable>
 
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 24, flexWrap: 'wrap', flexShrink: 1 }}>
-        {nav.links.map((link) => (
-          <NavLink key={link.anchor} label={link.label} active={active === link.anchor} onPress={() => scrollToAnchor(link.anchor)} />
-        ))}
         <AppButton label={nav.languageToggleLabel} onPress={toggleLocale} variant="pill" size="sm" />
-        <AppButton label={nav.cta.label} onPress={() => scrollToAnchor(nav.cta.anchor)} variant="pillPrimary" size="sm" />
+        <AppButton label={nav.cta.label} onPress={() => goToSection(nav.cta.anchor)} variant="pillPrimary" size="sm" />
       </View>
     </Animated.View>
   );

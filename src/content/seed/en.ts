@@ -11,6 +11,7 @@ export const en: PortfolioContent = {
     ],
     languageToggleLabel: 'es / EN',
     cta: { label: "Let's work", anchor: 'contact' },
+    dock: { home: 'Home', services: 'Services', about: 'About', projects: 'Projects', contact: 'Contact' },
   },
   hero: {
     availability: 'Available for freelance projects',

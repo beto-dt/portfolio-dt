@@ -8,7 +8,7 @@ import { colors, fonts, radii } from '@/theme/tokens';
 import { useFluidType } from '@/theme/use-fluid-type';
 import { AppButton } from '@/ui/app-button';
 import { Reveal } from '@/ui/reveal';
-import { scrollToAnchor } from '@/ui/scroll-to-anchor';
+import { goToSection } from '@/ui/go-to-section';
 
 function prefersReducedMotion(): boolean {
   if (Platform.OS !== 'web' || typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
@@ -68,7 +68,7 @@ export function HeroSection() {
   const fluid = useFluidType();
 
   return (
-    <Container style={{ paddingVertical: 88 }} nativeID="top">
+    <Container style={{ paddingVertical: 88 }}>
       <HeroBackdrop />
       <View style={{ gap: 34 }}>
         <Reveal delay={0} style={{ alignSelf: 'flex-start' }}>
@@ -106,8 +106,8 @@ export function HeroSection() {
 
         <Reveal delay={240}>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 16 }}>
-            <AppButton label={hero.primaryCta.label} onPress={() => scrollToAnchor(hero.primaryCta.anchor)} variant="primary" />
-            <AppButton label={hero.secondaryCta.label} onPress={() => scrollToAnchor(hero.secondaryCta.anchor)} variant="outline" />
+            <AppButton label={hero.primaryCta.label} onPress={() => goToSection(hero.primaryCta.anchor)} variant="primary" />
+            <AppButton label={hero.secondaryCta.label} onPress={() => goToSection(hero.secondaryCta.anchor)} variant="outline" />
             <AppButton label={`↓ ${hero.cvLabel}`} onPress={() => Linking.openURL(hero.cvUrl)} variant="outline" />
           </View>
         </Reveal>
