@@ -3,7 +3,7 @@ import { Linking, Platform, Pressable, Text, TextInput, View, useWindowDimension
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
 import { BookingCalendar } from './booking-calendar';
-import { onBookingIntent } from './booking-intent';
+import { consumeBookingIntent, onBookingIntent, type BookingIntent } from './booking-intent';
 import { SLOT_TIMES, formatSlot } from './booking-config';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
@@ -132,14 +132,21 @@ export function ContactSection() {
   const [model, setModel] = useState<string | null>(null);
   const [intentNotice, setIntentNotice] = useState<{ type: string; model: string } | null>(null);
 
-  useEffect(() => onBookingIntent((i) => {
+  const applyIntent = (i: BookingIntent) => {
     if (i.model) setModel(i.model);
     if (i.projectType) {
       setType(i.projectType);
       setIntentNotice(i.model ? { type: i.projectType, model: i.model } : null);
     }
     setStep('form');
-  }), []);
+  };
+
+  useEffect(() => {
+    const pending = consumeBookingIntent();
+    if (pending) applyIntent(pending);
+    return onBookingIntent(applyIntent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const slot = date && time ? formatSlot(date, time, locale) : null;
 

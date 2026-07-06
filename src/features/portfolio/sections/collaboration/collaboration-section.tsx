@@ -6,7 +6,7 @@ import { colors, fonts, radii } from '@/theme/tokens';
 import { AppButton } from '@/ui/app-button';
 import { GlowCard } from '@/ui/glow-card';
 import { Reveal } from '@/ui/reveal';
-import { scrollToAnchor } from '@/ui/scroll-to-anchor';
+import { goToSection } from '@/ui/go-to-section';
 import { setBookingIntent } from '../contact/booking-intent';
 import type { CollaborationModel } from '@/content/types';
 
@@ -50,7 +50,7 @@ function ModelCard({ model }: { model: CollaborationModel }) {
               label={model.cta}
               onPress={() => {
                 setBookingIntent({ model: model.title });
-                scrollToAnchor('contact');
+                goToSection('contact');
               }}
               variant={model.popular ? 'primary' : 'outline'}
             />

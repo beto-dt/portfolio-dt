@@ -2,7 +2,7 @@ import { Platform, Pressable, Text, View, type PressableStateCallbackType } from
 import type { ServiceItem } from '@/content/types';
 import { colors, fonts, radii } from '@/theme/tokens';
 import { GlowCard } from '@/ui/glow-card';
-import { scrollToAnchor } from '@/ui/scroll-to-anchor';
+import { goToSection } from '@/ui/go-to-section';
 import { setBookingIntent } from '../contact/booking-intent';
 
 type HoverState = PressableStateCallbackType & { hovered?: boolean };
@@ -47,7 +47,7 @@ export function ServiceCard({ item, requestCta }: { item: ServiceItem; requestCt
             <Pressable
               onPress={() => {
                 setBookingIntent({ projectType: item.projectType, model: item.recommendedModel });
-                scrollToAnchor('contact');
+                goToSection('contact');
               }}
               style={{ alignSelf: 'flex-start' }}
             >
