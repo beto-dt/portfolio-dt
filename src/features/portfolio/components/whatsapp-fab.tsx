@@ -24,7 +24,7 @@ const FIRST_PULSE_MS = 5000;
 /** Floating WhatsApp pill; pulses an accent ring every 30 s to draw attention. */
 export function WhatsAppFab() {
   const { width } = useWindowDimensions();
-  const narrow = width < 640;
+  const narrow = width < 760;
   const { content } = useI18n();
   const { contact } = content;
   const ring = useRef(new Animated.Value(0)).current;
@@ -100,7 +100,7 @@ export function WhatsAppFab() {
         ]}
       >
         <Text style={{ fontSize: 16, color: colors.onAccent }}>✆</Text>
-        <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.onAccent }}>WhatsApp</Text>
+        {narrow ? null : <Text style={{ fontFamily: fonts.bodyMedium, fontSize: 14, color: colors.onAccent }}>WhatsApp</Text>}
       </Pressable>
     </Animated.View>
   );

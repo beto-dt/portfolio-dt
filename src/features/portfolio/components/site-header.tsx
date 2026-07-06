@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Animated, Image, Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
+import { Animated, Image, Platform, Pressable, Text, View, useWindowDimensions, type PressableStateCallbackType } from 'react-native';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
 import { AppButton } from '@/ui/app-button';
@@ -12,6 +12,7 @@ const logoTransition = Platform.OS === 'web' ? ({ transitionProperty: 'transform
 export function SiteHeader() {
   const { content, toggleLocale } = useI18n();
   const { nav } = content;
+  const { width } = useWindowDimensions();
 
   const enter = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -29,7 +30,7 @@ export function SiteHeader() {
         flexWrap: 'wrap',
         columnGap: 20,
         rowGap: 12,
-        paddingHorizontal: 40,
+        paddingHorizontal: width < 760 ? 20 : 40,
         paddingVertical: 16,
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(255,255,255,0.07)',
