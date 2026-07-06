@@ -10,6 +10,7 @@ export function ServicesForm({ value, onChange }: { value: ServicesContent; onCh
       <Field label="kicker" value={value.kicker} onChangeText={(t) => set('kicker', t)} />
       <Field label="heading" value={value.heading} onChangeText={(t) => set('heading', t)} />
       <Field label="requestCta" value={value.requestCta} onChangeText={(t) => set('requestCta', t)} />
+      <Field label="seeAllCta" value={value.seeAllCta} onChangeText={(t) => set('seeAllCta', t)} />
       <Label>items</Label>
       <ListEditor
         items={value.items}

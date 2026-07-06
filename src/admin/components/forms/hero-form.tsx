@@ -20,6 +20,8 @@ export function HeroForm({ value, onChange }: { value: HeroContent; onChange: (h
       <Field label="cvUrl" value={value.cvUrl} onChangeText={(t) => set('cvUrl', t)} />
       <Field label="clientsHeading" value={value.clientsHeading} onChangeText={(t) => set('clientsHeading', t)} />
       <StringListEditor label="clients" items={value.clients} onChange={(clients) => set('clients', clients)} />
+      <Field label="ctaBandTitle" value={value.ctaBandTitle} onChangeText={(t) => set('ctaBandTitle', t)} />
+      <Field label="ctaBandSub" value={value.ctaBandSub} onChangeText={(t) => set('ctaBandSub', t)} multiline />
       <Label>stats</Label>
       <ListEditor
         items={value.stats}

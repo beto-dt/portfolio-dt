@@ -30,11 +30,14 @@ export const es: PortfolioContent = {
     cvUrl: '/cv.pdf',
     clientsHeading: 'Empresas y sectores donde he entregado',
     clients: ['Banca · Produbanco', 'E-commerce · Acid Labs', 'IoT · Audax', 'Telecom · Smartisp', 'Salud · HL7/FHIR', 'AR/VR · Unity'],
+    ctaBandTitle: '¿Listo para llevar tu idea a producción?',
+    ctaBandSub: 'Cuéntame tu proyecto y agenda una llamada gratuita de 30 minutos. Respondo en menos de 24 h.',
   },
   services: {
     kicker: 'servicios',
     heading: 'Cómo puedo ayudarte',
     requestCta: 'Solicitar este servicio',
+    seeAllCta: 'Ver todos los servicios',
     items: [
       { index: '01', tag: 'WEB', title: 'Desarrollo Web', description: 'Aplicaciones React y Next.js de alto rendimiento, dashboards en tiempo real y SPAs escalables con UX pulida.', projectType: 'Web', recommendedModel: 'Proyecto llave en mano' },
       { index: '02', tag: 'MOBILE', title: 'Apps Móviles', description: 'iOS y Android nativo (Swift/Kotlin) y multiplataforma con Flutter, KMP y React Native, publicadas en las stores.', projectType: 'App móvil', recommendedModel: 'Proyecto llave en mano' },
