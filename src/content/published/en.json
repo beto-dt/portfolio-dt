@@ -106,7 +106,8 @@
         "projectType": "AI Agents",
         "recommendedModel": "Turnkey project"
       }
-    ]
+    ],
+    "seeAllCta": "See all services"
   },
   "impact": {
     "kicker": "impact",
@@ -454,7 +455,9 @@
       "Telecom · Smartisp",
       "Health · HL7/FHIR",
       "AR/VR · Unity"
-    ]
+    ],
+    "ctaBandTitle": "Ready to take your idea to production?",
+    "ctaBandSub": "Tell me about your project and book a free 30-minute call. I reply within 24 h."
   },
   "education": {
     "kicker": "academics",
