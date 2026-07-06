@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Animated, Linking, Platform, Pressable, Text, type PressableStateCallbackType } from 'react-native';
+import { Animated, Linking, Platform, Pressable, Text, type PressableStateCallbackType, useWindowDimensions } from 'react-native';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
 
@@ -23,6 +23,8 @@ const FIRST_PULSE_MS = 5000;
 
 /** Floating WhatsApp pill; pulses an accent ring every 30 s to draw attention. */
 export function WhatsAppFab() {
+  const { width } = useWindowDimensions();
+  const narrow = width < 640;
   const { content } = useI18n();
   const { contact } = content;
   const ring = useRef(new Animated.Value(0)).current;
@@ -56,7 +58,7 @@ export function WhatsAppFab() {
       style={[
         {
           position: 'absolute',
-          bottom: 24,
+          bottom: narrow ? 96 : 24,
           right: 24,
           zIndex: 50,
           transform: [{ scale: bounce.interpolate({ inputRange: [0, 1], outputRange: [1, 1.06] }) }],

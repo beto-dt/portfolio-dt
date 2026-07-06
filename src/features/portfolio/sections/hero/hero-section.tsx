@@ -68,7 +68,7 @@ export function HeroSection() {
   const fluid = useFluidType();
 
   return (
-    <Container style={{ paddingVertical: 88 }} nativeID="top">
+    <Container style={{ paddingVertical: 88 }}>
       <HeroBackdrop />
       <View style={{ gap: 34 }}>
         <Reveal delay={0} style={{ alignSelf: 'flex-start' }}>
