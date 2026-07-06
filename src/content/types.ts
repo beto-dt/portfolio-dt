@@ -22,6 +22,8 @@ export type HeroContent = {
   cvUrl: string;
   clientsHeading: string;
   clients: string[];
+  ctaBandTitle: string;
+  ctaBandSub: string;
 };
 
 export type ServiceItem = {
@@ -32,7 +34,7 @@ export type ServiceItem = {
   projectType: string;
   recommendedModel: string;
 };
-export type ServicesContent = { kicker: string; heading: string; requestCta: string; items: ServiceItem[] };
+export type ServicesContent = { kicker: string; heading: string; requestCta: string; seeAllCta: string; items: ServiceItem[] };
 
 export type ImpactItem = { value: string; label: string };
 export type ImpactContent = { kicker: string; heading: string; items: ImpactItem[] };

@@ -106,7 +106,8 @@
         "projectType": "Agentes IA",
         "recommendedModel": "Proyecto llave en mano"
       }
-    ]
+    ],
+    "seeAllCta": "Ver todos los servicios"
   },
   "impact": {
     "kicker": "impacto",
@@ -454,7 +455,9 @@
       "Telecom · Smartisp",
       "Salud · HL7/FHIR",
       "AR/VR · Unity"
-    ]
+    ],
+    "ctaBandTitle": "¿Listo para llevar tu idea a producción?",
+    "ctaBandSub": "Cuéntame tu proyecto y agenda una llamada gratuita de 30 minutos. Respondo en menos de 24 h."
   },
   "education": {
     "kicker": "academia",
