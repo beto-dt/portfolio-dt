@@ -12,6 +12,12 @@ export function NavForm({ value, onChange }: { value: NavContent; onChange: (v: 
       <Field label="languageToggleLabel" value={value.languageToggleLabel} onChangeText={(t) => set('languageToggleLabel', t)} />
       <Field label="cta.label" value={value.cta.label} onChangeText={(t) => set('cta', { ...value.cta, label: t })} />
       <Field label="cta.anchor" value={value.cta.anchor} onChangeText={(t) => set('cta', { ...value.cta, anchor: t })} />
+      <Label>dock</Label>
+      <Field label="dock.home" value={value.dock.home} onChangeText={(t) => set('dock', { ...value.dock, home: t })} />
+      <Field label="dock.services" value={value.dock.services} onChangeText={(t) => set('dock', { ...value.dock, services: t })} />
+      <Field label="dock.about" value={value.dock.about} onChangeText={(t) => set('dock', { ...value.dock, about: t })} />
+      <Field label="dock.projects" value={value.dock.projects} onChangeText={(t) => set('dock', { ...value.dock, projects: t })} />
+      <Field label="dock.contact" value={value.dock.contact} onChangeText={(t) => set('dock', { ...value.dock, contact: t })} />
       <Label>links</Label>
       <ListEditor
         items={value.links}
