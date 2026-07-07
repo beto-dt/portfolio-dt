@@ -2,14 +2,14 @@ import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
 import { defineSecret } from 'firebase-functions/params';
 import { initializeApp, getApps } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
-import nodemailer from 'nodemailer';
+import { createHash } from 'node:crypto';
+import { ADMIN_EMAIL, sendAdminEmail } from './mailer';
 
 if (!getApps().length) initializeApp();
 const db = getFirestore();
 
 const GITHUB_TOKEN = defineSecret('GITHUB_TOKEN');
 
-const ADMIN_EMAIL = 'luis.atorred24@gmail.com';
 const DISPATCH_URL =
   'https://api.github.com/repos/beto-dt/portfolio-dt/actions/workflows/deploy.yml/dispatches';
 const ACTIONS_URL =
@@ -209,20 +209,10 @@ export const submitBooking = onRequest(
     });
     let emailed = true;
     try {
-      // Explicit SMTPS (TLS on 465) — same endpoint the 'gmail' shorthand uses,
-      // spelled out so the transport is verifiably encrypted (Sonar S5332).
-      const transport = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: { user: ADMIN_EMAIL, pass: GMAIL_APP_PASSWORD.value() },
-      });
-      await transport.sendMail({
-        from: `Portfolio <${ADMIN_EMAIL}>`,
-        to: ADMIN_EMAIL,
-        replyTo: email,
-        subject: `Nueva solicitud — ${name} · ${date} ${time}`,
-        text: [
+      await sendAdminEmail(
+        GMAIL_APP_PASSWORD.value(),
+        `Nueva solicitud — ${name} · ${date} ${time}`,
+        [
           `Nombre: ${name}`,
           `Email: ${email}`,
           `Tipo: ${projectType || '—'}`,
@@ -234,11 +224,141 @@ export const submitBooking = onRequest(
           'Mensaje:',
           message || '—',
         ].join('\n'),
-      });
+        email,
+      );
     } catch (error) {
       emailed = false;
       console.error('booking email failed', error);
     }
     res.json({ ok: true, emailed });
+  },
+);
+
+const FEEDBACK_SALT = 'ldt-feedback-v1';
+const SLUG_RE = /^[a-z0-9-]{1,80}$/;
+
+function feedbackIpHash(forwarded: string | undefined, fallbackIp: string | undefined, slug: string): string {
+  const ip = forwarded?.split(',')[0]?.trim() || fallbackIp || 'unknown';
+  return createHash('sha256').update(`${ip}|${slug}|${FEEDBACK_SALT}`).digest('hex');
+}
+
+type StoredComment = { name: string; message: string; status: string; ipHash?: string; createdAt?: { toDate?: () => Date } };
+
+function commentDay(c: StoredComment): string {
+  return c.createdAt?.toDate ? c.createdAt.toDate().toISOString().slice(0, 10) : '';
+}
+
+export const postFeedback = onRequest(
+  { secrets: [GMAIL_APP_PASSWORD], region: 'us-central1', cors: true },
+  async (req, res) => {
+    try {
+      if (req.method === 'GET') {
+        const slug = String(req.query.slug ?? '');
+        if (!SLUG_RE.test(slug)) {
+          res.status(400).json({ error: 'bad_slug' });
+          return;
+        }
+        const [fbSnap, commentsSnap] = await Promise.all([
+          db.doc(`feedback/${slug}`).get(),
+          db.collection('comments').where('slug', '==', slug).get(),
+        ]);
+        const sum = (fbSnap.data()?.ratingSum as number) ?? 0;
+        const count = (fbSnap.data()?.ratingCount as number) ?? 0;
+        const comments = commentsSnap.docs
+          .map((d) => ({ id: d.id, data: d.data() as StoredComment }))
+          .filter((c) => c.data.status === 'approved')
+          .map((c) => ({ id: c.id, name: c.data.name, message: c.data.message, createdAt: commentDay(c.data) }))
+          .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+          .slice(0, 100);
+        res.json({ rating: { avg: count ? Math.round((sum / count) * 10) / 10 : 0, count }, comments });
+        return;
+      }
+      if (req.method !== 'POST') {
+        res.status(405).json({ error: 'method_not_allowed' });
+        return;
+      }
+      const body = (req.body ?? {}) as Record<string, unknown>;
+      const slug = typeof body.slug === 'string' ? body.slug : '';
+      if (!SLUG_RE.test(slug)) {
+        res.status(400).json({ error: 'bad_slug' });
+        return;
+      }
+      const postSnap = await db.doc(`posts/${slug}`).get();
+      if (!postSnap.exists || postSnap.data()?.status !== 'published') {
+        res.status(404).json({ error: 'unknown_post' });
+        return;
+      }
+      const ipHash = feedbackIpHash(req.headers['x-forwarded-for'] as string | undefined, req.ip, slug);
+
+      if (body.type === 'rating') {
+        const stars = Number(body.stars);
+        if (!Number.isInteger(stars) || stars < 1 || stars > 5) {
+          res.status(400).json({ error: 'bad_stars' });
+          return;
+        }
+        const voteRef = db.doc(`feedback/${slug}/votes/${ipHash}`);
+        const fbRef = db.doc(`feedback/${slug}`);
+        try {
+          const result = await db.runTransaction(async (tx) => {
+            const vote = await tx.get(voteRef);
+            if (vote.exists) throw new Error('already_rated');
+            const fb = await tx.get(fbRef);
+            const sum = ((fb.data()?.ratingSum as number) ?? 0) + stars;
+            const count = ((fb.data()?.ratingCount as number) ?? 0) + 1;
+            tx.set(voteRef, { createdAt: FieldValue.serverTimestamp() });
+            tx.set(fbRef, { ratingSum: sum, ratingCount: count }, { merge: true });
+            return { sum, count };
+          });
+          res.json({ rating: { avg: Math.round((result.sum / result.count) * 10) / 10, count: result.count } });
+        } catch (error) {
+          if (error instanceof Error && error.message === 'already_rated') {
+            res.status(409).json({ error: 'already_rated' });
+            return;
+          }
+          throw error;
+        }
+        return;
+      }
+
+      if (body.type === 'comment') {
+        const name = typeof body.name === 'string' ? body.name.trim() : '';
+        const message = typeof body.message === 'string' ? body.message.trim() : '';
+        if (!name || name.length > 60 || !message || message.length > 1000) {
+          res.status(400).json({ error: 'bad_fields' });
+          return;
+        }
+        const existing = await db.collection('comments').where('slug', '==', slug).get();
+        const today = new Date().toISOString().slice(0, 10);
+        const mineToday = existing.docs.filter((d) => {
+          const data = d.data() as StoredComment;
+          return data.ipHash === ipHash && commentDay(data) === today;
+        });
+        if (mineToday.length >= 3) {
+          res.status(429).json({ error: 'too_many' });
+          return;
+        }
+        await db.collection('comments').add({ slug, name, message, status: 'pending', ipHash, createdAt: FieldValue.serverTimestamp() });
+        await sendAdminEmail(
+          GMAIL_APP_PASSWORD.value(),
+          `Nuevo comentario en /blog/${slug}`,
+          [
+            `Nombre: ${name}`,
+            `Post: https://luisdelatorre.dev/blog/${slug}`,
+            '',
+            'Comentario:',
+            message,
+            '',
+            'Aprueba o elimina en https://luisdelatorre.dev/admin (pestaña Blog).',
+          ].join('\n'),
+        ).catch((error) => console.error('comment email failed', error));
+        res.json({ ok: true });
+        return;
+      }
+
+      res.status(400).json({ error: 'bad_type' });
+    } catch (error) {
+      console.error('postFeedback failed', error);
+      res.status(500).json({ error: 'internal' });
+    }
   },
 );

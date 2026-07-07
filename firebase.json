@@ -11,6 +11,10 @@
       {
         "source": "/api/booking",
         "function": { "functionId": "submitBooking", "region": "us-central1" }
+      },
+      {
+        "source": "/api/feedback",
+        "function": { "functionId": "postFeedback", "region": "us-central1" }
       }
     ]
   },
