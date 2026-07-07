@@ -25,6 +25,7 @@ import { ContactForm } from '../components/forms/contact-form';
 import { FooterForm } from '../components/forms/footer-form';
 import { MetricsView } from '../components/metrics-view';
 import { BookingsView } from '../components/bookings-view';
+import { PostsView } from '../components/posts-view';
 import { AdminBackdrop, LoginView } from '../components/login-view';
 import { AccentButton, AdminShell, ViewHeader, type AdminView } from '../components/admin-shell';
 
@@ -305,6 +306,8 @@ export function AdminScreen() {
         <MetricsView bookings={bookings} />
       ) : view === 'bookings' ? (
         <BookingsView bookings={bookings} onStatus={onBookingStatus} />
+      ) : view === 'posts' ? (
+        <PostsView />
       ) : (
         <EditorView wide={wide} section={section} onSection={setSection} loading={loading} content={content} onChange={setContent} status={status} onSave={onSave} />
       )}
