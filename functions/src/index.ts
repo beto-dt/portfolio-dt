@@ -47,6 +47,7 @@ export const publish = onCall(
 
 const SECTION_KEYS = new Set([
   'hero',
+  'ar',
   'services',
   'process',
   'impact',
