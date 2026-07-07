@@ -7,7 +7,7 @@ export type NavContent = {
   links: { label: string; anchor: string }[];
   languageToggleLabel: string;
   cta: CtaLink;
-  dock: { home: string; services: string; about: string; projects: string; contact: string };
+  dock: { home: string; services: string; about: string; projects: string; contact: string; blog: string };
 };
 
 export type HeroContent = {

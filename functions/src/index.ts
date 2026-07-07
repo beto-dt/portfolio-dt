@@ -59,6 +59,7 @@ const SECTION_KEYS = new Set([
   'formation',
   'collaboration',
   'contact',
+  'blog',
 ]);
 
 export const recordVisit = onRequest({ region: 'us-central1', cors: true }, async (req, res) => {
