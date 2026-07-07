@@ -139,6 +139,7 @@ export const en: PortfolioContent = {
       { category: 'TELECOM', title: 'Smartisp OLT', description: 'Real-time fiber-optic monitoring system with live dashboards, remote equipment control and low-latency telemetry.', tech: ['React', 'SNMP', 'Microservices'] },
       { category: 'E-COMMERCE', title: 'Enterprise Platform', description: '15+ scalable microservices on AWS with payment and partner integrations, supporting 1000+ concurrent users.', tech: ['AWS', 'Terraform', 'Kubernetes', 'Node.js'] },
       { category: 'AR/3D', title: 'AR Commerce', description: 'Augmented Reality experiences with Unity that digitized commercial catalogs and tripled customer engagement.', tech: ['Unity', 'ARKit', 'ARCore'] },
+      { category: 'PLATFORM', title: 'This portfolio', description: 'Expo + React Native Web site with its own Firestore CMS, an admin console, bookings and cookie-less analytics on Cloud Functions, a bilingual blog with moderated comments and a WebAR demo. You are using it right now.', tech: ['Expo', 'React Native Web', 'Firebase', 'Cloud Functions', 'WebAR'] },
     ],
   },
   testimonials: {

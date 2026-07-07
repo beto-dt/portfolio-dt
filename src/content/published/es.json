@@ -1,115 +1,4 @@
 {
-  "nav": {
-    "name": "Luis De La Torre",
-    "role": "Senior Full-Stack & Mobile",
-    "links": [
-      {
-        "label": "Servicios",
-        "anchor": "services"
-      },
-      {
-        "label": "Experiencia",
-        "anchor": "experience"
-      },
-      {
-        "label": "Proyectos",
-        "anchor": "projects"
-      }
-    ],
-    "languageToggleLabel": "ES / en",
-    "cta": {
-      "label": "Trabajemos",
-      "anchor": "contact"
-    },
-    "dock": {
-      "home": "Inicio",
-      "services": "Servicios",
-      "about": "Sobre mí",
-      "projects": "Proyectos",
-      "contact": "Contacto",
-      "blog": "Blog"
-    }
-  },
-  "services": {
-    "kicker": "servicios",
-    "heading": "Cómo puedo ayudarte",
-    "requestCta": "Solicitar este servicio",
-    "items": [
-      {
-        "index": "01",
-        "tag": "WEB",
-        "title": "Desarrollo Web",
-        "description": "Aplicaciones React y Next.js de alto rendimiento, dashboards en tiempo real y SPAs escalables con UX pulida.",
-        "projectType": "Web",
-        "recommendedModel": "Proyecto llave en mano"
-      },
-      {
-        "index": "02",
-        "tag": "MOBILE",
-        "title": "Apps Móviles",
-        "description": "iOS y Android nativo (Swift/Kotlin) y multiplataforma con Flutter, KMP y React Native, publicadas en las stores.",
-        "projectType": "App móvil",
-        "recommendedModel": "Proyecto llave en mano"
-      },
-      {
-        "index": "03",
-        "tag": "AR/3D",
-        "title": "Realidad Aumentada & Unity",
-        "description": "Experiencias AR nativas (ARKit/ARCore) y 3D/VR con Unity que digitalizan productos y triplican el engagement.",
-        "projectType": "AR / Unity",
-        "recommendedModel": "Proyecto llave en mano"
-      },
-      {
-        "index": "04",
-        "tag": "BACKEND",
-        "title": "Backend & Microservicios",
-        "description": "Arquitecturas distribuidas, DDD, event-driven y APIs robustas con NestJS, FastAPI, Spring Boot y Go.",
-        "projectType": "Backend",
-        "recommendedModel": "Proyecto llave en mano"
-      },
-      {
-        "index": "05",
-        "tag": "CLOUD",
-        "title": "Cloud & DevOps",
-        "description": "Infraestructura en AWS y Azure con Terraform (IaC), CI/CD, Docker y Kubernetes para despliegues confiables.",
-        "projectType": "Cloud / DevOps",
-        "recommendedModel": "Retainer / por horas"
-      },
-      {
-        "index": "06",
-        "tag": "AI/ML",
-        "title": "Integración de IA/ML",
-        "description": "Pipelines de datos, análisis predictivo y modelos de machine learning integrados directamente en tu producto.",
-        "projectType": "IA / ML",
-        "recommendedModel": "Retainer / por horas"
-      },
-      {
-        "index": "07",
-        "tag": "LEAD",
-        "title": "Consultoría & Tech Lead",
-        "description": "Definición de arquitectura, estándares de ingeniería y liderazgo técnico para llevar tu producto a producción.",
-        "projectType": "Consultoría",
-        "recommendedModel": "Tech Lead fraccional"
-      },
-      {
-        "index": "08",
-        "tag": "CHATBOT",
-        "title": "Chatbots con IA",
-        "description": "Asistentes conversacionales automatizados con lenguaje natural (LLMs) para soporte, ventas y atención 24/7, integrados a WhatsApp, web y tus sistemas.",
-        "projectType": "Chatbot IA",
-        "recommendedModel": "Proyecto llave en mano"
-      },
-      {
-        "index": "09",
-        "tag": "AGENTES",
-        "title": "Agentes inteligentes",
-        "description": "Agentes de IA autónomos que razonan, usan herramientas y APIs, y ejecutan tareas de varios pasos para automatizar flujos de trabajo completos.",
-        "projectType": "Agentes IA",
-        "recommendedModel": "Proyecto llave en mano"
-      }
-    ],
-    "seeAllCta": "Ver todos los servicios"
-  },
   "impact": {
     "kicker": "impacto",
     "heading": "Resultados medibles",
@@ -289,65 +178,6 @@
       }
     ]
   },
-  "projects": {
-    "kicker": "destacados",
-    "heading": "Proyectos",
-    "items": [
-      {
-        "category": "FINTECH",
-        "title": "Banca móvil KMP",
-        "description": "App bancaria multiplataforma con OTP, biometría facial (FacePhi) y cumplimiento de políticas de las stores, con CI/CD en Azure.",
-        "tech": [
-          "Kotlin Multiplatform",
-          "iOS",
-          "Android",
-          "Azure"
-        ]
-      },
-      {
-        "category": "IoT",
-        "title": "Audax · Tuya IoT",
-        "description": "Integración de dispositivos Tuya en una app React Native con un microservicio en Go y pipelines de despliegue móvil optimizados.",
-        "tech": [
-          "React Native",
-          "Go",
-          "IoT",
-          "CI/CD"
-        ]
-      },
-      {
-        "category": "TELECOM",
-        "title": "Smartisp OLT",
-        "description": "Sistema de monitoreo de fibra óptica en tiempo real con dashboards en vivo, control remoto de equipos y telemetría de baja latencia.",
-        "tech": [
-          "React",
-          "SNMP",
-          "Microservicios"
-        ]
-      },
-      {
-        "category": "E-COMMERCE",
-        "title": "Plataforma Enterprise",
-        "description": "15+ microservicios escalables en AWS con integraciones de pagos y partners, soportando 1000+ usuarios concurrentes.",
-        "tech": [
-          "AWS",
-          "Terraform",
-          "Kubernetes",
-          "Node.js"
-        ]
-      },
-      {
-        "category": "AR/3D",
-        "title": "AR Commerce",
-        "description": "Experiencias de Realidad Aumentada con Unity que digitalizaron catálogos comerciales y triplicaron el engagement de clientes.",
-        "tech": [
-          "Unity",
-          "ARKit",
-          "ARCore"
-        ]
-      }
-    ]
-  },
   "footer": {
     "copyright": "© 2026 Luis De La Torre Duran",
     "tagline": "Diseñado y desarrollado con precisión."
@@ -418,47 +248,6 @@
     "heading": "Modelos para trabajar juntos",
     "blurb": "Elige el formato que mejor encaje con tu proyecto. Todo empieza con una llamada gratuita de 30 min.",
     "kicker": "colaboración"
-  },
-  "hero": {
-    "availability": "Disponible para proyectos freelance",
-    "titleLead": "Construyo productos digitales que generan",
-    "titleAccent": "impacto real.",
-    "subtitle": "Senior Full-Stack & Mobile Developer con +7 años diseñando apps móviles, plataformas web escalables, experiencias de Realidad Aumentada y sistemas distribuidos. De la arquitectura al despliegue en App Store y Google Play.",
-    "primaryCta": {
-      "label": "Hablemos de tu proyecto",
-      "anchor": "contact"
-    },
-    "secondaryCta": {
-      "label": "Ver proyectos",
-      "anchor": "projects"
-    },
-    "stats": [
-      {
-        "value": "7+",
-        "label": "años de experiencia"
-      },
-      {
-        "value": "15+",
-        "label": "microservicios en producción"
-      },
-      {
-        "value": "99.9%",
-        "label": "uptime sostenido"
-      }
-    ],
-    "cvLabel": "Descargar CV",
-    "cvUrl": "/cv.pdf",
-    "clientsHeading": "Empresas y sectores donde he entregado",
-    "clients": [
-      "Banca · Produbanco",
-      "E-commerce · Acid Labs",
-      "IoT · Audax",
-      "Telecom · Smartisp",
-      "Salud · HL7/FHIR",
-      "AR/VR · Unity"
-    ],
-    "ctaBandTitle": "¿Listo para llevar tu idea a producción?",
-    "ctaBandSub": "Cuéntame tu proyecto y agenda una llamada gratuita de 30 minutos. Respondo en menos de 24 h."
   },
   "education": {
     "kicker": "academia",
@@ -543,71 +332,11 @@
       }
     ]
   },
-  "contact": {
-    "kicker": "contacto",
-    "heading": "¿Tienes un proyecto en mente? Hablemos.",
-    "blurb": "Estoy disponible para proyectos freelance y colaboraciones. Cuéntame qué quieres construir y te respondo en menos de 24 horas.",
-    "emailCta": "Enviar por email",
-    "whatsappCta": "Enviar por WhatsApp",
-    "email": "luis.atorred24@gmail.com",
-    "phone": "+593 97 990 6532",
-    "whatsapp": "593979906532",
-    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
-    "location": "Quito, Ecuador · GMT-5",
-    "linkedinLabel": "/luis-alberto-de-la-torre",
-    "formNameLabel": "Tu nombre",
-    "formNamePlaceholder": "Ej: María Torres",
-    "formTypeLabel": "Tipo de proyecto",
-    "projectTypes": [
-      "Web",
-      "App móvil",
-      "AR / Unity",
-      "Backend",
-      "Cloud / DevOps",
-      "IA / ML",
-      "Consultoría",
-      "Chatbot IA",
-      "Agentes IA"
-    ],
-    "formBudgetLabel": "Presupuesto estimado",
-    "budgets": [
-      "< $2k",
-      "$2k–5k",
-      "$5k–15k",
-      "$15k+",
-      "A definir"
-    ],
-    "formMessageLabel": "Cuéntame tu proyecto",
-    "formMessagePlaceholder": "¿Qué quieres construir? Objetivo, plazos, contexto...",
-    "formHint": "Recibirás una confirmación y el detalle llegará directo a mi correo. Respondo en menos de 24 h.",
-    "formEmailLabel": "Tu email",
-    "formEmailPlaceholder": "nombre@correo.com",
-    "stepProjectLabel": "Proyecto",
-    "stepScheduleLabel": "Agenda",
-    "nextCta": "Elegir día y hora →",
-    "backCta": "← Volver",
-    "confirmCta": "Confirmar y enviar",
-    "slotsHeading": "Horarios disponibles",
-    "slotsFreeSuffix": "horarios libres",
-    "slotsPickDay": "Selecciona primero un día en el calendario.",
-    "bannerPickDay": "Elige un día y una hora para tu llamada gratuita de 30 min.",
-    "bannerPickTime": "Día seleccionado. Ahora elige una hora.",
-    "bannerScheduled": "Llamada de 30 min agendada para el {slot}.",
-    "whatsappAlt": "o coordinar por WhatsApp",
-    "successTitle": "¡Solicitud enviada!",
-    "successBody": "Recibí tu solicitud para el {slot}. Te confirmo por email en menos de 24 h.",
-    "successAgain": "Enviar otra solicitud",
-    "errorRequired": "Completa tu nombre y email para continuar.",
-    "errorSlotTaken": "Ese horario acaba de ocuparse. Elige otro.",
-    "errorNetwork": "No se pudo enviar. Intenta de nuevo o escríbeme por WhatsApp.",
-    "interestLabel": "Interesado en",
-    "intentBanner": "Para {type} te recomiendo el modelo {model}. Ya lo dejé preseleccionado abajo — cuéntame los detalles."
-  },
   "testimonials": {
-    "kicker": "recomendaciones",
+    "linkedinUrl": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/details/recommendations/",
     "heading": "Lo que dicen de mi trabajo",
     "blurb": "Recomendaciones de líderes técnicos y clientes con quienes he colaborado.",
-    "linkedinUrl": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/details/recommendations/",
+    "kicker": "recomendaciones",
     "items": [
       {
         "name": "Juan Cruz Cuello",
@@ -684,9 +413,25 @@
     ]
   },
   "globalReach": {
-    "kicker": "alcance global",
+    "teamItems": [
+      "Solapamiento horario con América (EST/PST) y Europa (CET)",
+      "Flujo remoto y asíncrono, con dailies y demos en inglés",
+      "Documentación y code reviews bilingües (ES/EN)",
+      "Adaptación a equipos multiculturales y husos distintos"
+    ],
+    "languages": [
+      {
+        "language": "Español",
+        "level": "Nativo",
+        "percent": 100
+      },
+      {
+        "language": "Inglés",
+        "level": "Intermedio · B1",
+        "percent": 55
+      }
+    ],
     "heading": "Experiencia nacional e internacional",
-    "blurb": "He colaborado con equipos locales y distribuidos en distintos países, culturas y zonas horarias, comunicándome con fluidez en español e inglés. Del trabajo presencial en Ecuador a la colaboración remota con clientes de América y Europa.",
     "stats": [
       {
         "value": "3",
@@ -701,7 +446,6 @@
         "label": "base en Quito, Ecuador"
       }
     ],
-    "locationsHeading": "Dónde he colaborado",
     "locations": [
       {
         "name": "Ecuador",
@@ -721,24 +465,292 @@
       }
     ],
     "languagesHeading": "Idiomas",
-    "languages": [
+    "blurb": "He colaborado con equipos locales y distribuidos en distintos países, culturas y zonas horarias, comunicándome con fluidez en español e inglés. Del trabajo presencial en Ecuador a la colaboración remota con clientes de América y Europa.",
+    "teamHeading": "En equipos globales",
+    "locationsHeading": "Dónde he colaborado",
+    "kicker": "alcance global"
+  },
+  "contact": {
+    "kicker": "contacto",
+    "heading": "¿Tienes un proyecto en mente? Hablemos.",
+    "blurb": "Estoy disponible para proyectos freelance y colaboraciones. Cuéntame qué quieres construir y te respondo en menos de 24 horas.",
+    "email": "luis.atorred24@gmail.com",
+    "phone": "+593 97 990 6532",
+    "whatsapp": "593979906532",
+    "linkedin": "https://www.linkedin.com/in/luis-alberto-de-la-torre-duran-752569141/",
+    "formNameLabel": "Tu nombre",
+    "emailCta": "Enviar por email",
+    "formMessageLabel": "Cuéntame tu proyecto",
+    "formMessagePlaceholder": "¿Qué quieres construir? Objetivo, plazos, contexto...",
+    "whatsappCta": "Enviar por WhatsApp",
+    "budgets": [
+      "< $2k",
+      "$2k–5k",
+      "$5k–15k",
+      "$15k+",
+      "A definir"
+    ],
+    "formBudgetLabel": "Presupuesto estimado",
+    "linkedinLabel": "/luis-alberto-de-la-torre",
+    "location": "Quito, Ecuador · GMT-5",
+    "formTypeLabel": "Tipo de proyecto",
+    "formNamePlaceholder": "Ej: María Torres",
+    "backCta": "← Volver",
+    "confirmCta": "Confirmar y enviar",
+    "errorRequired": "Completa tu nombre y email para continuar.",
+    "slotsHeading": "Horarios disponibles",
+    "errorNetwork": "No se pudo enviar. Intenta de nuevo o escríbeme por WhatsApp.",
+    "slotsPickDay": "Selecciona primero un día en el calendario.",
+    "successAgain": "Enviar otra solicitud",
+    "nextCta": "Elegir día y hora →",
+    "errorSlotTaken": "Ese horario acaba de ocuparse. Elige otro.",
+    "formEmailPlaceholder": "nombre@correo.com",
+    "bannerScheduled": "Llamada de 30 min agendada para el {slot}.",
+    "successTitle": "¡Solicitud enviada!",
+    "slotsFreeSuffix": "horarios libres",
+    "bannerPickDay": "Elige un día y una hora para tu llamada gratuita de 30 min.",
+    "stepProjectLabel": "Proyecto",
+    "successBody": "Recibí tu solicitud para el {slot}. Te confirmo por email en menos de 24 h.",
+    "bannerPickTime": "Día seleccionado. Ahora elige una hora.",
+    "whatsappAlt": "o coordinar por WhatsApp",
+    "formEmailLabel": "Tu email",
+    "formHint": "Recibirás una confirmación y el detalle llegará directo a mi correo. Respondo en menos de 24 h.",
+    "stepScheduleLabel": "Agenda",
+    "interestLabel": "Interesado en",
+    "projectTypes": [
+      "Web",
+      "App móvil",
+      "AR / Unity",
+      "Backend",
+      "Cloud / DevOps",
+      "IA / ML",
+      "Consultoría",
+      "Chatbot IA",
+      "Agentes IA"
+    ],
+    "intentBanner": "Para {type} te recomiendo el modelo {model}. Ya lo dejé preseleccionado abajo — cuéntame los detalles."
+  },
+  "hero": {
+    "availability": "Disponible para proyectos freelance",
+    "titleLead": "Construyo productos digitales que generan",
+    "titleAccent": "impacto real.",
+    "subtitle": "Senior Full-Stack & Mobile Developer con +7 años diseñando apps móviles, plataformas web escalables, experiencias de Realidad Aumentada y sistemas distribuidos. De la arquitectura al despliegue en App Store y Google Play.",
+    "primaryCta": {
+      "label": "Hablemos de tu proyecto",
+      "anchor": "contact"
+    },
+    "secondaryCta": {
+      "label": "Ver proyectos",
+      "anchor": "projects"
+    },
+    "stats": [
       {
-        "language": "Español",
-        "level": "Nativo",
-        "percent": 100
+        "value": "7+",
+        "label": "años de experiencia"
       },
       {
-        "language": "Inglés",
-        "level": "Intermedio · B1",
-        "percent": 55
+        "value": "15+",
+        "label": "microservicios en producción"
+      },
+      {
+        "value": "99.9%",
+        "label": "uptime sostenido"
       }
     ],
-    "teamHeading": "En equipos globales",
-    "teamItems": [
-      "Solapamiento horario con América (EST/PST) y Europa (CET)",
-      "Flujo remoto y asíncrono, con dailies y demos en inglés",
-      "Documentación y code reviews bilingües (ES/EN)",
-      "Adaptación a equipos multiculturales y husos distintos"
+    "cvLabel": "Descargar CV",
+    "cvUrl": "/cv.pdf",
+    "clientsHeading": "Empresas y sectores donde he entregado",
+    "clients": [
+      "Banca · Produbanco",
+      "E-commerce · Acid Labs",
+      "IoT · Audax",
+      "Telecom · Smartisp",
+      "Salud · HL7/FHIR",
+      "AR/VR · Unity"
+    ],
+    "ctaBandSub": "Cuéntame tu proyecto y agenda una llamada gratuita de 30 minutos. Respondo en menos de 24 h.",
+    "ctaBandTitle": "¿Listo para llevar tu idea a producción?"
+  },
+  "services": {
+    "kicker": "servicios",
+    "heading": "Cómo puedo ayudarte",
+    "requestCta": "Solicitar este servicio",
+    "items": [
+      {
+        "index": "01",
+        "tag": "WEB",
+        "title": "Desarrollo Web",
+        "description": "Aplicaciones React y Next.js de alto rendimiento, dashboards en tiempo real y SPAs escalables con UX pulida.",
+        "projectType": "Web",
+        "recommendedModel": "Proyecto llave en mano"
+      },
+      {
+        "index": "02",
+        "tag": "MOBILE",
+        "title": "Apps Móviles",
+        "description": "iOS y Android nativo (Swift/Kotlin) y multiplataforma con Flutter, KMP y React Native, publicadas en las stores.",
+        "projectType": "App móvil",
+        "recommendedModel": "Proyecto llave en mano"
+      },
+      {
+        "index": "03",
+        "tag": "AR/3D",
+        "title": "Realidad Aumentada & Unity",
+        "description": "Experiencias AR nativas (ARKit/ARCore) y 3D/VR con Unity que digitalizan productos y triplican el engagement.",
+        "projectType": "AR / Unity",
+        "recommendedModel": "Proyecto llave en mano"
+      },
+      {
+        "index": "04",
+        "tag": "BACKEND",
+        "title": "Backend & Microservicios",
+        "description": "Arquitecturas distribuidas, DDD, event-driven y APIs robustas con NestJS, FastAPI, Spring Boot y Go.",
+        "projectType": "Backend",
+        "recommendedModel": "Proyecto llave en mano"
+      },
+      {
+        "index": "05",
+        "tag": "CLOUD",
+        "title": "Cloud & DevOps",
+        "description": "Infraestructura en AWS y Azure con Terraform (IaC), CI/CD, Docker y Kubernetes para despliegues confiables.",
+        "projectType": "Cloud / DevOps",
+        "recommendedModel": "Retainer / por horas"
+      },
+      {
+        "index": "06",
+        "tag": "AI/ML",
+        "title": "Integración de IA/ML",
+        "description": "Pipelines de datos, análisis predictivo y modelos de machine learning integrados directamente en tu producto.",
+        "projectType": "IA / ML",
+        "recommendedModel": "Retainer / por horas"
+      },
+      {
+        "index": "07",
+        "tag": "LEAD",
+        "title": "Consultoría & Tech Lead",
+        "description": "Definición de arquitectura, estándares de ingeniería y liderazgo técnico para llevar tu producto a producción.",
+        "projectType": "Consultoría",
+        "recommendedModel": "Tech Lead fraccional"
+      },
+      {
+        "index": "08",
+        "tag": "CHATBOT",
+        "title": "Chatbots con IA",
+        "description": "Asistentes conversacionales automatizados con lenguaje natural (LLMs) para soporte, ventas y atención 24/7, integrados a WhatsApp, web y tus sistemas.",
+        "projectType": "Chatbot IA",
+        "recommendedModel": "Proyecto llave en mano"
+      },
+      {
+        "index": "09",
+        "tag": "AGENTES",
+        "title": "Agentes inteligentes",
+        "description": "Agentes de IA autónomos que razonan, usan herramientas y APIs, y ejecutan tareas de varios pasos para automatizar flujos de trabajo completos.",
+        "projectType": "Agentes IA",
+        "recommendedModel": "Proyecto llave en mano"
+      }
+    ],
+    "seeAllCta": "Ver todos los servicios"
+  },
+  "nav": {
+    "name": "Luis De La Torre",
+    "role": "Senior Full-Stack & Mobile",
+    "links": [
+      {
+        "label": "Servicios",
+        "anchor": "services"
+      },
+      {
+        "label": "Experiencia",
+        "anchor": "experience"
+      },
+      {
+        "label": "Proyectos",
+        "anchor": "projects"
+      }
+    ],
+    "languageToggleLabel": "ES / en",
+    "cta": {
+      "label": "Trabajemos",
+      "anchor": "contact"
+    },
+    "dock": {
+      "projects": "Proyectos",
+      "contact": "Contacto",
+      "about": "Sobre mí",
+      "services": "Servicios",
+      "home": "Inicio",
+      "blog": "Blog"
+    }
+  },
+  "projects": {
+    "kicker": "destacados",
+    "heading": "Proyectos",
+    "items": [
+      {
+        "category": "FINTECH",
+        "title": "Banca móvil KMP",
+        "description": "App bancaria multiplataforma con OTP, biometría facial (FacePhi) y cumplimiento de políticas de las stores, con CI/CD en Azure.",
+        "tech": [
+          "Kotlin Multiplatform",
+          "iOS",
+          "Android",
+          "Azure"
+        ]
+      },
+      {
+        "category": "IoT",
+        "title": "Audax · Tuya IoT",
+        "description": "Integración de dispositivos Tuya en una app React Native con un microservicio en Go y pipelines de despliegue móvil optimizados.",
+        "tech": [
+          "React Native",
+          "Go",
+          "IoT",
+          "CI/CD"
+        ]
+      },
+      {
+        "category": "TELECOM",
+        "title": "Smartisp OLT",
+        "description": "Sistema de monitoreo de fibra óptica en tiempo real con dashboards en vivo, control remoto de equipos y telemetría de baja latencia.",
+        "tech": [
+          "React",
+          "SNMP",
+          "Microservicios"
+        ]
+      },
+      {
+        "category": "E-COMMERCE",
+        "title": "Plataforma Enterprise",
+        "description": "15+ microservicios escalables en AWS con integraciones de pagos y partners, soportando 1000+ usuarios concurrentes.",
+        "tech": [
+          "AWS",
+          "Terraform",
+          "Kubernetes",
+          "Node.js"
+        ]
+      },
+      {
+        "category": "AR/3D",
+        "title": "AR Commerce",
+        "description": "Experiencias de Realidad Aumentada con Unity que digitalizaron catálogos comerciales y triplicaron el engagement de clientes.",
+        "tech": [
+          "Unity",
+          "ARKit",
+          "ARCore"
+        ]
+      },
+      {
+        "category": "PLATAFORMA",
+        "title": "Este portfolio",
+        "description": "Sitio Expo + React Native Web con CMS propio en Firestore, consola de administración, reservas y analítica sin cookies sobre Cloud Functions, blog bilingüe con comentarios moderados y demo WebAR. Lo estás usando ahora mismo.",
+        "tech": [
+          "Expo",
+          "React Native Web",
+          "Firebase",
+          "Cloud Functions",
+          "WebAR"
+        ]
+      }
     ]
   }
 }
