@@ -11,7 +11,7 @@ import {
 import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, getDocs, orderBy, query, serverTimestamp, type DocumentData } from 'firebase/firestore';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { firebaseConfig } from './firebase-config';
-import type { BlogPost } from '@/content/posts-types';
+import type { BlogPost, PostComment } from '@/content/posts-types';
 
 // This is the ONLY module that imports the Firebase SDK at runtime. Everything
 // else reaches it via a single dynamic import('./firebase-client'), so the
@@ -115,4 +115,27 @@ export async function writePost(post: BlogPost): Promise<void> {
 export async function deletePostDoc(slug: string): Promise<void> {
   const { db } = services();
   await deleteDoc(doc(db, 'posts', slug));
+}
+
+export async function readPendingComments(): Promise<PostComment[]> {
+  const { db } = services();
+  const snap = await getDocs(query(collection(db, 'comments'), orderBy('createdAt', 'asc')));
+  return snap.docs
+    .map((d) => {
+      const data = d.data() as DocumentData;
+      const created = data.createdAt?.toDate ? (data.createdAt.toDate() as Date).toISOString().slice(0, 10) : '';
+      return { id: d.id, slug: data.slug as string, name: data.name as string, message: data.message as string, status: data.status as string, createdAt: created };
+    })
+    .filter((c) => c.status === 'pending')
+    .map(({ status: _s, ...rest }) => rest);
+}
+
+export async function updateCommentStatus(id: string, status: string): Promise<void> {
+  const { db } = services();
+  await updateDoc(doc(db, 'comments', id), { status });
+}
+
+export async function deleteCommentDoc(id: string): Promise<void> {
+  const { db } = services();
+  await deleteDoc(doc(db, 'comments', id));
 }

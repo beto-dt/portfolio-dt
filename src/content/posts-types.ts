@@ -11,3 +11,5 @@ export type BlogPost = {
 
 /** Shape of src/content/published/posts.json entries (always published). */
 export type PublishedPost = Omit<BlogPost, 'status'>;
+
+export type PostComment = { id: string; slug: string; name: string; message: string; createdAt: string };
