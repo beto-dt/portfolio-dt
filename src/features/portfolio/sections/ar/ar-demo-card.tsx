@@ -4,6 +4,7 @@ import { markSectionSeen } from '@/analytics/tracker';
 import type { ProjectItem } from '@/content/types';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
+import { Reveal } from '@/ui/reveal';
 import { ProjectCard } from '../projects/project-card';
 import { ArViewer } from './ar-viewer';
 
@@ -50,14 +51,18 @@ export function ArDemoCard() {
   return (
     <>
       <ProjectCard item={item} onPress={openDemo} cta={t.cta} />
-      <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-        <Pressable
-          onPress={() => setOpen(false)}
-          style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.72)', alignItems: 'center', justifyContent: 'center', padding: 16 }}
-        >
-          {/* Stop backdrop-close when pressing inside the dialog. */}
+      {/* animationType is left at 'none': RNW's animated Modal wrapper can leave
+          pointer-events:none stuck after the fade, freezing every press inside.
+          Reveal provides the fade instead. */}
+      <Modal visible={open} transparent onRequestClose={() => setOpen(false)}>
+        <Reveal slide={false} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+          {/* Backdrop as a SIBLING (not parent) of the dialog: nested Pressables
+              fight over the responder on react-native-web. */}
           <Pressable
-            onPress={(e) => e.stopPropagation()}
+            onPress={() => setOpen(false)}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.72)' }}
+          />
+          <View
             style={{
               width: '92%',
               maxWidth: 900,
@@ -82,8 +87,8 @@ export function ArDemoCard() {
               </Pressable>
             </View>
             <ArViewer />
-          </Pressable>
-        </Pressable>
+          </View>
+        </Reveal>
       </Modal>
     </>
   );
