@@ -32,11 +32,11 @@
     ],
     "headers": [
       {
-        "source": "/_expo/static/**",
+        "source": "**",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=31536000, immutable"
+            "value": "no-cache"
           }
         ]
       },
@@ -50,11 +50,11 @@
         ]
       },
       {
-        "source": "**/*.@(html|json|xml|txt)",
+        "source": "/_expo/static/**",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "public, max-age=31536000, immutable"
           }
         ]
       }
