@@ -1,20 +1,62 @@
 {
   "hosting": {
     "public": "dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "cleanUrls": true,
     "rewrites": [
       {
         "source": "/api/visit",
-        "function": { "functionId": "recordVisit", "region": "us-central1" }
+        "function": {
+          "functionId": "recordVisit",
+          "region": "us-central1"
+        }
       },
       {
         "source": "/api/booking",
-        "function": { "functionId": "submitBooking", "region": "us-central1" }
+        "function": {
+          "functionId": "submitBooking",
+          "region": "us-central1"
+        }
       },
       {
         "source": "/api/feedback",
-        "function": { "functionId": "postFeedback", "region": "us-central1" }
+        "function": {
+          "functionId": "postFeedback",
+          "region": "us-central1"
+        }
+      }
+    ],
+    "headers": [
+      {
+        "source": "/_expo/static/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico|woff2)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(html|json|xml|txt)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
       }
     ]
   },
@@ -23,6 +65,8 @@
   },
   "functions": {
     "source": "functions",
-    "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run build"
+    ]
   }
 }
