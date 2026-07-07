@@ -6,9 +6,10 @@ import { GlowCard } from '@/ui/glow-card';
 const chipTransition = Platform.OS === 'web' ? ({ transitionProperty: 'background-color', transitionDuration: '180ms' } as object) : null;
 const tagTransition = Platform.OS === 'web' ? ({ transitionProperty: 'border-color, color', transitionDuration: '180ms' } as object) : null;
 
-export function ProjectCard({ item }: { item: ProjectItem }) {
+export function ProjectCard({ item, onPress, cta }: { item: ProjectItem; onPress?: () => void; cta?: string }) {
   return (
     <GlowCard
+      onPress={onPress}
       style={{
         width: '100%',
         flexGrow: 1,
@@ -67,6 +68,10 @@ export function ProjectCard({ item }: { item: ProjectItem }) {
               </View>
             ))}
           </View>
+
+          {cta ? (
+            <Text style={{ fontFamily: fonts.mono, fontSize: 12, color: colors.accent, marginTop: 14 }}>{cta}</Text>
+          ) : null}
         </>
       )}
     </GlowCard>
