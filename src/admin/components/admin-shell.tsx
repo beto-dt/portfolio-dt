@@ -7,7 +7,7 @@ import { HoverLink } from '@/ui/hover-link';
 
 type HoverState = PressableStateCallbackType & { hovered?: boolean };
 
-export type AdminView = 'metrics' | 'bookings' | 'editor';
+export type AdminView = 'metrics' | 'bookings' | 'posts' | 'editor';
 
 const webPress = Platform.OS === 'web'
   ? ({ cursor: 'pointer', transitionProperty: 'background-color, border-color, opacity', transitionDuration: '150ms' } as object)
@@ -16,6 +16,7 @@ const webPress = Platform.OS === 'web'
 const NAV: { key: AdminView; glyph: string; label: string }[] = [
   { key: 'metrics', glyph: '📊', label: 'Métricas' },
   { key: 'bookings', glyph: '💬', label: 'Solicitudes' },
+  { key: 'posts', glyph: '📝', label: 'Blog' },
   { key: 'editor', glyph: '✎', label: 'Editor' },
 ];
 

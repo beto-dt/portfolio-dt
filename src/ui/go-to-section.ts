@@ -15,6 +15,7 @@ const ROUTE_OF: Record<string, string> = {
   testimonials: '/proyectos',
   formation: '/proyectos',
   contact: '/contacto',
+  blog: '/blog',
 };
 // Same-route scroll targets that differ from the anchor name.
 const SCROLL_ID: Record<string, string> = { hero: 'top' };

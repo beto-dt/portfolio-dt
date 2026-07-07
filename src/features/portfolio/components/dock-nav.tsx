@@ -15,7 +15,7 @@ const dockWebNarrow = Platform.OS === 'web'
   : null;
 const tabWeb = Platform.OS === 'web' ? ({ cursor: 'pointer', transitionProperty: 'background-color', transitionDuration: '180ms' } as object) : null;
 
-type IconName = 'home' | 'services' | 'about' | 'projects' | 'contact';
+type IconName = 'home' | 'services' | 'about' | 'projects' | 'contact' | 'blog';
 
 // Icon paths lifted verbatim from Portfolio v2.dc.html (21×21, stroke 1.9).
 function DockIcon({ name, color }: { name: IconName; color: string }) {
@@ -49,6 +49,12 @@ function DockIcon({ name, color }: { name: IconName; color: string }) {
         <>
           <Rect x={3} y={5} width={18} height={14} rx={2} {...common} />
           <Path d="m3.5 7 8.5 6 8.5-6" {...common} />
+        </>
+      ) : null}
+      {name === 'blog' ? (
+        <>
+          <Path d="M12 20h9" {...common} />
+          <Path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" {...common} />
         </>
       ) : null}
     </Svg>
@@ -90,6 +96,7 @@ export function DockNav() {
     { icon: 'services', route: '/servicios', label: dock.services },
     { icon: 'about', route: '/sobre-mi', label: dock.about },
     { icon: 'projects', route: '/proyectos', label: dock.projects },
+    { icon: 'blog', route: '/blog', label: dock.blog },
     { icon: 'contact', route: '/contacto', label: dock.contact },
   ];
 

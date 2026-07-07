@@ -18,6 +18,7 @@ export function NavForm({ value, onChange }: { value: NavContent; onChange: (v: 
       <Field label="dock.about" value={value.dock.about} onChangeText={(t) => set('dock', { ...value.dock, about: t })} />
       <Field label="dock.projects" value={value.dock.projects} onChangeText={(t) => set('dock', { ...value.dock, projects: t })} />
       <Field label="dock.contact" value={value.dock.contact} onChangeText={(t) => set('dock', { ...value.dock, contact: t })} />
+      <Field label="dock.blog" value={value.dock.blog} onChangeText={(t) => set('dock', { ...value.dock, blog: t })} />
       <Label>links</Label>
       <ListEditor
         items={value.links}
