@@ -1,17 +1,15 @@
-import { Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import type { ServiceItem } from '@/content/types';
 import { colors, fonts, radii } from '@/theme/tokens';
+import { ArrowLink } from '@/ui/arrow-link';
 import { GlowCard } from '@/ui/glow-card';
 import { goToSection } from '@/ui/go-to-section';
 import { setBookingIntent } from '../contact/booking-intent';
 
-type HoverState = PressableStateCallbackType & { hovered?: boolean };
 
 // Web-only smooth transition for the tag chip bg + index color on hover.
 const chipTransition = Platform.OS === 'web' ? ({ transitionProperty: 'background-color', transitionDuration: '180ms' } as object) : null;
 const indexTransition = Platform.OS === 'web' ? ({ transitionProperty: 'color', transitionDuration: '180ms' } as object) : null;
-const ctaTransition = Platform.OS === 'web' ? ({ cursor: 'pointer', transitionProperty: 'color', transitionDuration: '160ms' } as object) : null;
-const arrowTransition = Platform.OS === 'web' ? ({ transitionProperty: 'transform', transitionDuration: '160ms' } as object) : null;
 
 export function ServiceCard({ item, requestCta }: { item: ServiceItem; requestCta: string }) {
   return (
@@ -44,24 +42,13 @@ export function ServiceCard({ item, requestCta }: { item: ServiceItem; requestCt
           </Text>
           {/* marginTop:'auto' pins the CTA to the bottom of the card */}
           <View style={{ marginTop: 'auto', paddingTop: 18 }}>
-            <Pressable
+            <ArrowLink
+              label={requestCta}
               onPress={() => {
                 setBookingIntent({ projectType: item.projectType, model: item.recommendedModel });
                 goToSection('contact');
               }}
-              style={{ alignSelf: 'flex-start' }}
-            >
-              {({ hovered: ctaHovered }: HoverState) => (
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                  <Text style={[{ fontFamily: fonts.mono, fontSize: 12.5, color: ctaHovered ? '#eeed6b' : colors.accent }, ctaTransition as object]}>
-                    {requestCta}
-                  </Text>
-                  <Text style={[{ fontFamily: fonts.mono, fontSize: 12.5, color: ctaHovered ? '#eeed6b' : colors.accent, transform: [{ translateX: ctaHovered ? 3 : 0 }] }, arrowTransition as object]}>
-                    →
-                  </Text>
-                </View>
-              )}
-            </Pressable>
+            />
           </View>
         </>
       )}

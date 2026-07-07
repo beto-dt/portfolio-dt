@@ -1,19 +1,18 @@
-import { Platform, Pressable, Text, View, type PressableStateCallbackType } from 'react-native';
+import { Text, View } from 'react-native';
 import { router } from 'expo-router';
 import postsJson from '@/content/published/posts.json';
 import { Container } from '../../components/container';
 import { SectionHeading } from '../../components/section-heading';
 import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts, radii } from '@/theme/tokens';
+import { ArrowLink } from '@/ui/arrow-link';
 import { GlowCard } from '@/ui/glow-card';
+import { TagChips } from '@/ui/tag-chips';
 import { Reveal } from '@/ui/reveal';
 import type { PublishedPost } from '@/content/posts-types';
 
 const posts = postsJson as PublishedPost[];
 
-type HoverState = PressableStateCallbackType & { hovered?: boolean };
-const ctaTransition = Platform.OS === 'web' ? ({ cursor: 'pointer', transitionProperty: 'color', transitionDuration: '160ms' } as object) : null;
-const arrowTransition = Platform.OS === 'web' ? ({ transitionProperty: 'transform', transitionDuration: '160ms' } as object) : null;
 
 function PostCard({ post, locale, readCta }: { post: PublishedPost; locale: 'es' | 'en'; readCta: string }) {
   const t = locale === 'es' ? post.es : post.en;
@@ -24,23 +23,12 @@ function PostCard({ post, locale, readCta }: { post: PublishedPost; locale: 'es'
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
             <Text style={{ fontFamily: fonts.mono, fontSize: 12, color: colors.accent }}>{post.publishedAt}</Text>
-            {post.tags.map((tag) => (
-              <View key={tag} style={{ backgroundColor: 'rgba(228,227,87,0.12)', borderRadius: 6, paddingHorizontal: 9, paddingVertical: 4 }}>
-                <Text style={{ fontFamily: fonts.mono, fontSize: 10.5, letterSpacing: 0.5, color: colors.accent }}>{tag}</Text>
-              </View>
-            ))}
+            <TagChips tags={post.tags} />
           </View>
           <Text style={{ fontFamily: fonts.display, fontSize: 20, letterSpacing: -0.2, color: colors.text, marginBottom: 9 }}>{t.title}</Text>
           <Text style={{ fontSize: 13.5, lineHeight: 22, color: colors.textDim }}>{t.excerpt}</Text>
           <View style={{ marginTop: 'auto', paddingTop: 18 }}>
-            <Pressable onPress={open} style={{ alignSelf: 'flex-start' }}>
-              {({ hovered }: HoverState) => (
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                  <Text style={[{ fontFamily: fonts.mono, fontSize: 12.5, color: hovered ? '#eeed6b' : colors.accent }, ctaTransition as object]}>{readCta}</Text>
-                  <Text style={[{ fontFamily: fonts.mono, fontSize: 12.5, color: hovered ? '#eeed6b' : colors.accent, transform: [{ translateX: hovered ? 3 : 0 }] }, arrowTransition as object]}>→</Text>
-                </View>
-              )}
-            </Pressable>
+            <ArrowLink label={readCta} onPress={open} />
           </View>
         </>
       )}

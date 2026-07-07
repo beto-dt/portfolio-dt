@@ -6,6 +6,7 @@ import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
 import { HoverLink } from '@/ui/hover-link';
 import { Markdown } from '@/ui/markdown';
+import { TagChips } from '@/ui/tag-chips';
 import type { PublishedPost } from '@/content/posts-types';
 
 export function BlogPostPage({ post }: { post: PublishedPost }) {
@@ -22,11 +23,7 @@ export function BlogPostPage({ post }: { post: PublishedPost }) {
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
             <Text style={{ fontFamily: fonts.mono, fontSize: 12.5, color: colors.accent }}>{post.publishedAt}</Text>
-            {post.tags.map((tag) => (
-              <View key={tag} style={{ backgroundColor: 'rgba(228,227,87,0.12)', borderRadius: 6, paddingHorizontal: 9, paddingVertical: 4 }}>
-                <Text style={{ fontFamily: fonts.mono, fontSize: 10.5, letterSpacing: 0.5, color: colors.accent }}>{tag}</Text>
-              </View>
-            ))}
+            <TagChips tags={post.tags} />
           </View>
           <Text style={{ fontFamily: fonts.display, fontSize: 34, letterSpacing: -0.5, color: colors.text }}>{t.title}</Text>
           <Markdown source={t.content} />
