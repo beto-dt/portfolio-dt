@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Platform, Text, View, useWindowDimensions } from 'react-native';
 import { unstable_createElement } from 'react-native-web';
 import { useI18n } from '@/i18n/i18n-provider';
@@ -14,7 +14,6 @@ const T = {
     support:
       'Gira la torre y hazle zoom. Desde tu móvil, toca «Ver en AR» para ponerla en tu escritorio — sin instalar nada. Así se siente el trabajo de Realidad Aumentada que construyo.',
     arButton: 'Ver en AR ↗',
-    fallback: 'Tu navegador no soporta el visor 3D.',
   },
   en: {
     kicker: 'ar demo',
@@ -22,7 +21,6 @@ const T = {
     support:
       'Rotate the rook and zoom in. On your phone, tap “View in AR” to place it on your desk — nothing to install. This is what the Augmented Reality work I build feels like.',
     arButton: 'View in AR ↗',
-    fallback: 'Your browser does not support the 3D viewer.',
   },
 };
 
@@ -41,9 +39,32 @@ export function ArShowcase() {
   const { locale } = useI18n();
   const { width } = useWindowDimensions();
   const t = T[locale];
+  const hostRef = useRef<View>(null);
+  const [modelReady, setModelReady] = useState(false);
 
   useEffect(() => {
     ensureModelViewerScript();
+  }, []);
+
+  // Hide the static placeholder once the model renders (the viewer background
+  // is transparent, so anything behind it stays visible until then). Polling
+  // the element's `loaded` flag is more reliable than a React ref here:
+  // unstable_createElement does not forward refs to the custom element.
+  useEffect(() => {
+    const host = hostRef.current as unknown as HTMLElement | null;
+    if (!host || typeof host.querySelector !== 'function') return;
+    let ticks = 0;
+    const timer = setInterval(() => {
+      const el = host.querySelector('model-viewer') as unknown as { loaded?: boolean } | null;
+      ticks += 1;
+      if (el?.loaded) {
+        setModelReady(true);
+        clearInterval(timer);
+      } else if (ticks > 120) {
+        clearInterval(timer); // never loaded — keep the static placeholder
+      }
+    }, 250);
+    return () => clearInterval(timer);
   }, []);
 
   if (Platform.OS !== 'web') return null;
@@ -61,7 +82,7 @@ export function ArShowcase() {
       'auto-rotate-delay': '0',
       'shadow-intensity': '1',
       'touch-action': 'pan-y',
-      loading: 'lazy',
+      loading: 'eager',
       style: { width: '100%', height: '100%', '--progress-bar-color': 'rgba(228,227,87,0.85)' },
     },
     unstable_createElement(
@@ -97,6 +118,7 @@ export function ArShowcase() {
       </Reveal>
       <Reveal delay={120}>
         <View
+          ref={hostRef}
           style={{
             borderWidth: 1,
             borderColor: colors.border,
@@ -106,10 +128,9 @@ export function ArShowcase() {
             height: width < 640 ? 380 : 460,
           }}
         >
-          {/* Static fallback behind the viewer: visible only if the element never defines/loads. */}
-          <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+          {/* Static placeholder behind the viewer; hidden once the model renders. */}
+          <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center', opacity: modelReady ? 0 : 1 }}>
             <Text style={{ fontSize: 64, color: colors.accent }}>♜</Text>
-            <Text style={{ fontSize: 13, color: colors.textFaint }}>{t.fallback}</Text>
           </View>
           <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>{viewer}</View>
         </View>
