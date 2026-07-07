@@ -139,6 +139,7 @@ export const es: PortfolioContent = {
       { category: 'TELECOM', title: 'Smartisp OLT', description: 'Sistema de monitoreo de fibra óptica en tiempo real con dashboards en vivo, control remoto de equipos y telemetría de baja latencia.', tech: ['React', 'SNMP', 'Microservicios'] },
       { category: 'E-COMMERCE', title: 'Plataforma Enterprise', description: '15+ microservicios escalables en AWS con integraciones de pagos y partners, soportando 1000+ usuarios concurrentes.', tech: ['AWS', 'Terraform', 'Kubernetes', 'Node.js'] },
       { category: 'AR/3D', title: 'AR Commerce', description: 'Experiencias de Realidad Aumentada con Unity que digitalizaron catálogos comerciales y triplicaron el engagement de clientes.', tech: ['Unity', 'ARKit', 'ARCore'] },
+      { category: 'PLATAFORMA', title: 'Este portfolio', description: 'Sitio Expo + React Native Web con CMS propio en Firestore, consola de administración, reservas y analítica sin cookies sobre Cloud Functions, blog bilingüe con comentarios moderados y demo WebAR. Lo estás usando ahora mismo.', tech: ['Expo', 'React Native Web', 'Firebase', 'Cloud Functions', 'WebAR'] },
     ],
   },
   testimonials: {
