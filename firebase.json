@@ -41,7 +41,16 @@
         ]
       },
       {
-        "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico|woff2)",
+        "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico|woff2|glb|usdz)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "/vendor/**",
         "headers": [
           {
             "key": "Cache-Control",
