@@ -6,6 +6,7 @@ import { useI18n } from '@/i18n/i18n-provider';
 import { colors, fonts } from '@/theme/tokens';
 import { HoverLink } from '@/ui/hover-link';
 import { Markdown } from '@/ui/markdown';
+import { PostFeedback } from '../sections/blog/post-feedback';
 import { TagChips } from '@/ui/tag-chips';
 import type { PublishedPost } from '@/content/posts-types';
 
@@ -27,6 +28,7 @@ export function BlogPostPage({ post }: { post: PublishedPost }) {
           </View>
           <Text style={{ fontFamily: fonts.display, fontSize: 34, letterSpacing: -0.5, color: colors.text }}>{t.title}</Text>
           <Markdown source={t.content} />
+          <PostFeedback slug={post.slug} />
           <View style={{ marginTop: 24, alignSelf: 'flex-start' }}>
             <HoverLink label={back} onPress={() => router.push('/blog' as never)} color={colors.textFaint} hoverColor={colors.accent} />
           </View>
