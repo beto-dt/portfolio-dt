@@ -30,6 +30,21 @@ service cloud.firestore {
         && request.auth.token.email_verified == true
         && request.auth.token.email == 'luis.atorred24@gmail.com';
     }
+    // Feedback aggregates/votes are written only by the postFeedback function;
+    // the owner can read them for auditing.
+    match /feedback/{document=**} {
+      allow read: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'luis.atorred24@gmail.com';
+      allow write: if false;
+    }
+    // Comments are created by the function; the owner moderates them.
+    match /comments/{doc} {
+      allow read, update, delete: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'luis.atorred24@gmail.com';
+      allow create: if false;
+    }
     match /{document=**} {
       allow read, write: if false;
     }
