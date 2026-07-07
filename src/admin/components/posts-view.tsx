@@ -6,7 +6,7 @@ import { HoverLink } from '@/ui/hover-link';
 import { Field, Label } from './field';
 import { StringListEditor } from './string-list-editor';
 import { AccentButton, ViewHeader } from './admin-shell';
-import { listPosts, savePost, deletePost, type BlogPost } from '../posts-repo';
+import { listPosts, savePost, deletePost, listPendingComments, approveComment, deleteComment, type BlogPost, type PostComment } from '../posts-repo';
 
 const EMPTY: BlogPost = { slug: '', status: 'draft', publishedAt: '', tags: [], es: { title: '', excerpt: '', content: '' }, en: { title: '', excerpt: '', content: '' } };
 
@@ -33,11 +33,15 @@ export function PostsView() {
   const [slugTouched, setSlugTouched] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [pending, setPending] = useState<PostComment[] | null>(null);
 
   const reload = () => {
     setPosts(null);
     listPosts()
       .then(setPosts)
+      .catch((e) => setError(e instanceof Error ? e.message : String(e)));
+    listPendingComments()
+      .then(setPending)
       .catch((e) => setError(e instanceof Error ? e.message : String(e)));
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -98,6 +102,50 @@ export function PostsView() {
         <AccentButton label="+ Nuevo post" onPress={() => { setEditing({ ...EMPTY, publishedAt: today() }); setIsNew(true); setSlugTouched(false); setStatus(null); }} />
       </View>
       {error ? <Text style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</Text> : null}
+      {pending && pending.length > 0 ? (
+        <View style={{ gap: 12 }}>
+          <Text style={{ fontFamily: fonts.mono, fontSize: 11, letterSpacing: 1, color: colors.accent }}>COMENTARIOS PENDIENTES ({pending.length})</Text>
+          {pending.map((c) => (
+            <View key={c.id} style={{ gap: 8, padding: 16, borderWidth: 1, borderColor: 'rgba(228,227,87,0.45)', borderRadius: radii.lg, backgroundColor: colors.surface }}>
+              <Text style={{ fontFamily: fonts.mono, fontSize: 11, color: colors.textFaint }}>
+                {c.name} · /blog/{c.slug} · {c.createdAt}
+              </Text>
+              <Text style={{ fontSize: 13.5, lineHeight: 20, color: colors.textMuted }}>{c.message}</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                <AccentButton
+                  label="Aprobar"
+                  onPress={async () => {
+                    try {
+                      await approveComment(c.id);
+                      setPending((p) => p?.filter((x) => x.id !== c.id) ?? p);
+                    } catch (e) {
+                      setError(e instanceof Error ? e.message : String(e));
+                    }
+                  }}
+                />
+                <HoverLink
+                  label={confirmDelete === `c:${c.id}` ? '¿Seguro?' : 'Eliminar'}
+                  onPress={async () => {
+                    if (confirmDelete !== `c:${c.id}`) {
+                      setConfirmDelete(`c:${c.id}`);
+                      return;
+                    }
+                    try {
+                      await deleteComment(c.id);
+                      setConfirmDelete(null);
+                      setPending((p) => p?.filter((x) => x.id !== c.id) ?? p);
+                    } catch (e) {
+                      setError(e instanceof Error ? e.message : String(e));
+                    }
+                  }}
+                  color={confirmDelete === `c:${c.id}` ? '#ff6b6b' : colors.textFaint}
+                  hoverColor="#ff6b6b"
+                />
+              </View>
+            </View>
+          ))}
+        </View>
+      ) : null}
       {!posts ? (
         <ActivityIndicator color={colors.accent} />
       ) : posts.length === 0 ? (
