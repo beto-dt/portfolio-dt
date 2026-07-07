@@ -2,24 +2,6 @@
   {
     "publishedAt": "2026-07-06",
     "tags": [
-      "portfolio",
-      "detrás de cámaras"
-    ],
-    "es": {
-      "title": "Bienvenido al blog",
-      "excerpt": "Estreno este espacio para compartir notas de ingeniería: arquitectura, proyectos reales y experimentos con IA.",
-      "content": "Después de varias semanas construyendo este sitio, lo estreno con un espacio para escribir. Aquí voy a compartir notas de ingeniería: decisiones de arquitectura, aprendizajes de proyectos reales y experimentos con IA.\n\n## Qué vas a encontrar\n\n- Casos reales de proyectos (web, móvil, AR y microservicios)\n- Decisiones técnicas y sus *trade-offs*, sin humo\n- Experimentos con **agentes de IA** y automatización\n\n## Cómo está hecho este blog\n\nEl sitio completo es Expo + React Native Web con export estático. Los posts viven en Firestore, se editan desde un admin propio y cada publicación genera una página estática con su propio SEO:\n\n```\nadmin → Firestore → Publicar → build estático → /blog/mi-post\n```\n\n> ¿Tienes un proyecto en mente? En [contacto](https://luisdelatorre.dev/contacto) puedes agendar una llamada gratuita de 30 minutos.\n\nGracias por leer — nos vemos en el próximo post."
-    },
-    "en": {
-      "title": "Welcome to the blog",
-      "excerpt": "Opening this space to share engineering notes: architecture, real projects and AI experiments.",
-      "content": "After several weeks building this site, I am opening it with a space to write. Here I will share engineering notes: architecture decisions, lessons from real projects and AI experiments.\n\n## What you will find\n\n- Real project cases (web, mobile, AR and microservices)\n- Technical decisions and their *trade-offs*, no fluff\n- Experiments with **AI agents** and automation\n\n## How this blog is built\n\nThe whole site is Expo + React Native Web with a static export. Posts live in Firestore, are edited from a custom admin, and each publish generates a static page with its own SEO:\n\n```\nadmin → Firestore → Publish → static build → /blog/my-post\n```\n\n> Got a project in mind? You can [book a free 30-minute call](https://luisdelatorre.dev/contacto).\n\nThanks for reading — see you in the next post."
-    },
-    "slug": "bienvenido-al-blog"
-  },
-  {
-    "publishedAt": "2026-07-06",
-    "tags": [
       "podcast",
       "tech lead",
       "carrera"
