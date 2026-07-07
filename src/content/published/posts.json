@@ -2,19 +2,20 @@
   {
     "publishedAt": "2026-07-06",
     "tags": [
-      "portfolio",
-      "detrás de cámaras"
+      "podcast",
+      "tech lead",
+      "carrera"
     ],
     "es": {
-      "title": "Bienvenido al blog",
-      "excerpt": "Estreno este espacio para compartir notas de ingeniería: arquitectura, proyectos reales y experimentos con IA.",
-      "content": "Después de varias semanas construyendo este sitio, lo estreno con un espacio para escribir. Aquí voy a compartir notas de ingeniería: decisiones de arquitectura, aprendizajes de proyectos reales y experimentos con IA.\n\n## Qué vas a encontrar\n\n- Casos reales de proyectos (web, móvil, AR y microservicios)\n- Decisiones técnicas y sus *trade-offs*, sin humo\n- Experimentos con **agentes de IA** y automatización\n\n## Cómo está hecho este blog\n\nEl sitio completo es Expo + React Native Web con export estático. Los posts viven en Firestore, se editan desde un admin propio y cada publicación genera una página estática con su propio SEO:\n\n```\nadmin → Firestore → Publicar → build estático → /blog/mi-post\n```\n\n> ¿Tienes un proyecto en mente? En [contacto](https://luisdelatorre.dev/contacto) puedes agendar una llamada gratuita de 30 minutos.\n\nGracias por leer — nos vemos en el próximo post."
+      "title": "De Developer a Tech Lead: mi conversación en DevLokos",
+      "excerpt": "Me invitaron al podcast DevLokos a hablar sin filtros de la transición de Developer a Tech Lead — ese camino entre el impacto y la desgracia que nadie te cuenta completo.",
+      "content": "Hace unos meses me invitaron a **DevLokos** (episodio #089, temporada 2) a conversar con Kevin Morales sobre algo que viví en carne propia: la transición de Developer a Tech Lead.\n\nEl título del episodio no es casualidad: *\"La evolución de Developer a Tech Lead entre el impacto y la desgracia\"*. Porque ese camino tiene las dos caras, y normalmente solo te venden una.\n\n## De qué hablamos\n\n- El momento en que te ofrecen el rol — y por qué casi nadie está preparado\n- Lo que pierdes: horas de código, la zona de confort técnica\n- Lo que ganas: impacto multiplicado a través del equipo\n- Los errores que cometí al principio (y cómo los corregiría hoy)\n- Cómo mantener el filo técnico mientras lideras personas\n\n## Lo que me dejó la conversación\n\nHablar de esto en voz alta me ordenó ideas que llevaba años masticando. La principal: **ser Tech Lead no es un ascenso, es un cambio de profesión** — y tratarlo como ascenso es la receta de la \"desgracia\" del título.\n\n> Si estás frente a esa decisión ahora mismo, espero que el episodio te ahorre algunos golpes.\n\n🎧 Mira el episodio completo en [YouTube](https://www.youtube.com/watch?v=u-sXWrQtZVQ) — también disponible en Spotify y Apple Podcasts. Y [aquí el post en LinkedIn](https://www.linkedin.com/posts/luis-alberto-de-la-torre-duran-752569141_me-invitaron-a-devlokos-para-hablar-activity-7410543138341138432-Cc_n) con todos los detalles. Gracias a Kevin y al equipo de DevLokos por el espacio 🙌"
     },
     "en": {
-      "title": "Welcome to the blog",
-      "excerpt": "Opening this space to share engineering notes: architecture, real projects and AI experiments.",
-      "content": "After several weeks building this site, I am opening it with a space to write. Here I will share engineering notes: architecture decisions, lessons from real projects and AI experiments.\n\n## What you will find\n\n- Real project cases (web, mobile, AR and microservices)\n- Technical decisions and their *trade-offs*, no fluff\n- Experiments with **AI agents** and automation\n\n## How this blog is built\n\nThe whole site is Expo + React Native Web with a static export. Posts live in Firestore, are edited from a custom admin, and each publish generates a static page with its own SEO:\n\n```\nadmin → Firestore → Publish → static build → /blog/my-post\n```\n\n> Got a project in mind? You can [book a free 30-minute call](https://luisdelatorre.dev/contacto).\n\nThanks for reading — see you in the next post."
+      "title": "From Developer to Tech Lead: my conversation on DevLokos",
+      "excerpt": "I was invited to the DevLokos podcast for an unfiltered talk about the Developer-to-Tech-Lead transition — the path between impact and misery nobody fully tells you about.",
+      "content": "A few months ago I was invited to **DevLokos** (episode #089, season 2) to talk with Kevin Morales about something I lived first-hand: the transition from Developer to Tech Lead.\n\nThe episode title is no accident: *\"The evolution from Developer to Tech Lead between impact and misery\"*. That path has both faces, and you are usually sold only one.\n\n## What we talked about\n\n- The moment you are offered the role — and why almost nobody is ready\n- What you lose: coding hours, the technical comfort zone\n- What you gain: impact multiplied through the team\n- The mistakes I made early on (and how I would fix them today)\n- How to keep your technical edge while leading people\n\n## What the conversation left me\n\nTalking about this out loud organized ideas I had been chewing on for years. The main one: **being a Tech Lead is not a promotion, it is a career change** — and treating it as a promotion is the recipe for the \"misery\" in the title.\n\n> If you are facing that decision right now, I hope the episode saves you a few bruises.\n\n🎧 Watch the full episode on [YouTube](https://www.youtube.com/watch?v=u-sXWrQtZVQ) — also on Spotify and Apple Podcasts. And [here is the LinkedIn post](https://www.linkedin.com/posts/luis-alberto-de-la-torre-duran-752569141_me-invitaron-a-devlokos-para-hablar-activity-7410543138341138432-Cc_n) with all the details. Thanks to Kevin and the DevLokos crew for having me 🙌"
     },
-    "slug": "bienvenido-al-blog"
+    "slug": "de-developer-a-tech-lead-devlokos"
   }
 ]
