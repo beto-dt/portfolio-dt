@@ -45,6 +45,14 @@ service cloud.firestore {
         && request.auth.token.email == 'luis.atorred24@gmail.com';
       allow create: if false;
     }
+    // Chat usage counters are written only by the chatAgent function; the
+    // owner can read them to monitor the demo.
+    match /chatUsage/{doc} {
+      allow read: if request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'luis.atorred24@gmail.com';
+      allow write: if false;
+    }
     match /{document=**} {
       allow read, write: if false;
     }

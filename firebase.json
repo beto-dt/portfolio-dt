@@ -28,6 +28,13 @@
           "functionId": "postFeedback",
           "region": "us-central1"
         }
+      },
+      {
+        "source": "/api/chat",
+        "function": {
+          "functionId": "chatAgent",
+          "region": "us-central1"
+        }
       }
     ],
     "headers": [
