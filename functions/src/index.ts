@@ -4,6 +4,7 @@ import { initializeApp, getApps } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { createHash } from 'node:crypto';
 import { ADMIN_EMAIL, sendAdminEmail } from './mailer';
+import { CapError, askGemini, buildSystemPrompt, type ChatMessage } from './agent';
 
 if (!getApps().length) initializeApp();
 const db = getFirestore();
@@ -48,6 +49,7 @@ export const publish = onCall(
 const SECTION_KEYS = new Set([
   'hero',
   'ar',
+  'ai',
   'services',
   'process',
   'impact',
@@ -360,6 +362,82 @@ export const postFeedback = onRequest(
     } catch (error) {
       console.error('postFeedback failed', error);
       res.status(500).json({ error: 'internal' });
+    }
+  },
+);
+
+// ---------------------------------------------------------------------------
+// AI sales agent (demo): hard-capped chat behind /api/chat.
+// ---------------------------------------------------------------------------
+
+const GEMINI_API_KEY = defineSecret('GEMINI_API_KEY');
+
+const CHAT_USER_DAILY_LIMIT = 10;
+const CHAT_GLOBAL_DAILY_LIMIT = 300;
+const CHAT_MAX_INPUT_CHARS = 500;
+const CHAT_MAX_TURNS = 12;
+
+function chatIpHash(forwarded: string | undefined, fallbackIp: string | undefined): string {
+  const ip = forwarded?.split(',')[0]?.trim() || fallbackIp || 'unknown';
+  return createHash('sha256').update(`${ip}|chat|${FEEDBACK_SALT}`).digest('hex');
+}
+
+export const chatAgent = onRequest(
+  { region: 'us-central1', cors: true, secrets: [GEMINI_API_KEY] },
+  async (req, res) => {
+    if (req.method !== 'POST') {
+      res.status(405).json({ error: 'method_not_allowed' });
+      return;
+    }
+    const { locale, messages } = (req.body ?? {}) as { locale?: unknown; messages?: unknown };
+    const loc = locale === 'en' ? 'en' : locale === 'es' ? 'es' : null;
+    if (!loc || !Array.isArray(messages) || messages.length === 0) {
+      res.status(400).json({ error: 'bad_request' });
+      return;
+    }
+    const turns: ChatMessage[] = [];
+    for (const m of messages.slice(-CHAT_MAX_TURNS)) {
+      const role = (m as { role?: unknown })?.role;
+      const text = (m as { text?: unknown })?.text;
+      if ((role !== 'user' && role !== 'model') || typeof text !== 'string' || !text.trim()) {
+        res.status(400).json({ error: 'bad_request' });
+        return;
+      }
+      turns.push({ role, text: text.trim().slice(0, 2000) });
+    }
+    const last = turns[turns.length - 1];
+    if (last.role !== 'user' || last.text.length > CHAT_MAX_INPUT_CHARS) {
+      res.status(400).json({ error: 'bad_request' });
+      return;
+    }
+
+    const ipHash = chatIpHash(req.headers['x-forwarded-for'] as string | undefined, req.ip);
+    const usageRef = db.doc(`chatUsage/${new Date().toISOString().slice(0, 10)}`);
+    try {
+      const remaining = await db.runTransaction(async (tx) => {
+        const snap = await tx.get(usageRef);
+        const total = (snap.data()?.total as number | undefined) ?? 0;
+        const mine = ((snap.data()?.byIp as Record<string, number> | undefined) ?? {})[ipHash] ?? 0;
+        if (total >= CHAT_GLOBAL_DAILY_LIMIT) throw new CapError('global_limit');
+        if (mine >= CHAT_USER_DAILY_LIMIT) throw new CapError('user_limit');
+        tx.set(
+          usageRef,
+          { total: FieldValue.increment(1), byIp: { [ipHash]: FieldValue.increment(1) } },
+          { merge: true },
+        );
+        return CHAT_USER_DAILY_LIMIT - mine - 1;
+      });
+
+      const system = await buildSystemPrompt(loc);
+      const reply = await askGemini(GEMINI_API_KEY.value(), system, turns);
+      res.json({ reply, remaining });
+    } catch (e) {
+      if (e instanceof CapError) {
+        res.status(429).json({ error: e.code });
+        return;
+      }
+      console.error('chatAgent error', e);
+      res.status(503).json({ error: 'unavailable' });
     }
   },
 );
