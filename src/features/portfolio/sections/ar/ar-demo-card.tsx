@@ -1,9 +1,6 @@
-import { useState } from 'react';
-import { markSectionSeen } from '@/analytics/tracker';
 import type { ProjectItem } from '@/content/types';
 import { useI18n } from '@/i18n/i18n-provider';
-import { DemoModal } from '../../components/demo-modal';
-import { ProjectCard } from '../projects/project-card';
+import { DemoProjectCard } from '../../components/demo-project-card';
 import { ArViewer } from './ar-viewer';
 
 const T = {
@@ -32,22 +29,12 @@ const TECH = ['WebAR', '3D', 'model-viewer', 'Scene Viewer', 'Quick Look'];
 /** WebAR card of the projects grid: opens the viewer in the shared demo modal. */
 export function ArDemoCard() {
   const { locale } = useI18n();
-  const [open, setOpen] = useState(false);
   const t = T[locale];
-
   const item: ProjectItem = { category: t.category, title: t.title, description: t.description, tech: TECH };
 
-  const openDemo = () => {
-    setOpen(true);
-    markSectionSeen('ar');
-  };
-
   return (
-    <>
-      <ProjectCard item={item} onPress={openDemo} cta={t.cta} />
-      <DemoModal visible={open} title={t.modalTitle} closeLabel={t.close} onClose={() => setOpen(false)}>
-        <ArViewer />
-      </DemoModal>
-    </>
+    <DemoProjectCard item={item} cta={t.cta} modalTitle={t.modalTitle} closeLabel={t.close} analyticsKey="ar">
+      {() => <ArViewer />}
+    </DemoProjectCard>
   );
 }
