@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Platform, Text, View } from 'react-native';
 import type { ProjectItem } from '@/content/types';
 import { colors, fonts, radii } from '@/theme/tokens';
@@ -6,7 +7,7 @@ import { GlowCard } from '@/ui/glow-card';
 const chipTransition = Platform.OS === 'web' ? ({ transitionProperty: 'background-color', transitionDuration: '180ms' } as object) : null;
 const tagTransition = Platform.OS === 'web' ? ({ transitionProperty: 'border-color, color', transitionDuration: '180ms' } as object) : null;
 
-export function ProjectCard({ item, onPress, cta }: { item: ProjectItem; onPress?: () => void; cta?: string }) {
+export function ProjectCard({ item, onPress, cta, footer }: { item: ProjectItem; onPress?: () => void; cta?: string; footer?: ReactNode }) {
   return (
     <GlowCard
       onPress={onPress}
@@ -72,6 +73,7 @@ export function ProjectCard({ item, onPress, cta }: { item: ProjectItem; onPress
           {cta ? (
             <Text style={{ fontFamily: fonts.mono, fontSize: 12, color: colors.accent, marginTop: 14 }}>{cta}</Text>
           ) : null}
+          {footer ? <View style={{ marginTop: 14 }}>{footer}</View> : null}
         </>
       )}
     </GlowCard>
