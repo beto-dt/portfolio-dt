@@ -1,9 +1,6 @@
-import { Linking, View } from 'react-native';
 import type { ProjectItem } from '@/content/types';
 import { useI18n } from '@/i18n/i18n-provider';
-import { colors } from '@/theme/tokens';
-import { HoverLink } from '@/ui/hover-link';
-import { ProjectCard } from '../projects/project-card';
+import { ProductDemoCard } from '../../components/product-demo-card';
 
 const DEMO_URL = 'https://spa.luisdelatorre.dev';
 const REPO_URL = 'https://github.com/beto-dt/ankara-spa';
@@ -36,14 +33,12 @@ export function AnkaraDemoCard() {
   const item: ProjectItem = { category: t.category, title: t.title, description: t.description, tech: TECH };
 
   return (
-    <ProjectCard
+    <ProductDemoCard
       item={item}
-      footer={
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', columnGap: 18, rowGap: 8 }}>
-          <HoverLink label={t.demo} onPress={() => Linking.openURL(DEMO_URL)} color={colors.accent} hoverColor={colors.text} size={12} mono />
-          <HoverLink label={t.code} onPress={() => Linking.openURL(REPO_URL)} color={colors.accent} hoverColor={colors.text} size={12} mono />
-        </View>
-      }
+      links={[
+        { label: t.demo, url: DEMO_URL },
+        { label: t.code, url: REPO_URL },
+      ]}
     />
   );
 }
