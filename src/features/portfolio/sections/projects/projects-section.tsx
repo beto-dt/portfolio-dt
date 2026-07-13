@@ -7,6 +7,7 @@ import { AiDemoCard } from '../ai/ai-demo-card';
 import { AnkaraDemoCard } from '../spa/ankara-demo-card';
 import { VitalaDemoCard } from '../vitala/vitala-demo-card';
 import { KipuDemoCard } from '../kipu/kipu-demo-card';
+import { AtalayaDemoCard } from '../atalaya/atalaya-demo-card';
 import { useI18n } from '@/i18n/i18n-provider';
 import { Reveal } from '@/ui/reveal';
 
@@ -40,8 +41,11 @@ export function ProjectsSection() {
         <Reveal delay={280} style={{ flexGrow: 1, flexBasis: 340, minWidth: 300 }}>
           <KipuDemoCard />
         </Reveal>
+        <Reveal delay={350} style={{ flexGrow: 1, flexBasis: 340, minWidth: 300 }}>
+          <AtalayaDemoCard />
+        </Reveal>
         {projects.items.map((item, i) => (
-          <Reveal key={item.title} delay={(i + 5) * 70} style={{ flexGrow: 1, flexBasis: 340, minWidth: 300 }}>
+          <Reveal key={item.title} delay={(i + 6) * 70} style={{ flexGrow: 1, flexBasis: 340, minWidth: 300 }}>
             <ProjectCard item={item} />
           </Reveal>
         ))}
