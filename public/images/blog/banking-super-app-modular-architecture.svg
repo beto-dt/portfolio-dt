@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="860" viewBox="0 0 1720 860" role="img" aria-labelledby="t d">
+  <title id="t">Modularizing a banking super app</title>
+  <desc id="d">Diagram of a banking super app before and after modularization: before, every feature shipped inside the base app; after, separate feature modules on top of shared Kotlin Multiplatform code, enabling Android Dynamic Feature Delivery.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#6b6e76"/>
+    </marker>
+    <marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#d9e36b"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .box { fill: #1a1b1f; stroke: #34363c; stroke-width: 2; }
+    .row { fill: #16171a; stroke: #34363c; stroke-width: 2; }
+    .hi { fill: #1d1f16; stroke: #d9e36b; stroke-width: 3; }
+    .bt { fill: #f2f2f3; font-size: 27px; font-weight: 600; text-anchor: middle; }
+    .bs { fill: #9a9ca3; font-size: 22px; text-anchor: middle; }
+    .rt { fill: #c9cbd0; font-size: 22px; }
+    .ln { stroke: #6b6e76; stroke-width: 2.5; fill: none; }
+    .lbl { font-size: 19px; letter-spacing: 3px; font-weight: 500; }
+  </style>
+
+  <rect width="1720" height="860" rx="28" fill="#111214"/>
+
+  <text x="72" y="104" fill="#f5f5f6" font-size="46" font-weight="700">Modularizing a banking super app</text>
+  <text x="72" y="150" fill="#9a9ca3" font-size="25">Mobile banking app for a major bank · Kotlin Multiplatform</text>
+
+  <!-- BEFORE -->
+  <text x="72" y="232" fill="#9a9ca3" class="lbl">BEFORE · EVERYTHING IN THE BASE APP</text>
+
+  <rect x="72" y="262" width="612" height="450" rx="22" class="box"/>
+  <text x="108" y="314" fill="#f2f2f3" font-size="27" font-weight="600">Base app</text>
+  <text x="108" y="352" fill="#9a9ca3" font-size="22">every feature built and shipped together</text>
+
+  <rect x="108" y="388" width="540" height="58" rx="12" class="row"/>
+  <text x="136" y="425" class="rt">Feature</text>
+  <rect x="108" y="464" width="540" height="58" rx="12" class="row"/>
+  <text x="136" y="501" class="rt">Feature</text>
+  <rect x="108" y="540" width="540" height="58" rx="12" class="row"/>
+  <text x="136" y="577" class="rt">Feature</text>
+  <rect x="108" y="616" width="540" height="58" rx="12" class="row"/>
+  <text x="136" y="653" class="rt">Shared code</text>
+
+  <!-- REFACTOR -->
+  <text x="776" y="470" fill="#d9e36b" class="lbl" text-anchor="middle">REFACTOR</text>
+  <line x1="708" y1="494" x2="844" y2="494" stroke="#d9e36b" stroke-width="2.5" marker-end="url(#h)"/>
+
+  <!-- AFTER -->
+  <text x="880" y="232" fill="#d9e36b" class="lbl">AFTER · MODULAR</text>
+
+  <rect x="880" y="262" width="250" height="152" rx="18" class="hi"/>
+  <text x="1005" y="326" class="bt">Feature</text>
+  <text x="1005" y="366" class="bs">module</text>
+  <rect x="1143" y="262" width="250" height="152" rx="18" class="hi"/>
+  <text x="1268" y="326" class="bt">Feature</text>
+  <text x="1268" y="366" class="bs">module</text>
+  <rect x="1406" y="262" width="250" height="152" rx="18" class="hi"/>
+  <text x="1531" y="326" class="bt">Feature</text>
+  <text x="1531" y="366" class="bs">module</text>
+
+  <line x1="1005" y1="416" x2="1005" y2="550" class="ln" marker-end="url(#a)"/>
+  <line x1="1268" y1="416" x2="1268" y2="550" class="ln" marker-end="url(#a)"/>
+  <line x1="1531" y1="416" x2="1531" y2="550" class="ln" marker-end="url(#a)"/>
+
+  <rect x="880" y="556" width="776" height="114" rx="18" class="box"/>
+  <text x="1268" y="602" class="bt">Shared code</text>
+  <text x="1268" y="642" class="bs">Kotlin Multiplatform</text>
+
+  <text x="880" y="740" fill="#f2f2f3" font-size="24" font-weight="600">Android Dynamic Feature Delivery enabled</text>
+  <text x="880" y="776" fill="#9a9ca3" font-size="22">On Android, feature modules can ship separately from the base app</text>
+
+  <text x="1656" y="826" fill="#7d8088" font-size="20" text-anchor="end">luisdelatorre.dev</text>
+</svg>
