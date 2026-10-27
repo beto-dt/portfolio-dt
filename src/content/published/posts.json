@@ -2,6 +2,27 @@
   {
     "publishedAt": "2026-10-27",
     "tags": [
+      "kotlin-multiplatform",
+      "android",
+      "mobile-architecture",
+      "dynamic-delivery"
+    ],
+    "es": {
+      "title": "Modularizando una super app bancaria en Kotlin Multiplatform",
+      "excerpt": "Cómo dividir una super app bancaria en Kotlin Multiplatform en módulos de funcionalidad hizo posible Android Dynamic Feature Delivery.",
+      "content": "![Diagrama de una super app bancaria antes y después de modularizarla: antes, cada funcionalidad iba dentro de la app base; después, módulos de funcionalidad separados sobre el código compartido en Kotlin Multiplatform, lo que habilita Android Dynamic Feature Delivery.](/images/blog/banking-super-app-modular-architecture.svg)\n\n## En resumen\n\n- **Cliente:** un banco grande de Ecuador (bajo NDA)\n- **Producto:** super app bancaria construida con Kotlin Multiplatform\n- **Mi rol:** Software Development Engineer, arquitectura móvil\n- **Stack:** Kotlin Multiplatform, Android, iOS\n- **Resultado:** una arquitectura modular, con Android Dynamic Feature Delivery habilitado\n\n## El problema\n\nUna super app no deja de sumar funcionalidades. Sin módulos de funcionalidad dinámicos, cada una entra en la app base que descarga cada usuario, y todas se publican juntas. Además, la app tenía que soportar Android Dynamic Feature Delivery, que solo funciona cuando cada funcionalidad vive en su propio módulo.\n\n## Qué hice\n\nTrabajé en refactorizar el código para que cada funcionalidad viva en su propio módulo, sobre el código compartido en Kotlin Multiplatform. En Android, esos módulos ahora se pueden entregar por separado. En iOS, la arquitectura de la plataforma hace este tipo de división mucho más difícil, así que el trabajo de entrega modular se centró en Android.\n\n## El resultado\n\nLa app ahora tiene una arquitectura modular, y Android Dynamic Feature Delivery se hizo posible: los módulos de funcionalidad se pueden entregar por separado en vez de ir todos dentro de la app base.\n\n## Lo que le diría a otro equipo\n\nSi estás construyendo una super app, define los límites de tus módulos desde el principio. Dividir después un código que ya creció se puede, pero cuesta mucho más trabajo."
+    },
+    "en": {
+      "title": "Modularizing a Kotlin Multiplatform banking super app",
+      "excerpt": "How splitting a Kotlin Multiplatform banking super app into feature modules made Android Dynamic Feature Delivery possible.",
+      "content": "![Diagram of a banking super app before and after modularization: before, every feature shipped inside the base app; after, separate feature modules on top of shared Kotlin Multiplatform code, enabling Android Dynamic Feature Delivery.](/images/blog/banking-super-app-modular-architecture.svg)\n\n## At a glance\n\n- **Client:** a major bank in Ecuador (under NDA)\n- **Product:** banking super app built with Kotlin Multiplatform\n- **My role:** Software Development Engineer, mobile architecture\n- **Stack:** Kotlin Multiplatform, Android, iOS\n- **Result:** a modular architecture, with Android Dynamic Feature Delivery enabled\n\n## The problem\n\nA super app keeps adding features. Without dynamic feature modules, every one of them goes into the base app that every user downloads, and they all ship together. The app also had to support Android Dynamic Feature Delivery, which only works when each feature lives in its own module.\n\n## What I did\n\nI worked on refactoring the codebase so each feature lives in its own module, on top of the shared Kotlin Multiplatform code. On Android, those feature modules can now be delivered on their own. On iOS, the platform's architecture makes this kind of split much harder, so the modular delivery work focused on Android.\n\n## The result\n\nThe app now has a modular architecture, and Android Dynamic Feature Delivery became possible: feature modules can be delivered separately instead of all shipping inside the base app.\n\n## What I'd tell another team\n\nIf you're building a super app, plan your module boundaries early. Splitting a grown codebase later can be done, but it takes a lot more work."
+    },
+    "lang": "en",
+    "slug": "banking-super-app-modular-architecture"
+  },
+  {
+    "publishedAt": "2026-10-27",
+    "tags": [
       "ios",
       "azure-devops",
       "ci-cd",
