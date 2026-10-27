@@ -1,13 +1,5 @@
-import admin from 'firebase-admin';
+import type { PublishedPost } from '../../posts-types';
 
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  projectId: 'luisdelatorre-portfolio',
-});
-
-const db = admin.firestore();
-
-const SLUG = 'ios-build-6-hours-to-15-minutes';
 const DIAGRAM = '/images/blog/ios-build-6-hours-to-15-minutes.svg';
 
 const EN_CONTENT = [
@@ -66,39 +58,21 @@ const ES_CONTENT = [
   'Si tus builds móviles se miden en horas, mira dónde se ejecutan antes de reescribir nada. La configuración del pipeline y el hardware de build suelen ser la victoria más rápida que tienes.',
 ].join('\n');
 
-// One-off seed: creates the iOS build case study unless it already exists.
-async function main() {
-  const ref = db.doc(`posts/${SLUG}`);
-  if ((await ref.get()).exists) {
-    console.log(`posts/${SLUG} already exists — skipping`);
-    return;
-  }
-  await ref.set({
-    status: 'published',
-    publishedAt: '2026-10-27',
-    tags: ['ios', 'azure-devops', 'ci-cd', 'kotlin-multiplatform'],
-    lang: 'en',
-    es: {
-      title: 'Cómo bajé el build de iOS de una app bancaria de 6 horas a 15 minutos',
-      excerpt:
-        'Cómo un pipeline de Azure DevOps afinado y un Mac dedicado como agente de build llevaron el build de iOS de una app bancaria de 6 horas a unos 15 minutos.',
-      content: ES_CONTENT,
-    },
-    en: {
-      title: "Cutting a bank app's iOS build from 6 hours to 15 minutes",
-      excerpt:
-        "How a tuned Azure DevOps pipeline and a dedicated Mac build agent took a mobile banking app's iOS build from 6 hours to about 15 minutes.",
-      content: EN_CONTENT,
-    },
-    createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-  });
-  console.log(`Seeded posts/${SLUG}`);
-}
-
-main()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
+export const post: PublishedPost = {
+  slug: 'ios-build-6-hours-to-15-minutes',
+  publishedAt: '2026-10-27',
+  tags: ['ios', 'azure-devops', 'ci-cd', 'kotlin-multiplatform'],
+  lang: 'en',
+  es: {
+    title: 'Cómo bajé el build de iOS de una app bancaria de 6 horas a 15 minutos',
+    excerpt:
+      'Cómo un pipeline de Azure DevOps afinado y un Mac dedicado como agente de build llevaron el build de iOS de una app bancaria de 6 horas a unos 15 minutos.',
+    content: ES_CONTENT,
+  },
+  en: {
+    title: "Cutting a bank app's iOS build from 6 hours to 15 minutes",
+    excerpt:
+      "How a tuned Azure DevOps pipeline and a dedicated Mac build agent took a mobile banking app's iOS build from 6 hours to about 15 minutes.",
+    content: EN_CONTENT,
+  },
+};

@@ -1,13 +1,5 @@
-import admin from 'firebase-admin';
+import type { PublishedPost } from '../../posts-types';
 
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  projectId: 'luisdelatorre-portfolio',
-});
-
-const db = admin.firestore();
-
-const SLUG = 'banking-super-app-modular-architecture';
 const DIAGRAM = '/images/blog/banking-super-app-modular-architecture.svg';
 
 const EN_CONTENT = [
@@ -66,7 +58,8 @@ const ES_CONTENT = [
   'Si estás construyendo una super app, define los límites de tus módulos desde el principio. Dividir después un código que ya creció se puede, pero cuesta mucho más trabajo.',
 ].join('\n');
 
-const POST = {
+export const post: PublishedPost = {
+  slug: 'banking-super-app-modular-architecture',
   publishedAt: '2026-10-27',
   tags: ['kotlin-multiplatform', 'android', 'mobile-architecture', 'dynamic-delivery'],
   es: {
@@ -81,28 +74,5 @@ const POST = {
       'How splitting a Kotlin Multiplatform banking super app into feature modules made Android Dynamic Feature Delivery possible.',
     content: EN_CONTENT,
   },
-  lang: 'en' as const,
+  lang: 'en',
 };
-
-// One-off seed: creates the banking super app case study unless it already exists.
-async function main() {
-  const ref = db.doc(`posts/${SLUG}`);
-  if ((await ref.get()).exists) {
-    console.log(`posts/${SLUG} already exists — skipping`);
-    return;
-  }
-  await ref.set({
-    status: 'published',
-    ...POST,
-    createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-  });
-  console.log(`Seeded posts/${SLUG}`);
-}
-
-main()
-  .then(() => process.exit(0))
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
