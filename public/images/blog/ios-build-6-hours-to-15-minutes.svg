@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="860" viewBox="0 0 1720 860" role="img" aria-labelledby="t d">
+  <title id="t">From 6 hours to about 15 minutes per iOS build</title>
+  <desc id="d">Before and after diagram of the iOS build pipeline: about 6 hours per build before, about 15 minutes after adding a dedicated Mac as a self-hosted Azure DevOps agent.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#6b6e76"/>
+    </marker>
+    <marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#d9e36b"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .box { fill: #1a1b1f; stroke: #34363c; stroke-width: 2; }
+    .hi { fill: #1d1f16; stroke: #d9e36b; stroke-width: 3; }
+    .bt { fill: #f2f2f3; font-size: 27px; font-weight: 600; text-anchor: middle; }
+    .bs { fill: #9a9ca3; font-size: 22px; text-anchor: middle; }
+    .ln { stroke: #6b6e76; stroke-width: 2.5; fill: none; }
+    .lh { stroke: #d9e36b; stroke-width: 2.5; fill: none; }
+    .lbl { font-size: 19px; letter-spacing: 3px; font-weight: 500; }
+  </style>
+
+  <rect width="1720" height="860" rx="28" fill="#111214"/>
+
+  <text x="72" y="104" fill="#f5f5f6" font-size="46" font-weight="700">From 6 hours to about 15 minutes per iOS build</text>
+  <text x="72" y="150" fill="#9a9ca3" font-size="25">Mobile banking app for a major bank · Azure DevOps</text>
+
+  <!-- BEFORE -->
+  <text x="72" y="232" fill="#9a9ca3" class="lbl">BEFORE</text>
+
+  <rect x="72" y="262" width="288" height="166" rx="18" class="box"/>
+  <text x="216" y="334" class="bt">Code pushed</text>
+  <text x="216" y="374" class="bs">by the team</text>
+
+  <rect x="396" y="262" width="288" height="166" rx="18" class="box"/>
+  <text x="540" y="334" class="bt">Azure DevOps</text>
+  <text x="540" y="374" class="bs">pipeline</text>
+
+  <rect x="1044" y="262" width="288" height="166" rx="18" class="box"/>
+  <text x="1188" y="334" class="bt">iOS build</text>
+  <text x="1188" y="374" class="bs" style="fill:#e8836f">about 6 hours</text>
+
+  <rect x="1368" y="262" width="288" height="166" rx="18" class="box"/>
+  <text x="1512" y="318" class="bt">Releases</text>
+  <text x="1512" y="358" class="bs">about 1 a day,</text>
+  <text x="1512" y="390" class="bs">on a good day</text>
+
+  <line x1="362" y1="345" x2="392" y2="345" class="ln" marker-end="url(#a)"/>
+  <line x1="686" y1="345" x2="1040" y2="345" class="ln" stroke-dasharray="10 9" marker-end="url(#a)"/>
+  <line x1="1334" y1="345" x2="1364" y2="345" class="ln" marker-end="url(#a)"/>
+
+  <line x1="72" y1="486" x2="1656" y2="486" stroke="#2a2c31" stroke-width="2"/>
+
+  <!-- AFTER -->
+  <text x="72" y="526" fill="#d9e36b" class="lbl">AFTER</text>
+
+  <rect x="72" y="554" width="288" height="166" rx="18" class="box"/>
+  <text x="216" y="626" class="bt">Code pushed</text>
+  <text x="216" y="666" class="bs">by the team</text>
+
+  <rect x="396" y="554" width="288" height="166" rx="18" class="box"/>
+  <text x="540" y="610" class="bt">Azure DevOps</text>
+  <text x="540" y="650" class="bs">tuned pipeline</text>
+  <text x="540" y="682" class="bs">configuration</text>
+
+  <rect x="720" y="554" width="288" height="166" rx="18" class="hi"/>
+  <text x="864" y="610" class="bt">Dedicated Mac</text>
+  <text x="864" y="650" class="bs">runs the jobs as a</text>
+  <text x="864" y="682" class="bs">self-hosted agent</text>
+
+  <rect x="1044" y="554" width="288" height="166" rx="18" class="hi"/>
+  <text x="1188" y="626" class="bt">iOS build</text>
+  <text x="1188" y="666" class="bs" style="fill:#d9e36b">about 15 minutes</text>
+
+  <rect x="1368" y="554" width="288" height="166" rx="18" class="box"/>
+  <text x="1512" y="610" class="bt">Releases</text>
+  <text x="1512" y="650" class="bs">as many as the</text>
+  <text x="1512" y="682" class="bs">team needs</text>
+
+  <line x1="362" y1="637" x2="392" y2="637" class="ln" marker-end="url(#a)"/>
+  <line x1="686" y1="637" x2="716" y2="637" class="lh" marker-end="url(#h)"/>
+  <line x1="1010" y1="637" x2="1040" y2="637" class="lh" marker-end="url(#h)"/>
+  <line x1="1334" y1="637" x2="1364" y2="637" class="ln" marker-end="url(#a)"/>
+
+  <text x="72" y="784" fill="#a9abb2" font-size="23">Same team, same code. iOS builds became roughly 24x faster, and Android builds got faster too.</text>
+  <text x="1656" y="822" fill="#7d8088" font-size="20" text-anchor="end">luisdelatorre.dev</text>
+</svg>

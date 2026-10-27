@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { Linking, Platform, ScrollView, Text, View } from 'react-native';
+import { useEffect, useState, type ReactNode } from 'react';
+import { Image, Linking, Platform, ScrollView, Text, View } from 'react-native';
 import { colors, fonts, radii } from '@/theme/tokens';
 
 const linkWeb = Platform.OS === 'web' ? ({ cursor: 'pointer' } as object) : null;
@@ -48,9 +48,32 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
 }
 
 const P_STYLE = { fontSize: 15, lineHeight: 26, color: colors.textMuted } as const;
-const BLOCK_START = /^(#{1,3})\s|^\s*[-*]\s|^\s*\d+\.\s|^>\s|^```/;
+const BLOCK_START = /^(#{1,3})\s|^\s*[-*]\s|^\s*\d+\.\s|^>\s|^```|^!\[/;
+const IMAGE = /^!\[([^\]]*)\]\(([^)]+)\)$/;
 
-/** Minimal markdown → RN renderer: headings, lists, quotes, code, inline styles. */
+// Site-relative paths ("/images/...") only resolve on web; native needs the full origin.
+function resolveSrc(src: string) {
+  return src.startsWith('/') && Platform.OS !== 'web' ? `https://luisdelatorre.dev${src}` : src;
+}
+
+function MarkdownImage({ alt, src }: { alt: string; src: string }) {
+  const uri = resolveSrc(src);
+  const [ratio, setRatio] = useState(2);
+  useEffect(() => {
+    Image.getSize(uri, (w, h) => h && setRatio(w / h), () => {});
+  }, [uri]);
+  return (
+    <Image
+      source={{ uri }}
+      accessibilityLabel={alt}
+      alt={alt}
+      resizeMode="contain"
+      style={{ width: '100%', aspectRatio: ratio, borderRadius: radii.md }}
+    />
+  );
+}
+
+/** Minimal markdown → RN renderer: headings, lists, quotes, code, images, inline styles. */
 export function Markdown({ source }: { source: string }) {
   const blocks: ReactNode[] = [];
   const lines = source.replace(/\r\n/g, '\n').split('\n');
@@ -87,6 +110,12 @@ export function Markdown({ source }: { source: string }) {
           <Text style={{ fontFamily: fonts.mono, fontSize: 13, lineHeight: 20, color: colors.text }}>{buf.join('\n')}</Text>
         </ScrollView>,
       );
+      continue;
+    }
+    const img = IMAGE.exec(line.trim());
+    if (img) {
+      push(<MarkdownImage alt={img[1]} src={img[2]} />);
+      i++;
       continue;
     }
     const h = /^(#{1,3})\s+(.*)$/.exec(line.trim());
