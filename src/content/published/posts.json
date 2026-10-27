@@ -1,5 +1,25 @@
 [
   {
+    "publishedAt": "2026-10-27",
+    "tags": [
+      "ios",
+      "azure-devops",
+      "ci-cd",
+      "kotlin-multiplatform"
+    ],
+    "es": {
+      "title": "Cómo bajé el build de iOS de una app bancaria de 6 horas a 15 minutos",
+      "excerpt": "Cómo un pipeline de Azure DevOps afinado y un Mac dedicado como agente de build llevaron el build de iOS de una app bancaria de 6 horas a unos 15 minutos.",
+      "content": "![Diagrama del antes y después del pipeline de iOS: unas 6 horas por build antes, unos 15 minutos después de sumar un Mac dedicado como agente self-hosted de Azure DevOps.](/images/blog/ios-build-6-hours-to-15-minutes.svg)\n\n## En resumen\n\n- **Cliente:** un banco grande de Ecuador (bajo NDA)\n- **Producto:** app de banca móvil construida con Kotlin Multiplatform\n- **Mi rol:** Software Development Engineer, móvil y CI/CD\n- **Stack:** Azure DevOps, un Mac dedicado como agente de build self-hosted, iOS, Android\n- **Resultado:** el build de iOS pasó de 6 horas a unos 15 minutos, unas 24 veces más rápido\n\n## El problema\n\nCada build de iOS de la app del banco tardaba unas 6 horas. Con builds tan lentos, el equipo podía sacar más o menos un release al día, y solo en un buen día. Los fixes, las rondas de QA y los envíos a las tiendas iban todos a ese ritmo.\n\n## Qué hice\n\nTrabajé en los pipelines de Azure DevOps junto al equipo. Primero, afinamos su configuración para que los builds de Android e iOS corrieran más rápido. Después vino el cambio más grande: un Mac dedicado que ejecuta los jobs de build como agente self-hosted de Azure DevOps, para que cada build de iOS tenga todos los recursos de esa máquina.\n\n## El resultado\n\nEl build de iOS bajó de 6 horas a unos 15 minutos, y los builds de Android también se aceleraron. El equipo pasó de un release al día a sacar todos los que necesita.\n\n## Lo que le diría a otro equipo\n\nSi tus builds móviles se miden en horas, mira dónde se ejecutan antes de reescribir nada. La configuración del pipeline y el hardware de build suelen ser la victoria más rápida que tienes."
+    },
+    "en": {
+      "title": "Cutting a bank app's iOS build from 6 hours to 15 minutes",
+      "excerpt": "How a tuned Azure DevOps pipeline and a dedicated Mac build agent took a mobile banking app's iOS build from 6 hours to about 15 minutes.",
+      "content": "![Before and after diagram of the iOS build pipeline: about 6 hours per build before, about 15 minutes after adding a dedicated Mac as a self-hosted Azure DevOps agent.](/images/blog/ios-build-6-hours-to-15-minutes.svg)\n\n## At a glance\n\n- **Client:** a major bank in Ecuador (under NDA)\n- **Product:** mobile banking app built with Kotlin Multiplatform\n- **My role:** Software Development Engineer, mobile and CI/CD\n- **Stack:** Azure DevOps, a dedicated Mac as a self-hosted build agent, iOS, Android\n- **Result:** the iOS build went from 6 hours to about 15 minutes, roughly 24x faster\n\n## The problem\n\nEvery iOS build of the bank's app took about 6 hours. With builds that slow, the team could ship about one release a day, and only on a good day. Fixes, QA rounds and store submissions all moved at that pace.\n\n## What I did\n\nI worked on the Azure DevOps pipelines with the team. First, we tuned their configuration so the Android and iOS builds would run faster. Then came the biggest change: a dedicated Mac that runs the build jobs as a self-hosted Azure DevOps agent, so every iOS build gets that machine's full resources.\n\n## The result\n\nThe iOS build dropped from 6 hours to about 15 minutes, and the Android builds got faster too. The team went from about one release a day to shipping as many releases as it needs.\n\n## What I'd tell another team\n\nIf your mobile builds are measured in hours, look at where they run before you rewrite anything. Pipeline configuration and build hardware are often the fastest win you have."
+    },
+    "slug": "ios-build-6-hours-to-15-minutes"
+  },
+  {
     "slug": "ankara-spa-reservas-kotlin-multiplatform",
     "publishedAt": "2026-07-09",
     "tags": [
