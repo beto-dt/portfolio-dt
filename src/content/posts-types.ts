@@ -5,6 +5,7 @@ export type BlogPost = {
   status: 'draft' | 'published';
   publishedAt: string; // YYYY-MM-DD
   tags: string[];
+  lang?: 'es' | 'en'; // language the post opens in; defaults to the site's
   es: PostLocaleContent;
   en: PostLocaleContent;
 };

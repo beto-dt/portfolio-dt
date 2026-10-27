@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { PageShell } from '../components/page-shell';
@@ -11,7 +12,11 @@ import { TagChips } from '@/ui/tag-chips';
 import type { PublishedPost } from '@/content/posts-types';
 
 export function BlogPostPage({ post }: { post: PublishedPost }) {
-  const { locale } = useI18n();
+  const { locale, setLocale } = useI18n();
+  // Arriving from another page keeps the old locale; open in the post's own language.
+  useEffect(() => {
+    if (post.lang) setLocale(post.lang);
+  }, [post.slug, post.lang, setLocale]);
   const t = locale === 'es' ? post.es : post.en;
   const back = locale === 'es' ? '← Volver al blog' : '← Back to blog';
 

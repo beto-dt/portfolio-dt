@@ -77,6 +77,7 @@ async function main() {
     status: 'published',
     publishedAt: '2026-10-27',
     tags: ['ios', 'azure-devops', 'ci-cd', 'kotlin-multiplatform'],
+    lang: 'en',
     es: {
       title: 'Cómo bajé el build de iOS de una app bancaria de 6 horas a 15 minutos',
       excerpt:

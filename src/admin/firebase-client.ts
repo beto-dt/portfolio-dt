@@ -105,6 +105,7 @@ export async function writePost(post: BlogPost): Promise<void> {
     status: post.status,
     publishedAt: post.publishedAt,
     tags: post.tags,
+    ...(post.lang ? { lang: post.lang } : {}),
     es: post.es,
     en: post.en,
     createdAt: existing.exists() ? (existing.data()?.createdAt ?? serverTimestamp()) : serverTimestamp(),
